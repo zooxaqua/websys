@@ -10,7 +10,7 @@ user-invocable: false
 
 ## 入力
 
-全工程の成果物（`documents/`, `src/`）, `documents/07-system-test-report.md`
+**全工程の成果物**（`documents/`, `src/`）— リリースノート作成のため例外的に全成果物を参照可能
 
 ## 出力先
 

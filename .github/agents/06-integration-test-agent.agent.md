@@ -6,11 +6,12 @@ user-invocable: false
 
 # Integration Test Agent — 工程6：結合評価（動的確認）
 
-コンポーネント間・工程間の連携を検証し、結合テストを実施します。
+コンポーネント間・システム間の連携を検証し、結合テストを実施します。
 
-## 入力
+## 入力（V字工程：基本設計を検証）
 
-`src/`, `tests/unit/`, `documents/02-basic-design/`, `documents/03-detail-design/`
+- `src/`（実装コード）
+- `documents/02-basic-design/`（検証対象の設計書：API設計・アーキテクチャ）
 
 ## 出力先
 
@@ -63,6 +64,9 @@ user-invocable: false
 
 ## 失敗シナリオ一覧
 | シナリオID | 失敗内容 | 重大度 | Issue番号 |
+
+## 基本設計との対応
+| API設計項目 | テスト結果 | 備考 |
 ```
 
 ## 承認基準
@@ -75,3 +79,4 @@ user-invocable: false
 
 - DO NOT `src/` のコードを直接修正しない
 - バグ発見時は `issue-manager` に登録し、`process-manager` に差し戻し判断を委ねる
+- 基本設計と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ

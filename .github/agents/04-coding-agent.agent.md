@@ -10,7 +10,7 @@ user-invocable: false
 
 ## 入力
 
-`documents/01-requirements/`, `documents/02-basic-design/`, `documents/03-detail-design/`
+`documents/03-detail-design/`（直前工程の成果物のみ）
 
 ## 出力先
 
@@ -22,6 +22,7 @@ user-invocable: false
 - `documents/03-detail-design/class-design.md` でクラス構成を把握する
 - `documents/03-detail-design/dal-interface.md` で DAL 仕様を確認する
 - `documents/03-detail-design/api-spec.md` でAPI仕様を確認する
+- 疑義がある場合は issue-manager に質問を記録し、process-manager の判断を仰ぐ
 
 ### 2. コーディング規約の遵守
 `websys-conventions` スキルを参照し、以下を必ず守る:
@@ -70,3 +71,5 @@ user-invocable: false
 - DO NOT `src/` 以外の設計書ファイルを編集しない
 - DO NOT テストコードを `src/` に含めない（`tests/` に配置）
 - DO NOT 環境依存の設定値をコードにハードコードしない
+- DO NOT `documents/01-requirements/`, `documents/02-basic-design/` を直接参照しない（直前工程の `documents/03-detail-design/` のみ参照）
+- 詳細設計に疑義がある場合は `issue-manager` に質問を記録し、`process-manager` の判断を仰ぐ

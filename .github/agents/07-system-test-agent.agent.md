@@ -8,9 +8,10 @@ user-invocable: false
 
 システム全体の E2E テスト・性能評価・セキュリティチェックを実施します。
 
-## 入力
+## 入力（V字工程：要件定義を検証）
 
-`src/`, `tests/integration/`, `documents/02-basic-design/`, 要件定義の非機能要件
+- `src/`（実装コード）
+- `documents/01-requirements/`（検証対象：機能要件・非機能要件・受入基準）
 
 ## 出力先
 
@@ -28,8 +29,8 @@ user-invocable: false
 - SSE によるリアルタイム通知の受信確認
 
 ### 2. 性能テスト
-要件定義の非機能要件（レスポンスタイム・同時接続数）に対して検証する:
-- API レスポンスタイム（目標値: 要件書参照）
+`documents/01-requirements/` の非機能要件（レスポンスタイム・同時接続数）に対して検証する:
+- API レスポンスタイム（目標値: 要件書から取得）
 - 同時接続時の挙動確認
 - JSON DB の読み書き性能
 
@@ -78,3 +79,4 @@ user-invocable: false
 
 - DO NOT `src/` のコードを直接修正しない
 - セキュリティ問題はすべて `issue-manager` に `severity: critical` で登録する
+- 要件定義と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ

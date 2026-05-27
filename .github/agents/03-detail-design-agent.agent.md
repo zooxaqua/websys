@@ -10,7 +10,7 @@ user-invocable: false
 
 ## 入力
 
-`documents/01-requirements/`, `documents/02-basic-design/`
+`documents/02-basic-design/`（直前工程の成果物のみ）
 
 ## 出力先
 
@@ -83,4 +83,6 @@ PHP → ブラウザ: 200 OK + Set-Cookie(JWT, httpOnly)
 
 - DO NOT コードを実際に書かない（仕様定義のみ）
 - DO NOT `documents/03-detail-design/` 以外のファイルを編集しない
+- DO NOT `documents/01-requirements/` を直接参照しない（直前工程の `documents/02-basic-design/` のみ参照）
+- 基本設計に疑義がある場合は `issue-manager` に質問を記録し、`process-manager` の判断を仰ぐ
 - セキュリティ設計（パスワードハッシュ・トークン管理）は OWASP に準拠する

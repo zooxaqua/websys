@@ -14,29 +14,41 @@
 | `06-integration-test-agent` | サブエージェント（工程6） | 結合評価 | `tests/integration/`, `documents/06-integration-test-report.md` |
 | `07-system-test-agent` | サブエージェント（工程7） | システム評価 | `tests/system/`, `documents/07-system-test-report.md` |
 | `08-release-agent` | サブエージェント（工程8） | リリース | `documents/08-release/` |
+| `agent-builder` | メタエージェント | エージェント・スキル・プロンプト設計生成 | `.github/agents/`, `.github/skills/` |
+| `requirement-analyst` | メタエージェント（サブ） | エージェント要件分析・ヒアリング | — |
+| `file-generator` | メタエージェント（サブ） | カスタマイズファイル生成・書き込み | `.github/` |
 
 > **原則**: 各成果物フォルダは担当エージェントのみ書き込み可。他のエージェント・ユーザーは読み取り専用。
 
 ---
 
-## 成果物オーナーシップ
+## 成果物オーナーシップ（参照権限）
 
-| フォルダ / ファイル | オーナー（書き込み可） | 読み取り可 |
-|--------------------|----------------------|-----------|
-| `requests/` | ユーザー | 全エージェント |
-| `documents/progress.json` | `process-manager` | 全エージェント |
-| `documents/01-requirements/` | `01-requirements-agent` | 工程2以降 + process-manager |
-| `documents/02-basic-design/` | `02-basic-design-agent` | 工程3以降 + process-manager |
-| `documents/03-detail-design/` | `03-detail-design-agent` | 工程4以降 + process-manager |
-| `src/` | `04-coding-agent` | 工程5以降 + process-manager |
-| `tests/unit/` | `05-unit-test-agent` | 工程6以降 + process-manager |
-| `tests/integration/` | `06-integration-test-agent` | 工程7以降 + process-manager |
-| `tests/system/` | `07-system-test-agent` | `08-release-agent` + process-manager |
-| `documents/05-unit-test-report.md` | `05-unit-test-agent` | 工程6以降 + process-manager |
-| `documents/06-integration-test-report.md` | `06-integration-test-agent` | 工程7以降 + process-manager |
-| `documents/07-system-test-report.md` | `07-system-test-agent` | `08-release-agent` + process-manager |
-| `documents/08-release/` | `08-release-agent` | process-manager |
-| `issues/issues.json` | `issue-manager` | 全エージェント |
+### 原則
+- **設計工程（A01〜A04）**: 直前工程の成果物のみ参照
+- **テスト工程（A05〜A07）**: V字工程に準拠し、対応する設計工程の成果物を参照
+  - A05（単体テスト） → 詳細設計（工程3）を検証
+  - A06（結合テスト） → 基本設計（工程2）を検証
+  - A07（システムテスト） → 要件定義（工程1）を検証
+- **process-manager** は全成果物を参照してレビュー・差し戻し判断
+- **A08（リリース）** は全成果物参照（リリースノート作成のため）
+
+### 参照権限一覧
+
+| エージェント | 読み取り可能 | 書き込み可能 | 備考 |
+|------------|------------|------------|------|
+| `01-requirements-agent` | `requests/` | `documents/01-requirements/` | 初期工程 |
+| `02-basic-design-agent` | `documents/01-requirements/` | `documents/02-basic-design/` | 要件を基に設計 |
+| `03-detail-design-agent` | `documents/02-basic-design/` | `documents/03-detail-design/` | 基本設計を詳細化 |
+| `04-coding-agent` | `documents/03-detail-design/` | `src/` | 詳細設計を実装 |
+| `05-unit-test-agent` | `src/`, `documents/03-detail-design/` | `tests/unit/`, `documents/05-unit-test-report.md` | 詳細設計通りに実装されているか検証 |
+| `06-integration-test-agent` | `src/`, `documents/02-basic-design/` | `tests/integration/`, `documents/06-integration-test-report.md` | 基本設計（API・連携）通りか検証 |
+| `07-system-test-agent` | `src/`, `documents/01-requirements/` | `tests/system/`, `documents/07-system-test-report.md` | 要件定義を満たしているか検証 |
+| `08-release-agent` | **全成果物** | `documents/08-release/` | リリースノート作成 |
+| `process-manager` | **全成果物** | `documents/progress.json` | 全体統括・レビュー |
+| `issue-manager` | **全成果物**（読み取り専用） | `issues/issues.json` | 課題管理 |
+
+> **注**: 各エージェントは自身の成果物フォルダ内のファイルを読み書き可能。他のフォルダへの書き込みは禁止。
 
 ---
 
@@ -78,35 +90,39 @@ flowchart TD
     PM -->|"工程8を呼び出す"| A08
     PM -->|"課題登録を依頼"| IM
 
+    %% 設計工程（直前工程の成果物のみ参照）
     A01 -->|"書き込み"| D01
-    A02 -->|"読み込み"| D01
+    D01 -->|"読み込み"| A02
     A02 -->|"書き込み"| D02
-    A03 -->|"読み込み"| D01
-    A03 -->|"読み込み"| D02
+    D02 -->|"読み込み"| A03
     A03 -->|"書き込み"| D03
-    A04 -->|"読み込み"| D03
+    D03 -->|"読み込み"| A04
     A04 -->|"書き込み"| SRC
-    A05 -->|"読み込み"| SRC
+    
+    %% テスト工程（V字工程：対応する設計工程を検証）
+    SRC -->|"読み込み（実装）"| A05
+    D03 -.->|"参照（詳細設計）"| A05
     A05 -->|"書き込み"| T05
-    A06 -->|"読み込み"| SRC
+    
+    SRC -->|"読み込み（実装）"| A06
+    D02 -.->|"参照（基本設計）"| A06
     A06 -->|"書き込み"| T06
-    A07 -->|"読み込み"| SRC
+    
+    SRC -->|"読み込み（実装）"| A07
+    D01 -.->|"参照（要件定義）"| A07
     A07 -->|"書き込み"| T07
+    
+    %% A08は例外的に全成果物参照可
+    D01 & D02 & D03 & SRC & T05 & T06 & T07 -->|"読み込み（全成果物）"| A08
     A08 -->|"書き込み"| D08
+    
     IM -->|"書き込み"| ISS
 
-    PM -->|"成果物レビュー"| D01
-    PM -->|"成果物レビュー"| D02
-    PM -->|"成果物レビュー"| D03
-    PM -->|"成果物レビュー"| SRC
-    PM -->|"成果物レビュー"| T05
-    PM -->|"成果物レビュー"| T06
-    PM -->|"成果物レビュー"| T07
-    PM -->|"成果物レビュー"| D08
+    %% PMは全成果物をレビュー
+    D01 & D02 & D03 & SRC & T05 & T06 & T07 & D08 -->|"レビュー"| PM
 
-    A05 -.->|"バグ報告"| IM
-    A06 -.->|"バグ報告"| IM
-    A07 -.->|"バグ報告"| IM
+    %% 課題報告
+    A05 & A06 & A07 -.->|"バグ報告"| IM
 ```
 
 ---

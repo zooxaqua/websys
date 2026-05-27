@@ -8,9 +8,10 @@ user-invocable: false
 
 コーディング成果物に対して単体テストを作成・実行し、カバレッジを計測します。
 
-## 入力
+## 入力（V字工程：詳細設計を検証）
 
-`src/`, `documents/03-detail-design/`
+- `src/`（実装コード）
+- `documents/03-detail-design/`（検証対象の設計書）
 
 ## 出力先
 
@@ -23,6 +24,7 @@ user-invocable: false
 
 ### 1. テスト対象の洗い出し
 - `documents/03-detail-design/class-design.md` から全クラス・関数を列挙する
+- 実装（`src/`）と設計書の対応関係を確認する
 - 各モジュールのテスト優先度を決める（認証・DAL・API処理を最優先）
 
 ### 2. テストケース設計（MCDC 準拠）
@@ -87,3 +89,4 @@ pytest tests/unit/ --cov=python/src --cov-report=term
 
 - DO NOT `src/` のコードを直接修正しない（バグを発見した場合は `issue-manager` に登録して報告）
 - DO NOT カバレッジが 100% 未満の状態でレポートを「完了」としない
+- 詳細設計と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ
