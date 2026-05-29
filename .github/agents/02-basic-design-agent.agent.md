@@ -1,6 +1,6 @@
 ---
 description: "工程2：基本設計を実施するサブエージェント。Use when: architecture design, API design, screen wireframe, system design, manifest schema design for websys. Invoked by process-manager."
-tools: [read, edit, search]
+tools: [read, edit, search, execute]
 user-invocable: false
 ---
 
@@ -10,11 +10,13 @@ user-invocable: false
 
 ## 入力
 
-`documents/01-requirements/` の全ドキュメント
+**システム**: `documents/sys/01-requirements/`
+**アプリ**: `documents/app/01-requirements/`
 
 ## 出力先
 
-`documents/02-basic-design/`
+**システム**: `documents/sys/02-basic-design/`
+**アプリ**: `documents/app/02-basic-design/`
 
 | ファイル | 内容 |
 |---------|------|
@@ -71,24 +73,46 @@ user-invocable: false
 ```
 websys/
   src/
-    system/         ← 共通基盤
-      auth/         ← 認証
-      api/          ← 共通API
-      dal/          ← データアクセス層（JSON/RDB抽象化）
-      ui/           ← 共通UIコンポーネント
-    apps/           ← アプリ配置ディレクトリ
+    sys/              ← システム共通基盤
+      auth/           ← 認証
+      api/            ← 共通API
+      dal/            ← データアクセス層（JSON/RDB抽象化）
+      ui/             ← 共通UIコンポーネント
+    app/              ← アプリ配置ディレクトリ
       <app-name>/
         manifest.json
         index.php
         api/
         data/
-  python/           ← FastAPI バックエンド
+  python/             ← FastAPI バックエンド
   tests/
+    sys/              ← システム共通基盤のテスト
+    app/              ← アプリケーションのテスト
   documents/
+    sys/
+    app/
   issues/
 ```
 
 ## 制約
 
 - DO NOT 実装レベルの詳細（クラス名・関数名）は記述しない（工程3で行う）
-- DO NOT `documents/02-basic-design/` 以外のファイルを編集しない
+- DO NOT `documents/sys/02-basic-design/`, `documents/app/02-basic-design/` 以外のファイルを編集しない
+- **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
+- **DO NOT スキル定義ファイル（`.github/skills/*/SKILL.md`）を編集しない**
+
+## チェックプログラムの作成責任
+
+成果物作成時に、`.github/checks/common/phase-02-check.py` を作成すること。
+
+### チェック項目
+- API設計ドキュメントの存在確認
+- 画面設計ドキュメントの存在確認
+- manifest.jsonスキーマ定義の存在確認
+- アーキテクチャ図の存在確認
+- 工程1の要件との対応関係チェック
+
+### チェックプログラム仕様
+- exit code: 0（成功）/ 1（失敗）
+- 出力形式: JSON `{"status": "pass"|"fail", "errors": [], "warnings": []}`
+- 実行環境: Python 3.9以上、標準ライブラリのみ

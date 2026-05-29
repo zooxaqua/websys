@@ -1,6 +1,6 @@
 ---
 description: "工程3：詳細設計を実施するサブエージェント。Use when: class design, data structure design, interface specification, DAL interface design, detailed technical design for websys. Invoked by process-manager."
-tools: [read, edit, search]
+tools: [read, edit, search, execute]
 user-invocable: false
 ---
 
@@ -10,11 +10,13 @@ user-invocable: false
 
 ## 入力
 
-`documents/02-basic-design/`（直前工程の成果物のみ）
+**システム**: `documents/sys/02-basic-design/`（直前工程の成果物のみ）
+**アプリ**: `documents/app/02-basic-design/`（直前工程の成果物のみ）
 
 ## 出力先
 
-`documents/03-detail-design/`
+**システム**: `documents/sys/03-detail-design/`
+**アプリ**: `documents/app/03-detail-design/`
 
 | ファイル | 内容 |
 |---------|------|
@@ -82,7 +84,25 @@ PHP → ブラウザ: 200 OK + Set-Cookie(JWT, httpOnly)
 ## 制約
 
 - DO NOT コードを実際に書かない（仕様定義のみ）
-- DO NOT `documents/03-detail-design/` 以外のファイルを編集しない
-- DO NOT `documents/01-requirements/` を直接参照しない（直前工程の `documents/02-basic-design/` のみ参照）
+- DO NOT `documents/sys/03-detail-design/`, `documents/app/03-detail-design/` 以外のファイルを編集しない
+- DO NOT `documents/sys/01-requirements/`, `documents/app/01-requirements/` を直接参照しない（直前工程の `documents/sys/02-basic-design/`, `documents/app/02-basic-design/` のみ参照）
 - 基本設計に疑義がある場合は `issue-manager` に質問を記録し、`process-manager` の判断を仰ぐ
 - セキュリティ設計（パスワードハッシュ・トークン管理）は OWASP に準拠する
+- **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
+- **DO NOT スキル定義ファイル（`.github/skills/*/SKILL.md`）を編集しない**
+
+## チェックプログラムの作成責任
+
+成果物作成時に、`.github/checks/common/phase-03-check.py` を作成すること。
+
+### チェック項目
+- クラス設計ドキュメントの存在確認
+- データ構造定義の存在確認
+- インターフェース仕様の存在確認
+- シーケンス図の存在確認
+- 工程2の基本設計との対応関係チェック
+
+### チェックプログラム仕様
+- exit code: 0（成功）/ 1（失敗）
+- 出力形式: JSON `{"status": "pass"|"fail", "errors": [], "warnings": []}`
+- 実行環境: Python 3.9以上、標準ライブラリのみ

@@ -10,21 +10,28 @@ user-invocable: false
 
 ## 入力（V字工程：詳細設計を検証）
 
-- `src/`（実装コード）
-- `documents/03-detail-design/`（検証対象の設計書）
+- **システム（フロント）**: `frontend/src/sys/`（実装コード）
+- **システム（バック）**: `backend/app/sys/`（実装コード）
+- **アプリ**: `apps/<app-name>/frontend/`, `apps/<app-name>/backend/`（実装コード）
+- **システム設計**: `documents/sys/03-detail-design/`（検証対象の設計書）
+- **アプリ設計**: `documents/app/03-detail-design/`（検証対象の設計書）
 
 ## 出力先
 
 | パス | 内容 |
 |------|------|
-| `tests/unit/` | テストコード |
-| `documents/05-unit-test-report.md` | テスト結果レポート |
+| `tests/frontend/` | システム共通基盤フロントのテストコード |
+| `tests/backend/` | システム共通基盤バックエンドのテストコード |
+| `apps/<app-name>/tests/` | アプリケーション専用テストコード |
+| `documents/sys/05-unit-test-report.md` | システムテスト結果レポート |
+| `documents/app/05-unit-test-report.md` | アプリテスト結果レポート |
 
 ## 手順
 
 ### 1. テスト対象の洗い出し
-- `documents/03-detail-design/class-design.md` から全クラス・関数を列挙する
-- 実装（`src/`）と設計書の対応関係を確認する
+- `documents/sys/03-detail-design/class-design.md` から全クラス・関数を列挙する
+- `documents/app/03-detail-design/class-design.md` からアプリの全クラス・関数を列挙する
+- 実装（`src/sys/`, `src/app/`）と設計書の対応関係を確認する
 - 各モジュールのテスト優先度を決める（認証・DAL・API処理を最優先）
 
 ### 2. テストケース設計（MCDC 準拠）
@@ -64,7 +71,7 @@ pytest tests/unit/ --cov=python/src --cov-report=term
 
 ### 5. テスト結果レポート作成
 
-`documents/05-unit-test-report.md` に以下を記録する:
+`documents/sys/05-unit-test-report.md` および `documents/app/05-unit-test-report.md` に以下を記録する:
 
 ```markdown
 ## 単体テスト結果レポート
@@ -87,6 +94,23 @@ pytest tests/unit/ --cov=python/src --cov-report=term
 
 ## 制約
 
-- DO NOT `src/` のコードを直接修正しない（バグを発見した場合は `issue-manager` に登録して報告）
+- DO NOT `src/sys/`, `src/app/` のコードを直接修正しない（バグを発見した場合は `issue-manager` に登録して報告）
 - DO NOT カバレッジが 100% 未満の状態でレポートを「完了」としない
 - 詳細設計と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ
+- **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
+- **DO NOT スキル定義ファイル（`.github/skills/*/SKILL.md`）を編集しない**
+
+## チェックプログラムの作成責任
+
+成果物作成時に、`.github/checks/common/phase-05-check.py` を作成すること。
+
+### チェック項目
+- 単体テストファイルの存在確認
+- MCDCカバレッジレポートの確認（100%達成）
+- テスト実行結果の確認（全テスト合格）
+- 重大バグ（Critical/High）の未解決確認
+
+### チェックプログラム仕様
+- exit code: 0（成功）/ 1（失敗）
+- 出力形式: JSON `{"status": "pass"|"fail", "errors": [], "warnings": []}`
+- 実行環境: Python 3.9以上、標準ライブラリのみ

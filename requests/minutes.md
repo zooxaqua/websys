@@ -4,7 +4,7 @@
 |------|------|
 | 日時 | 2026年5月27日 |
 | 目的 | Webシステム（共通基盤）および搭載アプリの開発方針策定 |
-| ステータス | 更新（2026-05-27：技術方針決定） |
+| ステータス | 更新（2026-05-28：技術スタック変更 - TypeScript + FastAPI構成に決定） |
 
 ---
 
@@ -22,24 +22,42 @@
                        │ マニフェストベースで自動登録
    ┌───────────────────┼───────────────────┐
    ▼                   ▼                   ▼
-┌────────┐         ┌────────┐         ┌────────────────────┐
-│ アプリA │         │ アプリB │         │ アプリC〜N          │
-│独立管理 │         │独立管理 │         │（後から追加可能）    │
-│独立データ│         │独立データ│         │独立管理・独立データ   │
-└────────┘         └────────┘         └────────────────────┘
+┌────────────┐   ┌────────────┐   ┌─────────────────┐
+│   アプリA    │   │   アプリB    │   │   アプリC〜N     │
+│完全独立構成  │   │完全独立構成  │   │（後から追加可能）│
+│・frontend/  │   │・frontend/  │   │完全独立構成      │
+│・backend/   │   │・backend/   │   │・frontend/      │
+│・tests/     │   │・tests/     │   │・backend/       │
+│・data/      │   │・data/      │   │・tests/         │
+└────────────┘   └────────────┘   └─────────────────┘
 ```
 
-**各アプリの独立性:**
+**各アプリの独立性（完全独立型）:**
 ```
 apps/
   app-a/
-    manifest.json   ← メタ情報（名前・バージョン・権限・エントリーポイント）
-    index.php
-    api/
-    data/           ← アプリ固有のJSONデータ（他アプリから直接アクセス不可）
+    manifest.json      ← メタ情報（名前・バージョン・権限・エントリーポイント）
+    frontend/          ← アプリA専用フロント（TypeScript + Alpine.js + Bootstrap）
+      src/
+        components/
+        pages/
+      package.json
+      vite.config.ts
+    backend/           ← アプリA専用バックエンド（FastAPI）
+      app/
+        api/
+        models/
+      data/            ← アプリA固有JSONデータ（他アプリから直接アクセス不可）
+      requirements.txt
+    tests/             ← アプリA専用テスト
+      frontend/
+      backend/
   app-b/
-    ...
-  app-c/            ← 後から追加するだけで自動認識
+    manifest.json
+    frontend/
+    backend/
+    tests/
+  app-c/               ← 後から追加するだけで自動認識
     ...
 ```
 
@@ -60,21 +78,24 @@ apps/
 
 | レイヤー | 技術 | 用途 |
 |---------|------|------|
-| フロントエンド（マークアップ） | PHP | ページレンダリング・テンプレート生成 |
-| フロントエンド（インタラクション） | JavaScript / TypeScript | UIの動的制御・APIコール |
-| フロントエンド（スタイル） | CSS | レイアウト・デザイン |
-| バックエンド（処理系） | Python (FastAPI) | AI・データ分析・特定処理。REST APIで提供 |
+| フロントエンド（ロジック） | TypeScript + Vite | メインロジック・ビルドツール |
+| フロントエンド（インタラクション） | Alpine.js | UIの動的制御・リアクティブな振る舞い |
+| フロントエンド（デザイン） | Bootstrap 5 | レスポンシブUI・コンポーネント |
+| フロントエンド（スタイル） | CSS | カスタムスタイル |
+| バックエンド | Python (FastAPI) | REST API・認証・データ処理・静的ファイル配信 |
 
 ### 2.2 連携アーキテクチャ
 
 ```
-[TypeScript SPA / PHP テンプレート]
+[ブラウザ]
+    ├── TypeScript (Alpine.js) ← ロジック・インタラクション
+    └── Bootstrap 5 ← デザイン・レイアウト
         │  REST API（JSON）/ SSE（通知・ストリーミング）
         ▼
-[PHP Web Server]  ─── PHPセッション（JSON格納）
-        │  REST API（HTTP）
-        ▼
-[FastAPI (Python)]  ← AI・データ分析処理
+[FastAPI (Python)]
+    ├── API エンドポイント（認証・CRUD・AI処理）
+    ├── 静的ファイル配信（フロントエンドdist/）
+    └── セッション管理（JWT）
         │
         ▼
 [JSON DB（DAL抽象化）]  ※ RDB移行対応
@@ -98,11 +119,12 @@ apps/
 
 | 用途 | 方式 | 格納場所 |
 |------|------|--------|
-| Web画面のログイン維持 | PHPサーバーサイドセッション | JSONファイル（`data/sessions/`） |
-| TypeScript → PHP/Python API の認証 | JWT（httpOnly Cookie） | クライアントCookie |
+| ログイン維持 | JWT（httpOnly Cookie） | クライアントCookie |
+| セッションデータ | サーバーサイド（FastAPI） | JSONファイル（`data/sessions/`） |
 
 - httpOnly Cookie によりXSSによるトークン窃取を防止する
-- PHPセッションはJSON DBと一貫した管理とし、DAL経由で読み書きする
+- セッションデータはJSON DBに格納し、DAL経由で読み書きする
+- JWTトークンにはユーザーID・権限・有効期限のみ含める
 
 ---
 
@@ -129,14 +151,14 @@ VS Code Copilot エージェントを各工程・管理機能ごとに整備す�
 
 | エージェント名 | 対応工程 | 役割 |
 |--------------|---------|------|
-| `requirements-agent` | 工程1：要件定義 | 要件の整理・ユースケース記述・要件ドキュメント生成 |
-| `basic-design-agent` | 工程2：基本設計 | API設計・画面設計・アーキテクチャ設計ドキュメント生成 |
-| `detail-design-agent` | 工程3：詳細設計 | クラス設計・データ構造・インターフェース仕様書生成 |
-| `coding-agent` | 工程4：コーディング | コード生成・コードレビュー・リファクタリング・コーディング規約とまりとめ |
-| `unit-test-agent` | 工程5：単体評価（動的確認） | 単体テスト生成・実行・カバレッジ確認（MCDC100%, 閾値検査など） |
-| `integration-test-agent` | 工程6：結合評価（動的確認） | 結合テスト設計・実行・バグ起票 |
-| `system-test-agent` | 工程7：システム評価（動的確認） | E2Eテスト・性能評価・セキュリティチェック |
-| `release-agent` | 工程8：リリース | リリースノート生成・デプロイ手順確認・チェックリスト |
+| `01-requirements-agent` | 工程1：要件定義 | 要件の整理・ユースケース記述・要件ドキュメント生成 |
+| `02-basic-design-agent` | 工程2：基本設計 | API設計・画面設計・アーキテクチャ設計ドキュメント生成 |
+| `03-detail-design-agent` | 工程3：詳細設計 | クラス設計・データ構造・インターフェース仕様書生成 |
+| `04-coding-agent` | 工程4：コーディング | TypeScript・Python コード生成・コードレビュー・リファクタリング |
+| `05-unit-test-agent` | 工程5：単体評価（動的確認） | 単体テスト生成・実行・カバレッジ確認（MCDC100%, 閾値検査など） |
+| `06-integration-test-agent` | 工程6：結合評価（動的確認） | 結合テスト設計・実行・バグ起票 |
+| `07-system-test-agent` | 工程7：システム評価（動的確認） | E2Eテスト・性能評価・セキュリティチェック |
+| `08-release-agent` | 工程8：リリース | リリースノート生成・デプロイ手順確認・チェックリスト |
 | `process-manager` | 全工程 | 全体管理・工程の進捗管理・工程間のハンドオフ・成果物レビュー（前工程に問題がある場合、差し戻し先も判断）・作業状況の可視化 |
 | `issue-manager` | 全工程 | 課題・バグ・リスクの登録・追跡・エスカレーション |
 
@@ -145,14 +167,14 @@ VS Code Copilot エージェントを各工程・管理機能ごとに整備す�
 ```
 ユーザー
   └── process-manager（工程全体を統括）
-        ├── requirements-agent    （工程1）
-        ├── basic-design-agent    （工程2）
-        ├── detail-design-agent   （工程3）
-        ├── coding-agent          （工程4）
-        ├── unit-test-agent       （工程5）
-        ├── integration-test-agent（工程6）
-        ├── system-test-agent     （工程7）
-        └── release-agent         （工程8）
+        ├── 01-requirements-agent    （工程1）
+        ├── 02-basic-design-agent    （工程2）
+        ├── 03-detail-design-agent   （工程3）
+        ├── 04-coding-agent          （工程4）
+        ├── 05-unit-test-agent       （工程5）
+        ├── 06-integration-test-agent（工程6）
+        ├── 07-system-test-agent     （工程7）
+        └── 08-release-agent         （工程8）
 
   └── issue-manager（全工程から独立して課題を管理）
 ```
@@ -165,6 +187,7 @@ VS Code Copilot エージェントを各工程・管理機能ごとに整備す�
 |---|------|--------|------|
 | 1 | JSONファイルDALのインターフェース設計（読み書き抽象化の方針） | 中 | 未定 |
 | 2 | アプリ間データ共有が必要になった際の共通API設計 | 低 | 未定 |
+| 3 | Alpine.js + Bootstrap のコンポーネント設計（共通UI部品） | 中 | 未定 |
 
 ---
 
@@ -172,7 +195,9 @@ VS Code Copilot エージェントを各工程・管理機能ごとに整備す�
 
 | # | タスク | 期限 |
 |---|--------|------|
-| 1 | 工程1（要件定義）の開始 — `requirements-agent` 整備・要件定義ドキュメント作成 | TBD |
+| 1 | 工程1（要件定義）の開始 — `01-requirements-agent` 整備・要件定義ドキュメント作成 | TBD |
 | 2 | マニフェスト仕様（`manifest.json` のスキーマ）を詳細設計で定義 | TBD |
 | 3 | JSONファイルDALのインターフェース設計・サンプル実装 | TBD |
-| 4 | FastAPI の雛形プロジェクト作成・PHP連携のサンプル実装 | TBD |
+| 4 | TypeScript + Vite + Alpine.js + Bootstrap の雛形プロジェクト作成 | TBD |
+| 5 | FastAPI の雛形プロジェクト作成・静的ファイル配信設定 | TBD |
+| 6 | JWT認証機構の実装（httpOnly Cookie） | TBD |

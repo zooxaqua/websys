@@ -127,17 +127,17 @@ class JsonDataStore implements DataStore
 
 | パス | コレクション | 管理主体 |
 |------|------------|---------|
-| `src/system/data/users.json` | users | 共通基盤 |
-| `src/system/data/sessions.json` | sessions | 共通基盤 |
-| `src/system/data/apps.json` | apps | 共通基盤（manifest登録状態） |
-| `src/apps/<name>/data/<name>.json` | アプリ固有 | 各アプリ |
+| `src/sys/data/users.json` | users | 共通基盤 |
+| `src/sys/data/sessions.json` | sessions | 共通基盤 |
+| `src/sys/data/apps.json` | apps | 共通基盤（manifest登録状態） |
+| `src/app/<name>/data/<name>.json` | アプリ固有 | 各アプリ |
 
 ## アプリ固有 DAL のインスタンス化
 
 ```php
 // アプリは自分のデータディレクトリを指すDALインスタンスを使う
 $appDataStore = new JsonDataStore(
-    basePath: __DIR__ . '/data'  // apps/<name>/data/
+    basePath: __DIR__ . '/data'  // app/<name>/data/
 );
 
 // 共通基盤のデータには直接アクセスしない

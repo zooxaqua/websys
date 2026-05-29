@@ -10,15 +10,21 @@ user-invocable: false
 
 ## 入力（V字工程：要件定義を検証）
 
-- `src/`（実装コード）
-- `documents/01-requirements/`（検証対象：機能要件・非機能要件・受入基準）
+- **システム（フロント）**: `frontend/src/sys/`（実装コード）
+- **システム（バック）**: `backend/app/sys/`（実装コード）
+- **アプリ**: `apps/<app-name>/frontend/`, `apps/<app-name>/backend/`（実装コード）
+- **システム要件**: `documents/sys/01-requirements/`（検証対象：機能要件・非機能要件・受入基準）
+- **アプリ要件**: `documents/app/01-requirements/`（検証対象：機能要件・非機能要件・受入基準）
 
 ## 出力先
 
 | パス | 内容 |
 |------|------|
-| `tests/system/` | E2Eテストコード |
-| `documents/07-system-test-report.md` | システムテスト結果レポート |
+| `tests/frontend/` | システム共通基盤フロントのE2Eテストコード |
+| `tests/backend/` | システム共通基盤バックエンドのE2Eテストコード |
+| `apps/<app-name>/tests/` | アプリケーション専用E2Eテストコード |
+| `documents/sys/07-system-test-report.md` | システムテスト結果レポート |
+| `documents/app/07-system-test-report.md` | アプリテスト結果レポート |
 
 ## テスト種別
 
@@ -29,7 +35,7 @@ user-invocable: false
 - SSE によるリアルタイム通知の受信確認
 
 ### 2. 性能テスト
-`documents/01-requirements/` の非機能要件（レスポンスタイム・同時接続数）に対して検証する:
+`documents/sys/01-requirements/`, `documents/app/01-requirements/` の非機能要件（レスポンスタイム・同時接続数）に対して検証する:
 - API レスポンスタイム（目標値: 要件書から取得）
 - 同時接続時の挙動確認
 - JSON DB の読み書き性能
@@ -49,7 +55,7 @@ user-invocable: false
 ### 4. リグレッションテスト
 単体・結合テストを全件再実行し、新しい問題が発生していないことを確認する。
 
-## テスト結果レポート（07-system-test-report.md）
+## テスト結果レポート（sys: 07-system-test-report.md, app: 07-system-test-report.md）
 
 ```markdown
 ## システムテスト結果レポート
@@ -77,6 +83,24 @@ user-invocable: false
 
 ## 制約
 
-- DO NOT `src/` のコードを直接修正しない
+- DO NOT `src/sys/`, `src/app/` のコードを直接修正しない
 - セキュリティ問題はすべて `issue-manager` に `severity: critical` で登録する
 - 要件定義と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ
+- **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
+- **DO NOT スキル定義ファイル（`.github/skills/*/SKILL.md`）を編集しない**
+
+## チェックプログラムの作成責任
+
+成果物作成時に、`.github/checks/common/phase-07-check.py` を作成すること。
+
+### チェック項目
+- システムテストファイルの存在確認
+- 全ユースケースE2Eテストの実行確認
+- 性能基準達成の確認（ページ2秒以内、API 500ms以内）
+- セキュリティチェック完了確認（OWASP Top 10）
+- 要件定義の受入基準すべてクリア確認
+
+### チェックプログラム仕様
+- exit code: 0（成功）/ 1（失敗）
+- 出力形式: JSON `{"status": "pass"|"fail", "errors": [], "warnings": []}`
+- 実行環境: Python 3.9以上、標準ライブラリのみ

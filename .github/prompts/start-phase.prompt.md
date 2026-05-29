@@ -27,11 +27,11 @@ ${scope:全体}
 
 | 工程 | エージェント | 入力 | 出力先 |
 |------|------------|------|--------|
-| 1 | 01-requirements-agent | requests/ | documents/01-requirements/ |
-| 2 | 02-basic-design-agent | documents/01-requirements/ | documents/02-basic-design/ |
-| 3 | 03-detail-design-agent | documents/02-basic-design/ | documents/03-detail-design/ |
-| 4 | 04-coding-agent | documents/03-detail-design/ | src/ |
-| 5 | 05-unit-test-agent | src/ | tests/unit/, documents/05-unit-test-report.md |
-| 6 | 06-integration-test-agent | src/ | tests/integration/, documents/06-integration-test-report.md |
-| 7 | 07-system-test-agent | src/ | tests/system/, documents/07-system-test-report.md |
-| 8 | 08-release-agent | documents/ | documents/08-release/ |
+| 1 | 01-requirements-agent | requests/ | documents/sys/01-requirements/, documents/app/01-requirements/ |
+| 2 | 02-basic-design-agent | documents/sys/01-requirements/, documents/app/01-requirements/ | documents/sys/02-basic-design/, documents/app/02-basic-design/ |
+| 3 | 03-detail-design-agent | documents/sys/02-basic-design/, documents/app/02-basic-design/ | documents/sys/03-detail-design/, documents/app/03-detail-design/ |
+| 4 | 04-coding-agent | documents/sys/03-detail-design/, documents/app/03-detail-design/ | src/sys/, src/app/ |
+| 5 | 05-unit-test-agent | src/sys/, src/app/ | tests/sys/, tests/app/, documents/sys/05-unit-test-report.md, documents/app/05-unit-test-report.md |
+| 6 | 06-integration-test-agent | src/sys/, src/app/ | tests/sys/, tests/app/, documents/sys/06-integration-test-report.md, documents/app/06-integration-test-report.md |
+| 7 | 07-system-test-agent | src/sys/, src/app/ | tests/sys/, tests/app/, documents/sys/07-system-test-report.md, documents/app/07-system-test-report.md |
+| 8 | 08-release-agent | documents/ | documents/sys/08-release/, documents/app/08-release/ |

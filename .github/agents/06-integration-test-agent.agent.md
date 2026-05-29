@@ -10,30 +10,36 @@ user-invocable: false
 
 ## 入力（V字工程：基本設計を検証）
 
-- `src/`（実装コード）
-- `documents/02-basic-design/`（検証対象の設計書：API設計・アーキテクチャ）
+- **システム（フロント）**: `frontend/src/sys/`（実装コード）
+- **システム（バック）**: `backend/app/sys/`（実装コード）
+- **アプリ**: `apps/<app-name>/frontend/`, `apps/<app-name>/backend/`（実装コード）
+- **システム設計**: `documents/sys/02-basic-design/`（検証対象の設計書：API設計・アーキテクチャ）
+- **アプリ設計**: `documents/app/02-basic-design/`（検証対象の設計書：API設計・アーキテクチャ）
 
 ## 出力先
 
 | パス | 内容 |
 |------|------|
-| `tests/integration/` | 結合テストコード |
-| `documents/06-integration-test-report.md` | テスト結果レポート |
+| `tests/frontend/` | システム共通基盤フロントの結合テストコード |
+| `tests/backend/` | システム共通基盤バックエンドの結合テストコード |
+| `apps/<app-name>/tests/` | アプリケーション専用結合テストコード |
+| `documents/sys/06-integration-test-report.md` | システムテスト結果レポート |
+| `documents/app/06-integration-test-report.md` | アプリテスト結果レポート |
 
 ## テスト対象の連携パターン
 
-### 1. PHP ↔ DAL 連携
+### 1. FastAPI ↔ DAL 連携
 - JSON ファイルの読み書きが正しく抽象化されているか
 - DAL インターフェース経由でのみデータアクセスが行われているか
 
-### 2. PHP ↔ TypeScript（REST API）連携
+### 2. TypeScript（フロント） ↔ FastAPI（REST API）連携
 - エンドポイントのリクエスト/レスポンス形式が api-spec.md と一致するか
-- 認証（JWT / セッション）が正しく機能するか
+- 認証（JWT / httpOnly Cookie）が正しく機能するか
 - エラーレスポンス（4xx, 5xx）が適切に返るか
 
-### 3. PHP ↔ FastAPI（Python）連携
-- PHP から FastAPI への REST API コールが正常に動作するか
-- タイムアウト・エラーハンドリングが実装されているか
+### 3. システム共通 ↔ アプリの連携
+- システム共通APIをアプリから正常に呼び出せるか
+- 共通UIコンポーネントがアプリで正しく動作するか
 
 ### 4. アプリプラグイン機構の検証
 - manifest.json を配置するだけでアプリが自動登録されるか
@@ -47,11 +53,11 @@ user-invocable: false
 ## 手順
 
 1. 各連携パターンのテストシナリオを設計する
-2. `tests/integration/` にテストコードを実装する
+2. `tests/sys/`, `tests/app/` にテストコードを実装する
 3. テストを実行し結果を記録する
 4. バグは `issue-manager` に登録する
 
-## テスト結果レポート（06-integration-test-report.md）
+## テスト結果レポート（sys: 06-integration-test-report.md, app: 06-integration-test-report.md）
 
 ```markdown
 ## 結合テスト結果レポート
@@ -77,6 +83,23 @@ user-invocable: false
 
 ## 制約
 
-- DO NOT `src/` のコードを直接修正しない
+- DO NOT `src/sys/`, `src/app/` のコードを直接修正しない
 - バグ発見時は `issue-manager` に登録し、`process-manager` に差し戻し判断を委ねる
 - 基本設計と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ
+- **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
+- **DO NOT スキル定義ファイル（`.github/skills/*/SKILL.md`）を編集しない**
+
+## チェックプログラムの作成責任
+
+成果物作成時に、`.github/checks/common/phase-06-check.py` を作成すること。
+
+### チェック項目
+- 結合テストファイルの存在確認
+- 全API連携シナリオの実行確認
+- テスト実行結果の確認（全テスト合格）
+- アプリ独立性検証の完了確認
+
+### チェックプログラム仕様
+- exit code: 0（成功）/ 1（失敗）
+- 出力形式: JSON `{"status": "pass"|"fail", "errors": [], "warnings": []}`
+- 実行環境: Python 3.9以上、標準ライブラリのみ

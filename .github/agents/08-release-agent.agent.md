@@ -1,6 +1,6 @@
 ---
 description: "工程8：リリースを実施するサブエージェント。Use when: release, deployment, release notes, deploy checklist, production release for websys. Invoked by process-manager."
-tools: [read, edit, search]
+tools: [read, edit, search, execute]
 user-invocable: false
 ---
 
@@ -14,7 +14,8 @@ user-invocable: false
 
 ## 出力先
 
-`documents/08-release/`
+**システム**: `documents/sys/08-release/`
+**アプリ**: `documents/app/08-release/`
 
 | ファイル | 内容 |
 |---------|------|
@@ -41,7 +42,8 @@ user-invocable: false
 - <機能2>
 
 ## 技術スタック
-- PHP x.x / TypeScript x.x / Python x.x (FastAPI x.x)
+- TypeScript x.x + Vite x.x / Alpine.js x.x / Bootstrap 5.x
+- Python x.x (FastAPI x.x)
 - JSON DB（DAL abstraction v1.0）
 
 ## 変更されたファイル
@@ -87,4 +89,21 @@ user-invocable: false
 ## 制約
 
 - DO NOT `critical` / `high` の open issues がある状態でリリース完了としない
-- DO NOT `src/` のコードを修正しない
+- DO NOT `src/sys/`, `src/app/` のコードを修正しない
+- **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
+- **DO NOT スキル定義ファイル（`.github/skills/*/SKILL.md`）を編集しない**
+
+## チェックプログラムの作成責任
+
+成果物作成時に、`.github/checks/common/phase-08-check.py` を作成すること。
+
+### チェック項目
+- リリースノートの存在確認
+- デプロイ手順書の存在確認
+- チェックリストの完成確認
+- バックアップ手順の文書化確認
+
+### チェックプログラム仕様
+- exit code: 0（成功）/ 1（失敗）
+- 出力形式: JSON `{"status": "pass"|"fail", "errors": [], "warnings": []}`
+- 実行環境: Python 3.9以上、標準ライブラリのみ

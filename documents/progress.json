@@ -1,0 +1,15 @@
+{
+  "project": "websys",
+  "currentPhase": 2,
+  "phases": {
+    "1": { "status": "completed", "startedAt": "2026-05-28T10:00:00Z", "completedAt": "2026-05-28T11:30:00Z", "notes": "要件追加完了（システムポータルページ、無効化アプリのリダイレクト動作、TODOアプリ正式採用）。自動チェックPASS、成果物レビュー合格。" },
+    "2": { "status": "ready", "startedAt": null, "completedAt": null, "notes": "工程2（基本設計）開始可能" },
+    "3": { "status": "not-started", "startedAt": null, "completedAt": null, "notes": "" },
+    "4": { "status": "not-started", "startedAt": null, "completedAt": null, "notes": "" },
+    "5": { "status": "not-started", "startedAt": null, "completedAt": null, "notes": "" },
+    "6": { "status": "not-started", "startedAt": null, "completedAt": null, "notes": "" },
+    "7": { "status": "not-started", "startedAt": null, "completedAt": null, "notes": "" },
+    "8": { "status": "not-started", "startedAt": null, "completedAt": null, "notes": "" }
+  },
+  "issues": []
+}
