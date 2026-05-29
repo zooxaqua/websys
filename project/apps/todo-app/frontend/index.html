@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO管理</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4" x-data="todoApp">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>TODO管理</h1>
+      <div>
+        <button class="btn btn-primary" @click="showAddDialog">新規作成</button>
+        <a href="/" class="btn btn-secondary">ポータルに戻る</a>
+      </div>
+    </div>
+
+    <!-- 統計情報 -->
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">全体</h5>
+            <p class="display-6" x-text="stats.total"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">未完了</h5>
+            <p class="display-6" x-text="stats.active"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">完了</h5>
+            <p class="display-6" x-text="stats.completed"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card border-danger">
+          <div class="card-body">
+            <h5 class="card-title text-danger">期限切れ</h5>
+            <p class="display-6 text-danger" x-text="stats.overdue"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- フィルター -->
+    <div class="mb-3">
+      <div class="btn-group" role="group">
+        <button class="btn btn-outline-primary" :class="filter === '' && 'active'" @click="filter = ''; loadTodos()">全て</button>
+        <button class="btn btn-outline-primary" :class="filter === 'active' && 'active'" @click="filter = 'active'; loadTodos()">未完了</button>
+        <button class="btn btn-outline-primary" :class="filter === 'completed' && 'active'" @click="filter = 'completed'; loadTodos()">完了</button>
+      </div>
+    </div>
+
+    <!-- TODO一覧 -->
+    <div class="list-group">
+      <template x-for="todo in todos" :key="todo.id">
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" :checked="todo.completed" @click="toggleTodo(todo.id)">
+              <label class="form-check-label" :class="todo.completed && 'text-decoration-line-through'">
+                <strong x-text="todo.title"></strong>
+                <template x-if="todo.dueDate">
+                  <span class="badge bg-info ms-2" x-text="formatDate(todo.dueDate)"></span>
+                </template>
+              </label>
+            </div>
+            <div>
+              <button class="btn btn-sm btn-danger" @click="deleteTodo(todo.id)">削除</button>
+            </div>
+          </div>
+          <template x-if="todo.description">
+            <p class="mb-0 mt-2 text-muted" x-text="todo.description"></p>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <template x-if="todos.length === 0">
+      <div class="alert alert-info text-center">TODOがありません</div>
+    </template>
+
+    <!-- 追加ダイアログ（モーダル） -->
+    <div class="modal" tabindex="-1" x-show="showDialog" style="display: block;" x-cloak>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">TODO追加</h5>
+            <button type="button" class="btn-close" @click="showDialog = false"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">タイトル</label>
+              <input type="text" class="form-control" x-model="newTodo.title" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">説明</label>
+              <textarea class="form-control" x-model="newTodo.description" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">期限</label>
+              <input type="date" class="form-control" x-model="newTodo.dueDate">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" @click="showDialog = false">キャンセル</button>
+            <button type="button" class="btn btn-primary" @click="addTodo">追加</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade show" x-show="showDialog" x-cloak></div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+</body>
+</html>

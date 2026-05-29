@@ -1,0 +1,90 @@
+{
+  "valid_info_notification": {
+    "id": "notif-001",
+    "userId": "user-001",
+    "type": "info",
+    "title": "Welcome",
+    "message": "Welcome to the system",
+    "metadata": {},
+    "read": false,
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": null
+  },
+  "valid_warning_notification": {
+    "id": "notif-002",
+    "userId": "user-001",
+    "type": "warning",
+    "title": "Warning: Maintenance",
+    "message": "System maintenance scheduled for tomorrow",
+    "metadata": {"priority": "high"},
+    "read": false,
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": "2026-05-30T00:00:00Z"
+  },
+  "valid_error_notification": {
+    "id": "notif-003",
+    "userId": "user-002",
+    "type": "error",
+    "title": "Error occurred",
+    "message": "An error occurred during processing",
+    "metadata": {"errorCode": "ERR_500"},
+    "read": true,
+    "createdAt": "2026-05-28T00:00:00Z",
+    "expiresAt": null
+  },
+  "valid_success_notification": {
+    "id": "notif-004",
+    "userId": "user-003",
+    "type": "success",
+    "title": "Operation completed",
+    "message": "Your request has been processed successfully",
+    "metadata": {},
+    "read": false,
+    "createdAt": "2026-05-29T12:00:00Z",
+    "expiresAt": "2026-06-05T00:00:00Z"
+  },
+  "expired_notification": {
+    "id": "notif-005",
+    "userId": "user-001",
+    "type": "info",
+    "title": "Expired message",
+    "message": "This notification has expired",
+    "metadata": {},
+    "read": false,
+    "createdAt": "2026-05-01T00:00:00Z",
+    "expiresAt": "2026-05-02T00:00:00Z"
+  },
+  "boundary_title_min": {
+    "id": "notif-006",
+    "userId": "user-001",
+    "type": "info",
+    "title": "A",
+    "message": "Minimum length title",
+    "metadata": {},
+    "read": false,
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": null
+  },
+  "boundary_title_max": {
+    "id": "notif-007",
+    "userId": "user-001",
+    "type": "info",
+    "title": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "message": "Maximum length title (200 chars)",
+    "metadata": {},
+    "read": false,
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": null
+  },
+  "boundary_message_min": {
+    "id": "notif-008",
+    "userId": "user-001",
+    "type": "info",
+    "title": "Short message",
+    "message": "A",
+    "metadata": {},
+    "read": false,
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": null
+  }
+}

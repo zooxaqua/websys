@@ -1,0 +1,31 @@
+{
+  "auth": {
+    "login": {
+      "success": {
+        "id": "user-001",
+        "username": "testuser",
+        "displayName": "Test User",
+        "role": "user",
+        "email": "test@example.com",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "lastLogin": "2024-01-15T10:30:00Z"
+      }
+    },
+    "getMe": {
+      "success": {
+        "id": "user-001",
+        "username": "testuser",
+        "displayName": "Test User",
+        "role": "user",
+        "email": "test@example.com",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "lastLogin": "2024-01-15T10:30:00Z"
+      }
+    },
+    "errors": {
+      "unauthorized": "認証に失敗しました",
+      "invalid_credentials": "ユーザー名またはパスワードが正しくありません",
+      "weak_password": "パスワードは8文字以上である必要があります"
+    }
+  }
+}

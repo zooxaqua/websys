@@ -1,0 +1,101 @@
+{
+  "testCases": {
+    "TC-HTTP-001": {
+      "description": "request() - 正常系（response.ok = true）",
+      "expected": {
+        "type": "success",
+        "data": {
+          "id": "user-001",
+          "username": "testuser",
+          "email": "test@example.com"
+        }
+      }
+    },
+    "TC-HTTP-002": {
+      "description": "request() - 異常系（response.ok = false, error.error.message）",
+      "expected": {
+        "type": "error",
+        "message": "認証エラー"
+      }
+    },
+    "TC-HTTP-003": {
+      "description": "request() - 異常系（response.ok = false, error.message）",
+      "expected": {
+        "type": "error",
+        "message": "レガシーエラーメッセージ"
+      }
+    },
+    "TC-HTTP-004": {
+      "description": "request() - 異常系（response.ok = false, JSONパース失敗）",
+      "expected": {
+        "type": "error",
+        "message": "エラーが発生しました"
+      }
+    },
+    "TC-HTTP-005": {
+      "description": "get() - 正常系",
+      "expected": {
+        "type": "success",
+        "method": "GET"
+      }
+    },
+    "TC-HTTP-006": {
+      "description": "post() - 正常系（データあり）",
+      "expected": {
+        "type": "success",
+        "method": "POST",
+        "bodyExists": true
+      }
+    },
+    "TC-HTTP-007": {
+      "description": "put() - 正常系（データあり）",
+      "expected": {
+        "type": "success",
+        "method": "PUT",
+        "bodyExists": true
+      }
+    },
+    "TC-HTTP-008": {
+      "description": "delete() - 正常系",
+      "expected": {
+        "type": "success",
+        "method": "DELETE"
+      }
+    },
+    "TC-HTTP-009": {
+      "description": "patch() - 正常系（data = あり）",
+      "expected": {
+        "type": "success",
+        "method": "PATCH",
+        "bodyExists": true
+      }
+    },
+    "TC-HTTP-010": {
+      "description": "patch() - 正常系（data = なし）",
+      "expected": {
+        "type": "success",
+        "method": "PATCH",
+        "bodyExists": false
+      }
+    },
+    "TC-HTTP-011": {
+      "description": "request() - credentials = 'include' が設定される",
+      "expected": {
+        "credentials": "include"
+      }
+    },
+    "TC-HTTP-012": {
+      "description": "request() - Content-Type = application/json が設定される",
+      "expected": {
+        "contentType": "application/json"
+      }
+    },
+    "TC-HTTP-013": {
+      "description": "request() - 異常系（error.error, error.message 両方なし）",
+      "expected": {
+        "type": "error",
+        "message": "エラーが発生しました"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "missing_sessionId": {
+    "error_type": "missing",
+    "field": "sessionId",
+    "message": "Field required"
+  },
+  "missing_userId": {
+    "error_type": "missing",
+    "field": "userId",
+    "message": "Field required"
+  },
+  "missing_token": {
+    "error_type": "missing",
+    "field": "token",
+    "message": "Field required"
+  },
+  "invalid_createdAt_type": {
+    "error_type": "datetime_parsing",
+    "field": "createdAt",
+    "message": "Input should be a valid datetime"
+  },
+  "invalid_expiresAt_type": {
+    "error_type": "datetime_parsing",
+    "field": "expiresAt",
+    "message": "Input should be a valid datetime"
+  }
+}

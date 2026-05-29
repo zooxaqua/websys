@@ -1,0 +1,83 @@
+{
+  "valid_app": {
+    "id": "app-001",
+    "name": "todo-app",
+    "version": "1.0.0",
+    "description": "Simple TODO application",
+    "icon": "/assets/todo-icon.png",
+    "entryPoint": "/apps/todo-app/",
+    "apiPrefix": "/api/apps/todo-app",
+    "enabled": true,
+    "author": "system-admin",
+    "requiredPermissions": ["read", "write"],
+    "dependencies": [],
+    "manifest": {
+      "name": "todo-app",
+      "version": "1.0.0",
+      "displayName": "TODO App",
+      "entryPoint": "/apps/todo-app/",
+      "apiPrefix": "/api/apps/todo-app"
+    },
+    "lastUpdated": "2026-05-29T00:00:00Z"
+  },
+  "valid_app_disabled": {
+    "id": "app-002",
+    "name": "disabled-app",
+    "version": "0.9.0",
+    "description": "Disabled application",
+    "icon": "/assets/disabled-icon.png",
+    "entryPoint": "/apps/disabled-app/",
+    "apiPrefix": "/api/apps/disabled-app",
+    "enabled": false,
+    "author": "test-user",
+    "requiredPermissions": [],
+    "dependencies": [],
+    "manifest": {
+      "name": "disabled-app",
+      "version": "0.9.0",
+      "displayName": "Disabled App",
+      "entryPoint": "/apps/disabled-app/",
+      "apiPrefix": "/api/apps/disabled-app"
+    },
+    "lastUpdated": "2026-05-28T00:00:00Z"
+  },
+  "invalid_manifest_missing_field": {
+    "id": "app-003",
+    "name": "invalid-app",
+    "version": "1.0.0",
+    "description": "App with invalid manifest",
+    "icon": "/assets/invalid-icon.png",
+    "entryPoint": "/apps/invalid-app/",
+    "apiPrefix": "/api/apps/invalid-app",
+    "enabled": true,
+    "author": "system-admin",
+    "requiredPermissions": [],
+    "dependencies": [],
+    "manifest": {
+      "name": "invalid-app",
+      "version": "1.0.0"
+    },
+    "lastUpdated": "2026-05-29T00:00:00Z"
+  },
+  "app_with_dependencies": {
+    "id": "app-004",
+    "name": "complex-app",
+    "version": "2.0.0",
+    "description": "App with dependencies",
+    "icon": "/assets/complex-icon.png",
+    "entryPoint": "/apps/complex-app/",
+    "apiPrefix": "/api/apps/complex-app",
+    "enabled": true,
+    "author": "dev-team",
+    "requiredPermissions": ["read", "write", "admin"],
+    "dependencies": ["base-lib", "utils-lib"],
+    "manifest": {
+      "name": "complex-app",
+      "version": "2.0.0",
+      "displayName": "Complex App",
+      "entryPoint": "/apps/complex-app/",
+      "apiPrefix": "/api/apps/complex-app"
+    },
+    "lastUpdated": "2026-05-29T12:00:00Z"
+  }
+}

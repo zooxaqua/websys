@@ -1,0 +1,12 @@
+{
+  "siteName": "WebSystem",
+  "siteDescription": "統合Webシステム",
+  "theme": "light",
+  "language": "ja",
+  "sessionTimeout": 24,
+  "maxLoginAttempts": 5,
+  "passwordMinLength": 8,
+  "enableNotifications": true,
+  "enableAppStore": true,
+  "maintenanceMode": false
+}

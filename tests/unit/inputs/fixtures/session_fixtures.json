@@ -1,0 +1,36 @@
+{
+  "valid_session": {
+    "sessionId": "sess-12345678-1234-1234-1234-123456789abc",
+    "userId": "user-001",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.valid_token",
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": "2026-05-30T00:00:00Z",
+    "metadata": {
+      "ip": "192.168.1.1",
+      "userAgent": "Mozilla/5.0"
+    }
+  },
+  "expired_session": {
+    "sessionId": "sess-expired-1234-1234-1234-123456789abc",
+    "userId": "user-002",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.expired_token",
+    "createdAt": "2026-05-01T00:00:00Z",
+    "expiresAt": "2026-05-02T00:00:00Z",
+    "metadata": {}
+  },
+  "session_no_metadata": {
+    "sessionId": "sess-no-meta-1234-1234-1234-123456789abc",
+    "userId": "user-003",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.no_metadata",
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": "2026-05-30T00:00:00Z"
+  },
+  "session_boundary_future": {
+    "sessionId": "sess-future-1234-1234-1234-123456789abc",
+    "userId": "user-004",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.future_token",
+    "createdAt": "2026-05-29T00:00:00Z",
+    "expiresAt": "2027-12-31T23:59:59Z",
+    "metadata": {}
+  }
+}

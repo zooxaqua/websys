@@ -1,0 +1,27 @@
+{
+  "invalid_type": {
+    "error_type": "string_pattern_mismatch",
+    "field": "type",
+    "message": "String should match pattern"
+  },
+  "title_empty": {
+    "error_type": "string_too_short",
+    "field": "title",
+    "message": "String should have at least 1 character"
+  },
+  "title_too_long": {
+    "error_type": "string_too_long",
+    "field": "title",
+    "message": "String should have at most 200 characters"
+  },
+  "message_empty": {
+    "error_type": "string_too_short",
+    "field": "message",
+    "message": "String should have at least 1 character"
+  },
+  "message_too_long": {
+    "error_type": "string_too_long",
+    "field": "message",
+    "message": "String should have at most 1000 characters"
+  }
+}

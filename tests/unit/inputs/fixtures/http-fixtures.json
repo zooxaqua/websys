@@ -1,0 +1,38 @@
+{
+  "testData": {
+    "successResponse": {
+      "id": "user-001",
+      "username": "testuser",
+      "email": "test@example.com"
+    },
+    "errorResponse": {
+      "error": {
+        "message": "認証エラー"
+      }
+    },
+    "errorResponseLegacy": {
+      "message": "レガシーエラーメッセージ"
+    },
+    "errorResponseEmptyMessages": {
+      "error": {},
+      "code": "UNKNOWN"
+    },
+    "postData": {
+      "username": "newuser",
+      "password": "Password123!"
+    },
+    "putData": {
+      "email": "updated@example.com"
+    },
+    "patchData": {
+      "status": "active"
+    }
+  },
+  "testUrls": {
+    "get": "http://localhost:8000/api/users/1",
+    "post": "http://localhost:8000/api/users",
+    "put": "http://localhost:8000/api/users/1",
+    "delete": "http://localhost:8000/api/users/1",
+    "patch": "http://localhost:8000/api/users/1"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "username_too_short": {
+    "error_type": "ValidationError",
+    "field": "username",
+    "constraint": "min_length",
+    "expected_min": 3
+  },
+  "username_too_long": {
+    "error_type": "ValidationError",
+    "field": "username",
+    "constraint": "max_length",
+    "expected_max": 50
+  },
+  "invalid_role": {
+    "error_type": "ValidationError",
+    "field": "role",
+    "constraint": "pattern",
+    "expected_pattern": "^(admin|user)$"
+  },
+  "invalid_email": {
+    "error_type": "ValidationError",
+    "field": "email",
+    "constraint": "email_format"
+  },
+  "displayname_empty": {
+    "error_type": "ValidationError",
+    "field": "displayName",
+    "constraint": "min_length",
+    "expected_min": 1
+  },
+  "displayname_too_long": {
+    "error_type": "ValidationError",
+    "field": "displayName",
+    "constraint": "max_length",
+    "expected_max": 100
+  }
+}

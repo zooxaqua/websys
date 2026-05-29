@@ -1,0 +1,136 @@
+{
+  "valid_user": {
+    "id": "user-001",
+    "username": "testuser",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Test User",
+    "role": "user",
+    "email": "test@example.com",
+    "metadata": {"department": "engineering"},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00",
+    "lastLogin": null
+  },
+  "valid_admin": {
+    "id": "user-002",
+    "username": "adminuser",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Admin User",
+    "role": "admin",
+    "email": "admin@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00",
+    "lastLogin": "2026-05-29T08:00:00"
+  },
+  "boundary_username_min": {
+    "id": "user-003",
+    "username": "abc",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Boundary Test",
+    "role": "user",
+    "email": "boundary@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "boundary_username_max": {
+    "id": "user-004",
+    "username": "12345678901234567890123456789012345678901234567890",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Boundary Test Max",
+    "role": "user",
+    "email": "boundarymax@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "boundary_displayname_min": {
+    "id": "user-005",
+    "username": "testuser5",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "A",
+    "role": "user",
+    "email": "display@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "boundary_displayname_max": {
+    "id": "user-006",
+    "username": "testuser6",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",
+    "role": "admin",
+    "email": "displaymax@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "invalid_username_too_short": {
+    "id": "user-007",
+    "username": "ab",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Invalid User",
+    "role": "user",
+    "email": "invalid@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "invalid_username_too_long": {
+    "id": "user-008",
+    "username": "123456789012345678901234567890123456789012345678901",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Invalid User Long",
+    "role": "user",
+    "email": "invalidlong@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "invalid_role": {
+    "id": "user-009",
+    "username": "testuser9",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Invalid Role User",
+    "role": "superadmin",
+    "email": "invalidrole@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "invalid_email": {
+    "id": "user-010",
+    "username": "testuser10",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "Invalid Email User",
+    "role": "user",
+    "email": "not-an-email",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "invalid_displayname_empty": {
+    "id": "user-011",
+    "username": "testuser11",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "",
+    "role": "user",
+    "email": "emptydisplay@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  },
+  "invalid_displayname_too_long": {
+    "id": "user-012",
+    "username": "testuser12",
+    "passwordHash": "$2b$12$KIXxLVJZ8hFQN7Z3mN1kLOZqJ4pQZ6Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3Z3",
+    "displayName": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
+    "role": "user",
+    "email": "toolong@example.com",
+    "metadata": {},
+    "createdAt": "2026-05-01T10:00:00",
+    "updatedAt": "2026-05-01T10:00:00"
+  }
+}

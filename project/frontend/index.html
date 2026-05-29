@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webシステム</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- ヘッダー -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" x-data="header">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Webシステム</a>
+        <div class="d-flex align-items-center">
+          <template x-if="user">
+            <div class="dropdown">
+              <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <span x-text="user.displayName"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#" @click.prevent="logout">ログアウト</a></li>
+              </ul>
+            </div>
+          </template>
+        </div>
+      </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- サイドバー -->
+        <nav class="col-md-2 d-md-block bg-light sidebar" x-data="navigation" x-show="isAuthenticated">
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#" @click.prevent="navigate('portal')">
+                  <span>🏠 ポータル</span>
+                </a>
+              </li>
+              <li class="nav-item" x-show="isAdmin">
+                <a class="nav-link" href="#" @click.prevent="navigate('users')">
+                  <span>👥 ユーザー管理</span>
+                </a>
+              </li>
+              <li class="nav-item" x-show="isAdmin">
+                <a class="nav-link" href="#" @click.prevent="navigate('apps')">
+                  <span>📦 アプリ管理</span>
+                </a>
+              </li>
+              <template x-for="app in apps" :key="app.id">
+                <li class="nav-item">
+                  <a class="nav-link" :href="`/apps/${app.id}/`" x-text="app.name"></a>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- コンテンツエリア -->
+        <main class="col-md-10 ms-sm-auto px-md-4">
+          <div class="pt-3">
+            <!-- ログイン画面 -->
+            <div x-data="loginPage" x-show="!isAuthenticated" x-cloak>
+              <div class="row justify-content-center">
+                <div class="col-md-4">
+                  <h2 class="text-center mb-4">ログイン</h2>
+                  <form @submit.prevent="login">
+                    <div class="mb-3">
+                      <label for="username" class="form-label">ユーザー名</label>
+                      <input type="text" class="form-control" id="username" x-model="username" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">パスワード</label>
+                      <input type="password" class="form-control" id="password" x-model="password" required>
+                    </div>
+                    <div x-show="error" class="alert alert-danger" x-text="error"></div>
+                    <button type="submit" class="btn btn-primary w-100">ログイン</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- ポータル画面 -->
+            <div x-data="portalPage" x-show="isAuthenticated && currentPage === 'portal'" x-cloak>
+              <h2>ポータル</h2>
+              <p>ようこそ、<span x-text="user?.displayName"></span> さん</p>
+              
+              <div class="row">
+                <template x-for="app in apps" :key="app.id">
+                  <div class="col-md-3 mb-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title" x-text="app.name"></h5>
+                        <p class="card-text" x-text="app.description"></p>
+                        <a :href="`/apps/${app.id}/`" class="btn btn-primary">開く</a>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- ユーザー管理画面 -->
+            <div x-data="usersPage" x-show="isAuthenticated && isAdmin && currentPage === 'users'" x-cloak>
+              <h2>ユーザー管理</h2>
+              <button class="btn btn-primary mb-3" @click="showCreateDialog">新規作成</button>
+              
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ユーザー名</th>
+                    <th>表示名</th>
+                    <th>ロール</th>
+                    <th>メール</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template x-for="user in users" :key="user.id">
+                    <tr>
+                      <td x-text="user.username"></td>
+                      <td x-text="user.displayName"></td>
+                      <td x-text="user.role"></td>
+                      <td x-text="user.email"></td>
+                      <td>
+                        <button class="btn btn-sm btn-danger" @click="deleteUser(user.id)">削除</button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- アプリ管理画面 -->
+            <div x-data="appsPage" x-show="isAuthenticated && isAdmin && currentPage === 'apps'" x-cloak>
+              <h2>アプリ管理</h2>
+              <button class="btn btn-primary mb-3" @click="scanApps">アプリスキャン</button>
+              
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>名前</th>
+                    <th>バージョン</th>
+                    <th>説明</th>
+                    <th>状態</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template x-for="app in apps" :key="app.id">
+                    <tr>
+                      <td x-text="app.name"></td>
+                      <td x-text="app.version"></td>
+                      <td x-text="app.description"></td>
+                      <td>
+                        <span class="badge" :class="app.enabled ? 'bg-success' : 'bg-secondary'" x-text="app.enabled ? '有効' : '無効'"></span>
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-warning" @click="toggleApp(app.id, app.enabled)" x-text="app.enabled ? '無効化' : '有効化'"></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/sys/main.ts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

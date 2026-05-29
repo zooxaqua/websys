@@ -1,0 +1,332 @@
+{
+  "auth": {
+    "valid_users": [
+      {
+        "id": "user-001",
+        "username": "testuser",
+        "password": "password123",
+        "displayName": "Test User",
+        "role": "user",
+        "email": "test@example.com",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "lastLogin": "2024-01-15T10:30:00Z"
+      },
+      {
+        "id": "admin-001",
+        "username": "admin",
+        "password": "adminpass",
+        "displayName": "Admin User",
+        "role": "admin",
+        "email": "admin@example.com",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "lastLogin": "2024-01-15T11:00:00Z"
+      }
+    ],
+    "login_requests": {
+      "valid": {
+        "username": "testuser",
+        "password": "password123"
+      },
+      "invalid_password": {
+        "username": "testuser",
+        "password": "wrongpassword"
+      },
+      "invalid_username": {
+        "username": "nonexistent",
+        "password": "password123"
+      },
+      "empty_username": {
+        "username": "",
+        "password": "password123"
+      },
+      "empty_password": {
+        "username": "testuser",
+        "password": ""
+      },
+      "boundary_long_username": {
+        "username": "a".repeat(100),
+        "password": "password123"
+      },
+      "boundary_long_password": {
+        "username": "testuser",
+        "password": "p".repeat(200)
+      }
+    },
+    "change_password_requests": {
+      "valid": {
+        "currentPassword": "password123",
+        "newPassword": "newpassword456"
+      },
+      "invalid_current": {
+        "currentPassword": "wrongpassword",
+        "newPassword": "newpassword456"
+      },
+      "weak_new_password": {
+        "currentPassword": "password123",
+        "newPassword": "123"
+      },
+      "empty_current": {
+        "currentPassword": "",
+        "newPassword": "newpassword456"
+      },
+      "empty_new": {
+        "currentPassword": "password123",
+        "newPassword": ""
+      }
+    },
+    "api_responses": {
+      "login_success": {
+        "success": true,
+        "user": {
+          "id": "user-001",
+          "username": "testuser",
+          "displayName": "Test User",
+          "role": "user",
+          "email": "test@example.com",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastLogin": "2024-01-15T10:30:00Z"
+        }
+      },
+      "me_success": {
+        "id": "user-001",
+        "username": "testuser",
+        "displayName": "Test User",
+        "role": "user",
+        "email": "test@example.com",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "lastLogin": "2024-01-15T10:30:00Z"
+      },
+      "error_unauthorized": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "認証に失敗しました"
+        }
+      },
+      "error_invalid_credentials": {
+        "error": {
+          "code": "INVALID_CREDENTIALS",
+          "message": "ユーザー名またはパスワードが正しくありません"
+        }
+      },
+      "error_weak_password": {
+        "error": {
+          "code": "WEAK_PASSWORD",
+          "message": "パスワードは8文字以上である必要があります"
+        }
+      }
+    }
+  },
+  "http": {
+    "success_responses": {
+      "get_users": {
+        "ok": true,
+        "status": 200,
+        "body": {
+          "users": [
+            { "id": "user-1", "username": "testuser1", "email": "test1@example.com" }
+          ]
+        }
+      },
+      "post_login": {
+        "ok": true,
+        "status": 200,
+        "body": {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          "user": { "id": "user-1", "username": "testuser" }
+        }
+      },
+      "put_update": {
+        "ok": true,
+        "status": 200,
+        "body": {
+          "id": "user-1",
+          "username": "updated_user",
+          "email": "updated@example.com"
+        }
+      },
+      "delete_user": {
+        "ok": true,
+        "status": 200,
+        "body": {
+          "message": "削除されました"
+        }
+      },
+      "patch_partial": {
+        "ok": true,
+        "status": 200,
+        "body": {
+          "id": "user-1",
+          "email": "patched@example.com"
+        }
+      }
+    },
+    "error_responses": {
+      "unauthorized_with_nested_error": {
+        "ok": false,
+        "status": 401,
+        "body": {
+          "error": {
+            "message": "認証が必要です",
+            "code": "UNAUTHORIZED"
+          }
+        }
+      },
+      "forbidden_with_message": {
+        "ok": false,
+        "status": 403,
+        "body": {
+          "message": "アクセスが拒否されました",
+          "code": "FORBIDDEN"
+        }
+      },
+      "server_error_no_message": {
+        "ok": false,
+        "status": 500,
+        "body": {
+          "code": "INTERNAL_ERROR"
+        }
+      },
+      "bad_request_invalid_json": {
+        "ok": false,
+        "status": 400,
+        "body": "NOT_A_JSON"
+      }
+    },
+    "test_cases": {
+      "TC-HTTP-001": {
+        "id": "TC-HTTP-001",
+        "description": "GET リクエスト成功",
+        "method": "get",
+        "url": "/api/users",
+        "expected_result": "成功",
+        "mcdc_conditions": {
+          "response.ok": true
+        }
+      },
+      "TC-HTTP-002": {
+        "id": "TC-HTTP-002",
+        "description": "POST リクエスト成功（データ送信）",
+        "method": "post",
+        "url": "/api/auth/login",
+        "data": { "username": "testuser", "password": "password123" },
+        "expected_result": "成功",
+        "mcdc_conditions": {
+          "response.ok": true,
+          "body": "exists"
+        }
+      },
+      "TC-HTTP-003": {
+        "id": "TC-HTTP-003",
+        "description": "PUT リクエスト成功",
+        "method": "put",
+        "url": "/api/users/user-1",
+        "data": { "username": "updated_user", "email": "updated@example.com" },
+        "expected_result": "成功",
+        "mcdc_conditions": {
+          "response.ok": true
+        }
+      },
+      "TC-HTTP-004": {
+        "id": "TC-HTTP-004",
+        "description": "DELETE リクエスト成功",
+        "method": "delete",
+        "url": "/api/users/user-1",
+        "expected_result": "成功",
+        "mcdc_conditions": {
+          "response.ok": true
+        }
+      },
+      "TC-HTTP-005": {
+        "id": "TC-HTTP-005",
+        "description": "PATCH リクエスト成功（データあり）",
+        "method": "patch",
+        "url": "/api/users/user-1",
+        "data": { "email": "patched@example.com" },
+        "expected_result": "成功",
+        "mcdc_conditions": {
+          "response.ok": true,
+          "data": "exists"
+        }
+      },
+      "TC-HTTP-006": {
+        "id": "TC-HTTP-006",
+        "description": "PATCH リクエスト成功（データなし）",
+        "method": "patch",
+        "url": "/api/users/user-1/status",
+        "data": null,
+        "expected_result": "成功",
+        "mcdc_conditions": {
+          "response.ok": true,
+          "data": "null"
+        }
+      },
+      "TC-HTTP-007": {
+        "id": "TC-HTTP-007",
+        "description": "エラーレスポンス（error.error.message あり）",
+        "method": "get",
+        "url": "/api/protected",
+        "expected_result": "失敗",
+        "expected_error": "認証が必要です",
+        "mcdc_conditions": {
+          "response.ok": false,
+          "error.error.message": "exists"
+        }
+      },
+      "TC-HTTP-008": {
+        "id": "TC-HTTP-008",
+        "description": "エラーレスポンス（error.message あり）",
+        "method": "get",
+        "url": "/api/admin",
+        "expected_result": "失敗",
+        "expected_error": "アクセスが拒否されました",
+        "mcdc_conditions": {
+          "response.ok": false,
+          "error.error.message": "not_exists",
+          "error.message": "exists"
+        }
+      },
+      "TC-HTTP-009": {
+        "id": "TC-HTTP-009",
+        "description": "エラーレスポンス（デフォルトメッセージ）",
+        "method": "get",
+        "url": "/api/error",
+        "expected_result": "失敗",
+        "expected_error": "エラーが発生しました",
+        "mcdc_conditions": {
+          "response.ok": false,
+          "error.error.message": "not_exists",
+          "error.message": "not_exists"
+        }
+      },
+      "TC-HTTP-010": {
+        "id": "TC-HTTP-010",
+        "description": "レスポンスJSONパース失敗時のデフォルトエラー",
+        "method": "get",
+        "url": "/api/invalid",
+        "expected_result": "失敗",
+        "expected_error": "エラーが発生しました",
+        "mcdc_conditions": {
+          "response.ok": false,
+          "response.json()": "throws"
+        }
+      },
+      "TC-HTTP-011": {
+        "id": "TC-HTTP-011",
+        "description": "credentials: 'include' が設定されていることを確認",
+        "method": "get",
+        "url": "/api/session",
+        "expected_result": "成功",
+        "assertion": "fetch は credentials: 'include' で呼ばれる"
+      },
+      "TC-HTTP-012": {
+        "id": "TC-HTTP-012",
+        "description": "Content-Type ヘッダーが正しく設定されていることを確認",
+        "method": "post",
+        "url": "/api/data",
+        "data": { "key": "value" },
+        "expected_result": "成功",
+        "assertion": "fetch は Content-Type: application/json で呼ばれる"
+      }
+    }
+  }
+}

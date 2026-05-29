@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="12" skipped="0" tests="108" time="3.162" timestamp="2026-05-29T11:46:09.719029" hostname="zooAquas-iMac.local"><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_creation_valid" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_creation_disabled" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_creation_with_dependencies" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_validate_manifest_valid" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_validate_manifest_invalid_missing_field" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_to_dict" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_from_dict" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_serialization_roundtrip" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_invalid_missing_id" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_invalid_missing_name" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppResponseModel" name="test_appresponse_creation_valid" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_insert_new_record" time="0.012" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_insert_with_predefined_id" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_one_existing_record" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_one_non_existing_record" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_multiple_records" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_with_pagination" time="0.006" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_boundary_offset_exceeds_data" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_update_existing_record" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_update_non_existing_record" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_delete_existing_record" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_delete_non_existing_record" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_count_matching_records" time="0.010" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_count_no_match" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_exists_record_present" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_exists_record_absent" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_load_data_file_not_exists" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_load_data_empty_file" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_load_data_io_error" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_match_criteria_all_match" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_match_criteria_partial_match" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_generate_id_uniqueness" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_info" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_warning" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_error" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_success" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_boundary_title_min" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_boundary_title_max" time="0.004"><failure message="AssertionError: assert 198 == 200&#10; +  where 198 = len('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')&#10; +    where 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' = Notification(id='notif-007', userId='user-001', type='info', title='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', message='Maximum length title (200 chars)', metadata={}, read=False, createdAt=datetime.datetime(2026, 5, 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=None).title">self = &lt;test_notification_model.TestNotificationModel object at 0x1074093c0&gt;
+
+    def test_notification_boundary_title_max(self):
+        """
+        TC-NOTIF-006: 境界値 - title最大長（200文字）
+        条件: title=200文字
+        期待: Notificationインスタンスが生成される
+        """
+        data = load_fixture('boundary_title_max')
+        notif = Notification(**data)
+    
+&gt;       assert len(notif.title) == 200
+E       AssertionError: assert 198 == 200
+E        +  where 198 = len('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+E        +    where 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' = Notification(id='notif-007', userId='user-001', type='info', title='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', message='Maximum length title (200 chars)', metadata={}, read=False, createdAt=datetime.datetime(2026, 5, 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=None).title
+
+tests/unit/logic/backend/sys/test_cases/test_notification_model.py:102: AssertionError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_boundary_message_min" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_type" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_title_empty" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_title_too_long" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_message_empty" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_message_too_long" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_is_expired_true" time="0.003"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_notification_model.TestNotificationModel object at 0x107408490&gt;
+mock_datetime = &lt;MagicMock name='datetime' id='4416744432'&gt;
+
+    @patch('project.backend.app.sys.models.notification.datetime')
+    def test_notification_is_expired_true(self, mock_datetime):
+        """
+        TC-NOTIF-013: is_expired() - 期限切れ
+        条件: 現在時刻 &gt; expiresAt
+        期待: True
+        """
+        mock_datetime.utcnow.return_value = datetime(2026, 5, 29, 12, 0, 0)
+    
+        data = load_fixture('expired_notification')
+        notif = Notification(**data)
+    
+&gt;       assert notif.is_expired() is True
+
+tests/unit/logic/backend/sys/test_cases/test_notification_model.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Notification(id='notif-005', userId='user-001', type='info', title='Expired message', message='This notification has e...time.datetime(2026, 5, 1, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2026, 5, 2, 0, 0, tzinfo=TzInfo(UTC)))
+
+    def is_expired(self) -&gt; bool:
+        """期限切れか判定"""
+        if not self.expiresAt:
+            return False
+&gt;       return datetime.utcnow() &gt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/notification.py:28: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_is_expired_false_not_expired" time="0.002"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_notification_model.TestNotificationModel object at 0x107408a60&gt;
+mock_datetime = &lt;MagicMock name='datetime' id='4414403392'&gt;
+
+    @patch('project.backend.app.sys.models.notification.datetime')
+    def test_notification_is_expired_false_not_expired(self, mock_datetime):
+        """
+        TC-NOTIF-014: is_expired() - 有効期限内
+        条件: 現在時刻 &lt; expiresAt
+        期待: False
+        """
+        mock_datetime.utcnow.return_value = datetime(2026, 5, 29, 12, 0, 0)
+    
+        data = load_fixture('valid_warning_notification')
+        notif = Notification(**data)
+    
+&gt;       assert notif.is_expired() is False
+
+tests/unit/logic/backend/sys/test_cases/test_notification_model.py:216: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Notification(id='notif-002', userId='user-001', type='warning', title='Warning: Maintenance', message='System maintena...me.datetime(2026, 5, 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2026, 5, 30, 0, 0, tzinfo=TzInfo(UTC)))
+
+    def is_expired(self) -&gt; bool:
+        """期限切れか判定"""
+        if not self.expiresAt:
+            return False
+&gt;       return datetime.utcnow() &gt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/notification.py:28: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_is_expired_false_no_expiry" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_to_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_from_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_serialization_roundtrip" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationCreateModel" name="test_notification_create_valid" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_find_by_token_existing" time="0.008" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_find_by_token_non_existing" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_insert_creates_session_file" time="0.003"><failure message="AssertionError: assert False&#10; +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp5dbgq047/sessions/c9a2e458-0aaf-4867-9b7f-79de6c02ba2e.json')&gt;()&#10; +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp5dbgq047/sessions/c9a2e458-0aaf-4867-9b7f-79de6c02ba2e.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp5dbgq047/sessions/c9a2e458-0aaf-4867-9b7f-79de6c02ba2e.json').exists">self = &lt;test_session_dal.TestSessionDAL object at 0x107408670&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x1073336d0&gt;
+
+    def test_insert_creates_session_file(self, dal):
+        """
+        TC-SESSION-DAL-003: insert() - セッションファイル作成
+        条件: セッションを挿入
+        期待: 個別ファイル（sessionId.json）が作成される
+        """
+        session_data = {
+            "sessionId": "sess-file-001",
+            "userId": "user-001",
+            "token": "token-file",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2026-05-30T00:00:00Z"
+        }
+        session_id = dal.insert(session_data)
+    
+        session_file = dal.sessions_dir / f"{session_id}.json"
+    
+&gt;       assert session_file.exists()
+E       AssertionError: assert False
+E        +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp5dbgq047/sessions/c9a2e458-0aaf-4867-9b7f-79de6c02ba2e.json')&gt;()
+E        +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp5dbgq047/sessions/c9a2e458-0aaf-4867-9b7f-79de6c02ba2e.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp5dbgq047/sessions/c9a2e458-0aaf-4867-9b7f-79de6c02ba2e.json').exists
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:82: AssertionError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_delete_removes_session_file" time="0.003"><failure message="AssertionError: assert False&#10; +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp3n3rkpcj/sessions/1f639ae6-a9f6-4073-97d3-d35641d817eb.json')&gt;()&#10; +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp3n3rkpcj/sessions/1f639ae6-a9f6-4073-97d3-d35641d817eb.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp3n3rkpcj/sessions/1f639ae6-a9f6-4073-97d3-d35641d817eb.json').exists">self = &lt;test_session_dal.TestSessionDAL object at 0x107408790&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107320eb0&gt;
+
+    def test_delete_removes_session_file(self, dal):
+        """
+        TC-SESSION-DAL-004: delete() - セッションファイル削除
+        条件: セッションを削除
+        期待: 個別ファイルも削除される
+        """
+        session_data = {
+            "sessionId": "sess-delete-001",
+            "userId": "user-001",
+            "token": "token-delete",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2026-05-30T00:00:00Z"
+        }
+        session_id = dal.insert(session_data)
+    
+        session_file = dal.sessions_dir / f"{session_id}.json"
+&gt;       assert session_file.exists()
+E       AssertionError: assert False
+E        +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp3n3rkpcj/sessions/1f639ae6-a9f6-4073-97d3-d35641d817eb.json')&gt;()
+E        +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp3n3rkpcj/sessions/1f639ae6-a9f6-4073-97d3-d35641d817eb.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp3n3rkpcj/sessions/1f639ae6-a9f6-4073-97d3-d35641d817eb.json').exists
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:101: AssertionError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_removes_old_sessions" time="0.017"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x107408400&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107323100&gt;
+
+    def test_cleanup_expired_removes_old_sessions(self, dal):
+        """
+        TC-SESSION-DAL-005: cleanup_expired() - 期限切れセッション削除
+        条件: 期限切れと有効なセッションが混在
+        期待: 期限切れのみ削除され、削除数が返される
+        """
+        # 期限切れセッション（2件）
+        dal.insert({
+            "sessionId": "sess-exp-001",
+            "userId": "user-001",
+            "token": "token-exp-1",
+            "createdAt": "2026-05-01T00:00:00Z",
+            "expiresAt": "2026-05-02T00:00:00Z"
+        })
+        dal.insert({
+            "sessionId": "sess-exp-002",
+            "userId": "user-002",
+            "token": "token-exp-2",
+            "createdAt": "2026-05-01T00:00:00Z",
+            "expiresAt": "2026-05-03T00:00:00Z"
+        })
+    
+        # 有効なセッション
+        dal.insert({
+            "sessionId": "sess-valid-001",
+            "userId": "user-003",
+            "token": "token-valid",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2027-05-29T00:00:00Z"
+        })
+    
+&gt;       deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107323100&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_no_expired_sessions" time="0.004"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x1074082e0&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107420610&gt;
+
+    def test_cleanup_expired_no_expired_sessions(self, dal):
+        """
+        TC-SESSION-DAL-006: cleanup_expired() - 期限切れなし
+        条件: 全セッションが有効
+        期待: 削除数 0 が返される
+        """
+        dal.insert({
+            "sessionId": "sess-valid-001",
+            "userId": "user-001",
+            "token": "token-valid-1",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2027-05-29T00:00:00Z"
+        })
+        dal.insert({
+            "sessionId": "sess-valid-002",
+            "userId": "user-002",
+            "token": "token-valid-2",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2027-05-29T00:00:00Z"
+        })
+    
+&gt;       deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107420610&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_boundary_exact_now" time="0.004"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x1074081f0&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107330220&gt;
+
+    def test_cleanup_expired_boundary_exact_now(self, dal):
+        """
+        TC-SESSION-DAL-007: cleanup_expired() - 境界値（expiresAt == 現在時刻）
+        条件: expiresAtがちょうど現在時刻
+        期待: 削除される（&lt; 比較のため）
+        """
+        with patch('project.backend.app.sys.dal.session_dal.datetime') as mock_datetime:
+            fixed_now = datetime(2026, 5, 29, 12, 0, 0)
+            mock_datetime.utcnow.return_value = fixed_now
+            mock_datetime.fromisoformat = datetime.fromisoformat
+    
+            dal.insert({
+                "sessionId": "sess-boundary",
+                "userId": "user-001",
+                "token": "token-boundary",
+                "createdAt": "2026-05-29T00:00:00Z",
+                "expiresAt": "2026-05-29T12:00:00Z"  # ちょうど現在時刻
+            })
+    
+&gt;           deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:195: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107330220&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_removes_session_files" time="0.005"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x1074081c0&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107408760&gt;
+
+    def test_cleanup_expired_removes_session_files(self, dal):
+        """
+        TC-SESSION-DAL-008: cleanup_expired() - セッションファイルも削除
+        条件: 期限切れセッションを削除
+        期待: 個別ファイルも削除される
+        """
+        session_id = "sess-cleanup-file"
+        dal.insert({
+            "sessionId": session_id,
+            "userId": "user-001",
+            "token": "token-cleanup",
+            "createdAt": "2026-05-01T00:00:00Z",
+            "expiresAt": "2026-05-02T00:00:00Z"
+        })
+    
+        session_file = dal.sessions_dir / f"{session_id}.json"
+        assert session_file.exists()
+    
+&gt;       deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x107408760&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_sessions_dir_created_on_init" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_collection_name_set" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_find_by_token_multiple_sessions" time="0.006" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_boundary_empty_database_cleanup" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_creation_valid" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_future" time="0.002"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_model.TestSessionModel object at 0x1071db7c0&gt;
+
+    def test_session_is_valid_future(self):
+        """
+        TC-SESSION-002: is_valid() - 有効期限内（未来）
+        条件: expiresAt &gt; 現在時刻
+        期待: is_valid() が True を返す
+        """
+        data = load_fixture('session_boundary_future')
+        session = Session(**data)
+    
+        # 未来の有効期限を持つため有効
+&gt;       assert session.is_valid() is True
+
+tests/unit/logic/backend/sys/test_cases/test_session_model.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Session(sessionId='sess-future-1234-1234-1234-123456789abc', userId='user-004', token='eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp... 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2027, 12, 31, 23, 59, 59, tzinfo=TzInfo(UTC)), metadata={})
+
+    def is_valid(self) -&gt; bool:
+        """セッションが有効か"""
+&gt;       return datetime.utcnow() &lt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/session.py:18: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_expired" time="0.001"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_model.TestSessionModel object at 0x1071db730&gt;
+
+    def test_session_is_valid_expired(self):
+        """
+        TC-SESSION-003: is_valid() - 有効期限切れ（過去）
+        条件: expiresAt &lt; 現在時刻
+        期待: is_valid() が False を返す
+        """
+        data = load_fixture('expired_session')
+        session = Session(**data)
+    
+        # 過去の有効期限を持つため無効
+&gt;       assert session.is_valid() is False
+
+tests/unit/logic/backend/sys/test_cases/test_session_model.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Session(sessionId='sess-expired-1234-1234-1234-123456789abc', userId='user-002', token='eyJhbGciOiJIUzI1NiIsInR5cCI6Ik...(2026, 5, 1, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2026, 5, 2, 0, 0, tzinfo=TzInfo(UTC)), metadata={})
+
+    def is_valid(self) -&gt; bool:
+        """セッションが有効か"""
+&gt;       return datetime.utcnow() &lt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/session.py:18: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_boundary_exact_now" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_boundary_one_second_before_expiry" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_to_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_from_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_no_metadata" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_missing_sessionId" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_missing_userId" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_invalid_createdAt_type" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_invalid_expiresAt_type" time="0.002"><failure message="Failed: DID NOT RAISE &lt;class 'pydantic_core._pydantic_core.ValidationError'&gt;">self = &lt;test_session_model.TestSessionModel object at 0x1071f8130&gt;
+
+    def test_session_invalid_expiresAt_type(self):
+        """
+        TC-SESSION-012: 異常系 - expiresAt型不正
+        条件: expiresAtが不正な型（数値）
+        期待: ValidationError が発生
+        """
+        data = load_fixture('valid_session')
+        data['expiresAt'] = 12345
+    
+&gt;       with pytest.raises(ValidationError) as exc_info:
+E       Failed: DID NOT RAISE &lt;class 'pydantic_core._pydantic_core.ValidationError'&gt;
+
+tests/unit/logic/backend/sys/test_cases/test_session_model.py:204: Failed</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_username_existing" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_username_non_existing" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_username_case_sensitive" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_email_existing" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_email_non_existing" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_update_last_login_existing_user" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_update_last_login_non_existing_user" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_multiple_users_find_by_username" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_email_case_sensitive" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_collection_name_set" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_crud_operations_integration" time="0.006" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_boundary_empty_database" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_creation_valid_user" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_creation_valid_admin" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_username_min" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_username_max" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_displayname_min" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_displayname_max" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_username_too_short" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_username_too_long" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_role" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_email" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_displayname_empty" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_displayname_too_long" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_to_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_from_dict" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_serialization_roundtrip" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_validate_password_success" time="0.150" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_validate_password_failure" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserCreateModel" name="test_usercreate_valid" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserCreateModel" name="test_usercreate_invalid_password_too_short" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserUpdateModel" name="test_userupdate_partial" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserResponseModel" name="test_userresponse_no_password" time="0.001" /></testsuite></testsuites>

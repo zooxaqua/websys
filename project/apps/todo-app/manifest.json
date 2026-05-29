@@ -1,0 +1,12 @@
+{
+  "name": "todo-app",
+  "displayName": "TODO管理",
+  "version": "1.0.0",
+  "description": "タスク管理アプリケーション",
+  "entryPoint": "/apps/todo-app/",
+  "apiPrefix": "/api/todo-app",
+  "icon": "icon.png",
+  "author": "System Team",
+  "requiredPermissions": ["read", "write"],
+  "dependencies": []
+}
