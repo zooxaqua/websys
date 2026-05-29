@@ -15,11 +15,11 @@ user-invocable: false
 
 ## 出力先
 
-**システム共通基盤（フロント）**: `frontend/src/sys/`（設計書に定義されたディレクトリ構成に従う）
-**システム共通基盤（バック）**: `backend/app/sys/`（設計書に定義されたディレクトリ構成に従う）
-**アプリケーション**: `apps/<app-name>/frontend/`, `apps/<app-name>/backend/`（設計書に定義されたディレクトリ構成に従う）
+**システム共通基盤（フロント）**: `project/frontend/src/sys/`（設計書に定義されたディレクトリ構成に従う）
+**システム共通基盤（バック）**: `project/backend/app/sys/`（設計書に定義されたディレクトリ構成に従う）
+**アプリケーション**: `project/apps/<app-name>/frontend/`, `project/apps/<app-name>/backend/`（設計書に定義されたディレクトリ構成に従う）
 
-> **重要**: アプリは完全独立構成。各アプリは `apps/<app-name>/` 配下に `frontend/`, `backend/`, `tests/` を持つ。
+> **重要**: アプリは完全独立構成。各アプリは `project/apps/<app-name>/` 配下に `frontend/`, `backend/`, `tests/` を持つ。
 
 ## 手順
 
@@ -63,15 +63,168 @@ user-invocable: false
 - カスタムプロパティ（`--var-name`）でテーマ管理
 - Bootstrap を優先、カスタムCSSは最小限
 
-### 3. DAL 実装（バックエンド）
+### 3. Python仮想環境のセットアップ
+
+実装開始前に、Python仮想環境を作成し依存関係をインストールする:
+
+**システム共通基盤（backend）**:
+```bash
+cd project/backend
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux (Windows: venv\Scripts\activate)
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+**アプリケーション（apps/<app-name>/backend）**:
+```bash
+cd project/apps/<app-name>/backend
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4. テスト依存関係の準備
+
+**重要**: 工程5（単体テスト）で変更が不要になるよう、テストフレームワークとカバレッジ計測ツールを事前にセットアップする。
+
+#### Backend（Python）
+
+`project/backend/requirements.txt` にテスト依存関係を追加:
+
+```text
+# テストフレームワーク
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+```
+
+#### Frontend（TypeScript）
+
+`project/frontend/package.json` の `devDependencies` にテスト依存関係を追加:
+
+```json
+"devDependencies": {
+  "vitest": "^1.0.0",
+  "@vitest/coverage-v8": "^1.0.0",
+  "@vitest/ui": "^1.0.0",
+  "happy-dom": "^12.0.0"
+}
+```
+
+`project/frontend/vitest.config.ts` を作成（基本設定）:
+
+```typescript
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      all: true,
+      lines: 100,
+      branches: 100,
+      functions: 100,
+      statements: 100,
+      include: ['src/sys/**/*.ts'],
+      exclude: ['src/sys/main.ts', '**/*.test.ts', '**/*.spec.ts']
+    }
+  }
+})
+```
+
+**注意事項**:
+- これらは **devDependencies**（開発時のみ使用）
+- 本番環境では不要（ビルド成果物に含まれない）
+- 標準的なテストツールなので、常にインストールしても問題なし
+
+#### アプリケーション（apps/<app-name>）
+
+各アプリの `requirements.txt` および `package.json` にも同様のテスト依存関係を追加する。
+
+### 5. .gitignore の作成
+
+Python仮想環境とビルド成果物をバージョン管理から除外する:
+
+**project/backend/.gitignore**:
+```gitignore
+# Python仮想環境
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# テスト・カバレッジ
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ビルド
+*.egg
+*.egg-info/
+dist/
+build/
+
+# データファイル（開発時は除外しないが、本番は除外）
+# data/*.json
+```
+
+**project/frontend/.gitignore**:
+```gitignore
+# Node.js
+node_modules/
+
+# ビルド
+dist/
+
+# その他
+.DS_Store
+*.log
+```
+
+**project/apps/<app-name>/backend/.gitignore**:
+```gitignore
+# Python仮想環境
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+```
+
+**project/apps/<app-name>/frontend/.gitignore**:
+```gitignore
+# Node.js
+node_modules/
+dist/
+.DS_Store
+*.log
+```
+
+### 6. DAL 実装（バックエンド）
 `backend/app/dal/` に JSON DB アクセス層を実装し、全モジュールから直接 JSON ファイルを操作しないようにする。
 
-### 4. ビルド設定
+### 7. ビルド設定
 - Vite の設定（`vite.config.ts`）を確認
 - TypeScript の型チェック（`tsconfig.json` の `strict: true`）
 - 本番ビルド時の最適化設定
 
-### 5. セキュリティチェック
+### 8. セキュリティチェック
 実装後に以下を自己チェックする:
 - [ ] XSS: Alpine.js の `x-html` 使用箇所で DOMPurify を使用しているか
 - [ ] CSRF: 状態変更APIにCSRFトークン検証があるか
@@ -80,7 +233,7 @@ user-invocable: false
 - [ ] パストラバーサル: ファイルパスにユーザー入力を使う箇所はバリデートしているか
 - [ ] JWT の httpOnly Cookie 設定が有効か
 
-### 6. コードレビュー
+### 9. コードレビュー
 実装完了後、以下の観点で自己レビューを行い結果を報告する:
 - 設計書との整合性
 - コーディング規約の遵守（TypeScript・Alpine.js・Bootstrap・Python）

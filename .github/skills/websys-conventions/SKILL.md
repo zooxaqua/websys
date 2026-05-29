@@ -23,59 +23,7 @@ argument-hint: '確認したい規約の種類（typescript, alpinejs, bootstrap
 
 ```
 websys/
-  frontend/                    ← システム共通基盤フロントエンド
-    src/
-      sys/                     ← システム共通基盤UI
-        auth/                  ← 認証UI（ログイン・セッション）
-        components/            ← 共通UIコンポーネント
-        api/                   ← API通信モジュール
-      main.ts                  ← エントリーポイント
-    public/
-      index.html
-    package.json
-    tsconfig.json
-    vite.config.ts
-  backend/                     ← システム共通基盤バックエンド
-    app/
-      main.py                  ← FastAPIエントリー
-      sys/                     ← システム共通基盤
-        api/                   ← システム共通API
-          auth.py              ← 認証エンドポイント
-        dal/                   ← データアクセス層（JSON/RDB抽象化）
-        core/                  ← 認証・共通機能
-        models/                ← データモデル（Pydantic）
-    data/                      ← システム共通データ
-      sessions/                ← セッションデータ
-      users/                   ← ユーザーデータ
-    requirements.txt
-  apps/                        ← アプリケーション（完全独立構成）
-    app-a/
-      manifest.json            ← 必須（アプリメタ情報）
-      frontend/                ← アプリA専用フロント
-        src/
-          components/          ← アプリA固有コンポーネント
-          pages/               ← アプリA固有ページ
-          main.ts
-        package.json
-        vite.config.ts
-      backend/                 ← アプリA専用バックエンド
-        app/
-          api/                 ← アプリA固有API
-          models/              ← アプリA固有モデル
-        data/                  ← アプリA固有JSONデータ（他アプリ直アクセス禁止）
-        requirements.txt
-      tests/                   ← アプリA専用テスト
-        frontend/
-        backend/
-    app-b/
-      manifest.json
-      frontend/
-      backend/
-      tests/
-  tests/                       ← システム共通基盤テスト
-    frontend/
-    backend/
-  documents/
+  documents/                   ← 全設計書・テストレポート
     sys/
       01-requirements/
       02-basic-design/
@@ -93,6 +41,70 @@ websys/
       07-system-test-report.md
       08-release/
     progress.json
+  project/                     ← プロジェクトコード
+    frontend/                  ← システム共通基盤フロントエンド
+      src/
+        sys/                   ← システム共通基盤UI
+          auth/                ← 認証UI（ログイン・セッション）
+          components/          ← 共通UIコンポーネント
+          api/                 ← API通信モジュール
+        main.ts                ← エントリーポイント
+      public/
+        index.html
+      package.json
+      tsconfig.json
+      vite.config.ts
+    backend/                   ← システム共通基盤バックエンド
+      app/
+        main.py                ← FastAPIエントリー
+        sys/                   ← システム共通基盤
+          api/                 ← システム共通API
+            auth.py            ← 認証エンドポイント
+          dal/                 ← データアクセス層（JSON/RDB抽象化）
+          core/                ← 認証・共通機能
+          models/              ← データモデル（Pydantic）
+      data/                    ← システム共通データ
+        sessions/              ← セッションデータ
+        users/                 ← ユーザーデータ
+      requirements.txt
+    apps/                      ← アプリケーション（完全独立構成）
+      app-a/
+        manifest.json          ← 必須（アプリメタ情報）
+        frontend/              ← アプリA専用フロント
+          src/
+            components/        ← アプリA固有コンポーネント
+            pages/             ← アプリA固有ページ
+            main.ts
+          package.json
+          vite.config.ts
+        backend/               ← アプリA専用バックエンド
+          app/
+            api/               ← アプリA固有API
+            models/            ← アプリA固有モデル
+          data/                ← アプリA固有JSONデータ（他アプリ直アクセス禁止）
+          requirements.txt
+        tests/                 ← アプリA専用テスト
+          unit/               ← 工程5：単体テスト
+          integration/        ← 工程6：結合テスト
+          system/             ← 工程7：システムテスト
+      app-b/
+        manifest.json
+        frontend/
+        backend/
+        tests/
+  tests/                       ← システム共通基盤テスト（工程別）
+    unit/                      ← 工程5：単体テスト
+      inputs/                  ← 入力データ・期待値
+      logic/                   ← テストロジック（スタブ・ドライバ）
+      outputs/                 ← テスト結果
+    integration/               ← 工程6：結合テスト
+      inputs/
+      logic/
+      outputs/
+    system/                    ← 工程7：システムテスト
+      inputs/
+      logic/
+      outputs/
   issues/
     issues.json
 ```

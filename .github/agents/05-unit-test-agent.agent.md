@@ -10,9 +10,9 @@ user-invocable: false
 
 ## 入力（V字工程：詳細設計を検証）
 
-- **システム（フロント）**: `frontend/src/sys/`（実装コード）
-- **システム（バック）**: `backend/app/sys/`（実装コード）
-- **アプリ**: `apps/<app-name>/frontend/`, `apps/<app-name>/backend/`（実装コード）
+- **システム（フロント）**: `project/frontend/src/sys/`（実装コード）
+- **システム（バック）**: `project/backend/app/sys/`（実装コード）
+- **アプリ**: `project/apps/<app-name>/frontend/`, `project/apps/<app-name>/backend/`（実装コード）
 - **システム設計**: `documents/sys/03-detail-design/`（検証対象の設計書）
 - **アプリ設計**: `documents/app/03-detail-design/`（検証対象の設計書）
 
@@ -20,11 +20,15 @@ user-invocable: false
 
 | パス | 内容 |
 |------|------|
-| `tests/frontend/` | システム共通基盤フロントのテストコード |
-| `tests/backend/` | システム共通基盤バックエンドのテストコード |
-| `apps/<app-name>/tests/` | アプリケーション専用テストコード |
+| `tests/unit/` | システム共通基盤の単体テスト（inputs/、logic/、outputs/） |
+| `project/apps/<app-name>/tests/unit/` | アプリケーション専用単体テスト |
 | `documents/sys/05-unit-test-report.md` | システムテスト結果レポート |
 | `documents/app/05-unit-test-report.md` | アプリテスト結果レポート |
+
+> **重要**: `tests/unit/` は以下の構成を持つ：
+> - `inputs/` ← 入力データ・期待値
+> - `logic/` ← テストロジック（スタブ・ドライバ）
+> - `outputs/` ← テスト結果
 
 ## 手順
 
@@ -58,15 +62,40 @@ MCDC 組み合わせ:
 - Python: pytest
 
 ### 4. テスト実行・カバレッジ計測
-```bash
-# PHP
-./vendor/bin/phpunit --coverage-text tests/unit/
 
+> **前提**: テスト依存関係（pytest, vitest など）は工程4で既にインストール済み。不足している場合は issue-manager に登録し、process-manager に報告すること。
+
+**🚨 必須**: Python仮想環境を**必ず**使用してテストを実行すること。グローバルPythonは使用禁止。
+
+**システム共通基盤（backend）**:
+```bash
+# 方法1: 仮想環境をアクティベート
+source project/backend/venv/bin/activate
+pytest tests/unit/logic/backend/sys/ --cov=project/backend/app/sys --cov-branch \
+    --cov-report=term --cov-report=html:tests/unit/outputs/coverage-sys-html
+
+# 方法2: 仮想環境のPythonを直接指定（必須・推奨）
+PYTHONPATH=project/backend project/backend/venv/bin/python -m pytest \
+    tests/unit/logic/backend/sys/ --cov=project/backend/app/sys --cov-branch \
+    --cov-report=term --cov-report=html:tests/unit/outputs/coverage-sys-html \
+    --cov-report=json:tests/unit/outputs/coverage-sys.json \
+    --junit-xml=tests/unit/outputs/test-report-sys.xml
+```
+
+**アプリケーション（apps/<app-name>/backend）**:
+```bash
+# 仮想環境のPythonを直接指定
+PYTHONPATH=project/apps/<app-name>/backend \
+    project/apps/<app-name>/backend/venv/bin/python -m pytest \
+    project/apps/<app-name>/tests/unit/ \
+    --cov=project/apps/<app-name>/backend/app --cov-branch \
+    --cov-report=term --cov-report=html
+```
+
+**フロントエンド（TypeScript）**:
+```bash
 # TypeScript
 npx vitest run --coverage
-
-# Python
-pytest tests/unit/ --cov=python/src --cov-report=term
 ```
 
 ### 5. テスト結果レポート作成
@@ -94,8 +123,13 @@ pytest tests/unit/ --cov=python/src --cov-report=term
 
 ## 制約
 
+- **DO NOT `project/` 配下のファイルを変更しない**（package.json, requirements.txt, vitest.config.ts など）
+- テスト依存関係が不足している場合は `issue-manager` に登録し、`process-manager` を通じて `04-coding-agent` に差し戻しを依頼
+- テスト実行のみに専念し、テストコード（`tests/` 配下）のみを作成・変更する
+- **DO 仮想環境を必ず使用すること**（`project/backend/venv/bin/python`で実行、グローバルPython禁止）
 - DO NOT `src/sys/`, `src/app/` のコードを直接修正しない（バグを発見した場合は `issue-manager` に登録して報告）
 - DO NOT カバレッジが 100% 未満の状態でレポートを「完了」としない
+- DO NOT グローバルPythonでテストを実行しない（`pytest`コマンド単体はNG、`project/backend/venv/bin/python -m pytest`を使用）
 - 詳細設計と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ
 - **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
 - **DO NOT スキル定義ファイル（`.github/skills/*/SKILL.md`）を編集しない**

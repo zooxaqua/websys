@@ -9,10 +9,10 @@
 | `01-requirements-agent` | サブエージェント（工程1） | 要件定義 + チェックプログラム作成 | `documents/sys/01-requirements/`, `documents/app/01-requirements/`, `.github/checks/phase-01-check.py` |
 | `02-basic-design-agent` | サブエージェント（工程2） | 基本設計 + チェックプログラム作成 | `documents/sys/02-basic-design/`, `documents/app/02-basic-design/`, `.github/checks/phase-02-check.py` |
 | `03-detail-design-agent` | サブエージェント（工程3） | 詳細設計 + チェックプログラム作成 | `documents/sys/03-detail-design/`, `documents/app/03-detail-design/`, `.github/checks/phase-03-check.py` |
-| `04-coding-agent` | サブエージェント（工程4） | コーディング + チェックプログラム作成 | `frontend/src/sys/`, `backend/app/sys/`, `apps/<app-name>/`, `.github/checks/phase-04-check.py` |
-| `05-unit-test-agent` | サブエージェント（工程5） | 単体評価 + チェックプログラム作成 | `tests/frontend/`, `tests/backend/`, `documents/sys/05-unit-test-report.md`, `documents/app/05-unit-test-report.md`, `.github/checks/phase-05-check.py` |
-| `06-integration-test-agent` | サブエージェント（工程6） | 結合評価 + チェックプログラム作成 | `tests/frontend/`, `tests/backend/`, `documents/sys/06-integration-test-report.md`, `documents/app/06-integration-test-report.md`, `.github/checks/phase-06-check.py` |
-| `07-system-test-agent` | サブエージェント（工程7） | システム評価 + チェックプログラム作成 | `tests/frontend/`, `tests/backend/`, `documents/sys/07-system-test-report.md`, `documents/app/07-system-test-report.md`, `.github/checks/phase-07-check.py` |
+| `04-coding-agent` | サブエージェント（工程4） | コーディング + チェックプログラム作成 | `project/frontend/src/sys/`, `project/backend/app/sys/`, `project/apps/<app-name>/`, `.github/checks/phase-04-check.py` |
+| `05-unit-test-agent` | サブエージェント（工程5） | 単体評価 + テスト方針書・チェックプログラム作成 | `tests/unit/`, `documents/common/05-unit-test/`, `documents/sys/05-unit-test/`, `documents/app/05-unit-test/`, `.github/checks/phase-05-check.py` |
+| `06-integration-test-agent` | サブエージェント（工程6） | 結合評価 + チェックプログラム作成 | `tests/integration/`, `documents/sys/06-integration-test-report.md`, `documents/app/06-integration-test-report.md`, `.github/checks/phase-06-check.py` |
+| `07-system-test-agent` | サブエージェント（工程7） | システム評価 + チェックプログラム作成 | `tests/system/`, `documents/sys/07-system-test-report.md`, `documents/app/07-system-test-report.md`, `.github/checks/phase-07-check.py` |
 | `08-release-agent` | サブエージェント（工程8） | リリース + チェックプログラム作成 | `documents/sys/08-release/`, `documents/app/08-release/`, `.github/checks/phase-08-check.py` |
 | `agent-builder` | メタエージェント | エージェント・スキル・プロンプト設計生成 | `.github/agents/`, `.github/skills/` |
 | `requirement-analyst` | メタエージェント（サブ） | エージェント要件分析・ヒアリング | — |
@@ -40,10 +40,10 @@
 | `01-requirements-agent` | `requests/` | `documents/sys/01-requirements/`, `documents/app/01-requirements/`, `.github/checks/common/phase-01-check.py` | 初期工程（sys/app並行）+ チェックプログラム作成 |
 | `02-basic-design-agent` | `documents/sys/01-requirements/`, `documents/app/01-requirements/` | `documents/sys/02-basic-design/`, `documents/app/02-basic-design/`, `.github/checks/common/phase-02-check.py` | 要件を基に設計 + チェックプログラム作成 |
 | `03-detail-design-agent` | `documents/sys/02-basic-design/`, `documents/app/02-basic-design/` | `documents/sys/03-detail-design/`, `documents/app/03-detail-design/`, `.github/checks/common/phase-03-check.py` | 基本設計を詳細化 + チェックプログラム作成 |
-| `04-coding-agent` | `documents/sys/03-detail-design/`, `documents/app/03-detail-design/` | `frontend/src/sys/`, `backend/app/sys/`, `apps/<app-name>/`, `.github/checks/common/phase-04-check.py` | 詳細設計を実装 + チェックプログラム作成 |
-| `05-unit-test-agent` | `frontend/src/sys/`, `backend/app/sys/`, `apps/<app-name>/`, `documents/sys/03-detail-design/`, `documents/app/03-detail-design/` | `tests/frontend/`, `tests/backend/`, `apps/<app-name>/tests/`, `documents/sys/05-unit-test-report.md`, `documents/app/05-unit-test-report.md`, `.github/checks/common/phase-05-check.py` | 詳細設計通りに実装されているか検証 + チェックプログラム作成 |
-| `06-integration-test-agent` | `frontend/src/sys/`, `backend/app/sys/`, `apps/<app-name>/`, `documents/sys/02-basic-design/`, `documents/app/02-basic-design/` | `tests/frontend/`, `tests/backend/`, `apps/<app-name>/tests/`, `documents/sys/06-integration-test-report.md`, `documents/app/06-integration-test-report.md`, `.github/checks/common/phase-06-check.py` | 基本設計（API・連携）通りか検証 + チェックプログラム作成 |
-| `07-system-test-agent` | `frontend/src/sys/`, `backend/app/sys/`, `apps/<app-name>/`, `documents/sys/01-requirements/`, `documents/app/01-requirements/` | `tests/frontend/`, `tests/backend/`, `apps/<app-name>/tests/`, `documents/sys/07-system-test-report.md`, `documents/app/07-system-test-report.md`, `.github/checks/common/phase-07-check.py` | 要件定義を満たしているか検証 + チェックプログラム作成 |
+| `04-coding-agent` | `documents/sys/03-detail-design/`, `documents/app/03-detail-design/` | **`project/`（全体）**: `project/frontend/`, `project/backend/`, `project/apps/<app-name>/`, `.github/checks/common/phase-04-check.py` | 詳細設計を実装 + テスト依存関係準備 + チェックプログラム作成。工程4は `project/` 全体の責任者。実装コード + テスト依存関係（requirements.txt, package.json, vitest.config.ts）を含む。 |
+| `05-unit-test-agent` | `project/frontend/src/sys/`, `project/backend/app/sys/`, `project/apps/<app-name>/`, `documents/sys/03-detail-design/`, `documents/app/03-detail-design/`, `documents/common/05-unit-test/` | `tests/unit/`, `project/apps/<app-name>/tests/unit/`, `documents/sys/05-unit-test/`, `documents/app/05-unit-test/`, `documents/common/05-unit-test/`, `.github/checks/common/phase-05-check.py` | 詳細設計通りに実装されているか検証 + テスト方針書作成 + チェックプログラム作成 |
+| `06-integration-test-agent` | `project/frontend/src/sys/`, `project/backend/app/sys/`, `project/apps/<app-name>/`, `documents/sys/02-basic-design/`, `documents/app/02-basic-design/` | `tests/integration/`, `project/apps/<app-name>/tests/integration/`, `documents/sys/06-integration-test-report.md`, `documents/app/06-integration-test-report.md`, `.github/checks/common/phase-06-check.py` | 基本設計（API・連携）通りか検証 + チェックプログラム作成 |
+| `07-system-test-agent` | `project/frontend/src/sys/`, `project/backend/app/sys/`, `project/apps/<app-name>/`, `documents/sys/01-requirements/`, `documents/app/01-requirements/` | `tests/system/`, `project/apps/<app-name>/tests/system/`, `documents/sys/07-system-test-report.md`, `documents/app/07-system-test-report.md`, `.github/checks/common/phase-07-check.py` | 要件定義を満たしているか検証 + チェックプログラム作成 |
 | `08-release-agent` | **全成果物** | `documents/sys/08-release/`, `documents/app/08-release/`, `.github/checks/common/phase-08-check.py` | リリースノート作成 + チェックプログラム作成 |
 | `process-manager` | **全成果物**, `.github/checks/` | `documents/progress.json` | 全体統括・自動チェック実行・手動レビュー・対話的差し戻し |
 | `issue-manager` | **全成果物**（読み取り専用） | `issues/issues.json` | 課題管理 |
@@ -75,15 +75,15 @@ flowchart TD
     D02_APP[("documents/app/02-basic-design/")]
     D03_SYS[("documents/sys/03-detail-design/")]
     D03_APP[("documents/app/03-detail-design/")]
-    SRC_SYS_FRONT[("frontend/src/sys/")]
-    SRC_SYS_BACK[("backend/app/sys/")]
-    SRC_APP[("apps/<app-name>/")]
-    T05_SYS[("tests/frontend/ + tests/backend/<br/>documents/sys/05-unit-test-report.md")]
-    T05_APP[("apps/<app-name>/tests/<br/>documents/app/05-unit-test-report.md")]
-    T06_SYS[("tests/frontend/ + tests/backend/<br/>documents/sys/06-integration-test-report.md")]
-    T06_APP[("apps/<app-name>/tests/<br/>documents/app/06-integration-test-report.md")]
-    T07_SYS[("tests/frontend/ + tests/backend/<br/>documents/sys/07-system-test-report.md")]
-    T07_APP[("apps/<app-name>/tests/<br/>documents/app/07-system-test-report.md")]
+    SRC_SYS_FRONT[("project/frontend/src/sys/")]
+    SRC_SYS_BACK[("project/backend/app/sys/")]
+    SRC_APP[("project/apps/<app-name>/")]
+    T05_SYS[("tests/unit/<br/>documents/sys/05-unit-test-report.md")]
+    T05_APP[("project/apps/<app-name>/tests/unit/<br/>documents/app/05-unit-test-report.md")]
+    T06_SYS[("tests/integration/<br/>documents/sys/06-integration-test-report.md")]
+    T06_APP[("project/apps/<app-name>/tests/integration/<br/>documents/app/06-integration-test-report.md")]
+    T07_SYS[("tests/system/<br/>documents/sys/07-system-test-report.md")]
+    T07_APP[("project/apps/<app-name>/tests/system/<br/>documents/app/07-system-test-report.md")]
     D08_SYS[("documents/sys/08-release/")]
     D08_APP[("documents/app/08-release/")]
     ISS[("issues/issues.json")]
@@ -185,40 +185,51 @@ websys/
 │       ├── 06-integration-test-report.md
 │       ├── 07-system-test-report.md
 │       └── 08-release/
-├── frontend/                        ← システム共通基盤フロント（04-coding-agent が生成）
-│   ├── src/
-│   │   └── sys/                    ← システム共通基盤UI（認証・共通コンポーネント）
-│   ├── public/
-│   ├── package.json
-│   └── vite.config.ts
-├── backend/                         ← システム共通基盤バックエンド（04-coding-agent が生成）
-│   ├── app/
-│   │   └── sys/                    ← システム共通基盤
-│   │       ├── api/                ← システム共通API（認証など）
-│   │       ├── dal/                ← データアクセス層
-│   │       ├── core/               ← 認証・共通機能
-│   │       └── models/             ← 共通データモデル
-│   ├── data/                       ← システム共通データ（JSON DB）
-│   └── requirements.txt
-├── apps/                            ← アプリケーション（完全独立構成）
-│   └── <app-name>/                 ← 各アプリ（04-coding-agent が生成）
-│       ├── manifest.json           ← アプリメタ情報
-│       ├── frontend/               ← アプリ専用フロント
-│       │   ├── src/
-│       │   ├── package.json
-│       │   └── vite.config.ts
-│       ├── backend/                ← アプリ専用バックエンド
-│       │   ├── app/
-│       │   │   ├── api/           ← アプリ固有API
-│       │   │   └── models/        ← アプリ固有モデル
-│       │   ├── data/              ← アプリ固有データ（JSON DB）
-│       │   └── requirements.txt
-│       └── tests/                  ← アプリ専用テスト
-│           ├── frontend/
-│           └── backend/
-├── tests/                           ← システム共通基盤テスト
-│   ├── frontend/
-│   └── backend/
+├── project/                         ← プロジェクトコード（04-coding-agent が生成）
+│   ├── frontend/                    ← システム共通基盤フロント
+│   │   ├── src/
+│   │   │   └── sys/                ← システム共通基盤UI（認証・共通コンポーネント）
+│   │   ├── public/
+│   │   ├── package.json
+│   │   └── vite.config.ts
+│   ├── backend/                     ← システム共通基盤バックエンド
+│   │   ├── app/
+│   │   │   └── sys/                ← システム共通基盤
+│   │   │       ├── api/            ← システム共通API（認証など）
+│   │   │       ├── dal/            ← データアクセス層
+│   │   │       ├── core/           ← 認証・共通機能
+│   │   │       └── models/         ← 共通データモデル
+│   │   ├── data/                   ← システム共通データ（JSON DB）
+│   │   └── requirements.txt
+│   └── apps/                        ← アプリケーション（完全独立構成）
+│       └── <app-name>/             ← 各アプリ
+│           ├── manifest.json       ← アプリメタ情報
+│           ├── frontend/           ← アプリ専用フロント
+│           │   ├── src/
+│           │   ├── package.json
+│           │   └── vite.config.ts
+│           ├── backend/            ← アプリ専用バックエンド
+│           │   ├── app/
+│           │   │   ├── api/       ← アプリ固有API
+│           │   │   └── models/    ← アプリ固有モデル
+│           │   ├── data/          ← アプリ固有データ（JSON DB）
+│           │   └── requirements.txt
+│           └── tests/              ← アプリ専用テスト
+│               ├── frontend/
+│               └── backend/
+├── tests/                           ← システム共通基盤テスト（工程別）
+│   ├── unit/                       ← 工程5：単体テスト
+│   │   ├── inputs/                 ← 入力データ・期待値
+│   │   ├── logic/                  ← テストロジック（スタブ・ドライバ）
+│   │   └── outputs/                ← テスト結果
+│   ├── integration/                ← 工程6：結合テスト
+│   │   ├── inputs/
+│   │   ├── logic/
+│   │   └── outputs/
+│   └── system/                     ← 工程7：システムテスト
+│       ├── inputs/
+│       ├── logic/
+│       └── outputs/
 ├── issues/
 │   └── issues.json         ← issue-manager が管理
 └── .github/

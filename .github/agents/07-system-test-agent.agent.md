@@ -10,9 +10,9 @@ user-invocable: false
 
 ## 入力（V字工程：要件定義を検証）
 
-- **システム（フロント）**: `frontend/src/sys/`（実装コード）
-- **システム（バック）**: `backend/app/sys/`（実装コード）
-- **アプリ**: `apps/<app-name>/frontend/`, `apps/<app-name>/backend/`（実装コード）
+- **システム（フロント）**: `project/frontend/src/sys/`（実装コード）
+- **システム（バック）**: `project/backend/app/sys/`（実装コード）
+- **アプリ**: `project/apps/<app-name>/frontend/`, `project/apps/<app-name>/backend/`（実装コード）
 - **システム要件**: `documents/sys/01-requirements/`（検証対象：機能要件・非機能要件・受入基準）
 - **アプリ要件**: `documents/app/01-requirements/`（検証対象：機能要件・非機能要件・受入基準）
 
@@ -20,11 +20,15 @@ user-invocable: false
 
 | パス | 内容 |
 |------|------|
-| `tests/frontend/` | システム共通基盤フロントのE2Eテストコード |
-| `tests/backend/` | システム共通基盤バックエンドのE2Eテストコード |
-| `apps/<app-name>/tests/` | アプリケーション専用E2Eテストコード |
+| `tests/system/` | システム共通基盤のE2Eテスト（inputs/、logic/、outputs/） |
+| `project/apps/<app-name>/tests/system/` | アプリケーション専用E2Eテスト |
 | `documents/sys/07-system-test-report.md` | システムテスト結果レポート |
 | `documents/app/07-system-test-report.md` | アプリテスト結果レポート |
+
+> **重要**: `tests/system/` は以下の構成を持つ：
+> - `inputs/` ← 入力データ・期待値
+> - `logic/` ← テストロジック（スタブ・ドライバ）
+> - `outputs/` ← テスト結果
 
 ## テスト種別
 
@@ -55,6 +59,37 @@ user-invocable: false
 ### 4. リグレッションテスト
 単体・結合テストを全件再実行し、新しい問題が発生していないことを確認する。
 
+### 5. テスト実行コマンド
+
+**🚨 必須**: Python仮想環境を**必ず**使用してテストを実行すること。グローバルPython禁止。
+
+**システムテスト（E2E）**:
+```bash
+# Playwright などのE2Eツールを使用
+npx playwright test tests/system/
+```
+
+**リグレッションテスト（単体・結合テストの再実行）**:
+```bash
+# システム共通基盤（backend）
+PYTHONPATH=project/backend project/backend/venv/bin/python -m pytest \
+    tests/unit/logic/backend/sys/ tests/integration/ \
+    --cov=project/backend/app/sys --cov-branch \
+    --cov-report=term
+
+# アプリケーション（apps/<app-name>/backend）
+PYTHONPATH=project/apps/<app-name>/backend \
+    project/apps/<app-name>/backend/venv/bin/python -m pytest \
+    project/apps/<app-name>/tests/unit/ \
+    project/apps/<app-name>/tests/integration/
+```
+
+**性能テスト**:
+```bash
+# locust や ab（Apache Bench）を使用
+locust -f tests/system/performance/locustfile.py --headless -u 100 -r 10
+```
+
 ## テスト結果レポート（sys: 07-system-test-report.md, app: 07-system-test-report.md）
 
 ```markdown
@@ -83,7 +118,9 @@ user-invocable: false
 
 ## 制約
 
+- **DO 仮想環境を必ず使用すること**（`project/backend/venv/bin/python`で実行、グローバルPython禁止）
 - DO NOT `src/sys/`, `src/app/` のコードを直接修正しない
+- DO NOT グローバルPythonでテストを実行しない（`pytest`コマンド単体はNG）
 - セキュリティ問題はすべて `issue-manager` に `severity: critical` で登録する
 - 要件定義と実装に乖離がある場合は `issue-manager` に記録し、`process-manager` の判断を仰ぐ
 - **DO NOT エージェント定義ファイル（`.github/agents/*.agent.md`）を編集しない**
