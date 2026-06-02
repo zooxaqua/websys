@@ -1,0 +1,233 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.13, pytest-7.4.3, pluggy-1.6.0 -- /Users/zooaqua/Desktop/repo/websys/project/backend/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/zooaqua/Desktop/repo/websys
+plugins: cov-4.1.0, asyncio-0.21.1, anyio-4.13.0
+asyncio: mode=strict
+collecting ... collected 27 items
+
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_user_read_through_dal ERROR [  3%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_session_write_through_dal FAILED [  7%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_config_read_through_dal ERROR [ 11%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_apps_list_through_dal ERROR [ 14%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_dal_abstraction_no_direct_file_access ERROR [ 18%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestDataConsistency::test_session_cleanup_on_logout ERROR [ 22%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestDataConsistency::test_user_data_not_modified_by_read_api ERROR [ 25%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_auto_registration_from_manifest ERROR [ 29%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_metadata_from_manifest ERROR [ 33%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_enable_disable ERROR [ 37%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_disabled_app_api_not_accessible ERROR [ 40%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_data_isolation ERROR [ 44%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_cannot_access_system_data_directly ERROR [ 48%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_uses_system_common_api ERROR [ 51%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestCrossAppIsolation::test_app_a_cannot_access_app_b_data ERROR [ 55%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestCrossAppIsolation::test_app_disable_does_not_affect_other_apps ERROR [ 59%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_success FAILED [ 62%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_invalid_credentials FAILED [ 66%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_invalid_username FAILED [ 70%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_authenticated_api_call ERROR [ 74%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_unauthenticated_api_call FAILED [ 77%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_logout ERROR [ 81%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_session_persistence ERROR [ 85%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestRoleBasedAccess::test_admin_access_to_admin_api ERROR [ 88%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestRoleBasedAccess::test_user_cannot_access_admin_api ERROR [ 92%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestJWTValidation::test_invalid_jwt_token FAILED [ 96%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestJWTValidation::test_missing_jwt_token FAILED [100%]
+
+==================================== ERRORS ====================================
+______ ERROR at setup of TestAPIDALIntegration.test_user_read_through_dal ______
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_____ ERROR at setup of TestAPIDALIntegration.test_config_read_through_dal _____
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+______ ERROR at setup of TestAPIDALIntegration.test_apps_list_through_dal ______
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_ ERROR at setup of TestAPIDALIntegration.test_dal_abstraction_no_direct_file_access _
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_____ ERROR at setup of TestDataConsistency.test_session_cleanup_on_logout _____
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_ ERROR at setup of TestDataConsistency.test_user_data_not_modified_by_read_api _
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_ ERROR at setup of TestAppPluginMechanism.test_app_auto_registration_from_manifest _
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+___ ERROR at setup of TestAppPluginMechanism.test_app_metadata_from_manifest ___
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_______ ERROR at setup of TestAppPluginMechanism.test_app_enable_disable _______
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_ ERROR at setup of TestAppPluginMechanism.test_disabled_app_api_not_accessible _
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+__________ ERROR at setup of TestAppIsolation.test_app_data_isolation __________
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_ ERROR at setup of TestAppIsolation.test_app_cannot_access_system_data_directly _
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+______ ERROR at setup of TestAppIsolation.test_app_uses_system_common_api ______
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_ ERROR at setup of TestCrossAppIsolation.test_app_a_cannot_access_app_b_data __
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_ ERROR at setup of TestCrossAppIsolation.test_app_disable_does_not_affect_other_apps _
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_____ ERROR at setup of TestAuthenticationFlow.test_authenticated_api_call _____
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_____________ ERROR at setup of TestAuthenticationFlow.test_logout _____________
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+______ ERROR at setup of TestAuthenticationFlow.test_session_persistence _______
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_____ ERROR at setup of TestRoleBasedAccess.test_admin_access_to_admin_api _____
+tests/integration/logic/backend/sys/conftest.py:101: in authenticated_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+___ ERROR at setup of TestRoleBasedAccess.test_user_cannot_access_admin_api ____
+tests/integration/logic/backend/sys/conftest.py:120: in authenticated_user_client
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+=================================== FAILURES ===================================
+_____________ TestAPIDALIntegration.test_session_write_through_dal _____________
+tests/integration/logic/backend/sys/test_api_dal_integration.py:42: in test_session_write_through_dal
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+__________________ TestAuthenticationFlow.test_login_success ___________________
+tests/integration/logic/backend/sys/test_auth_flow.py:19: in test_login_success
+    assert response.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+____________ TestAuthenticationFlow.test_login_invalid_credentials _____________
+tests/integration/logic/backend/sys/test_auth_flow.py:36: in test_login_invalid_credentials
+    assert response.status_code == 401
+E   assert 404 == 401
+E    +  where 404 = <Response [404 Not Found]>.status_code
+______________ TestAuthenticationFlow.test_login_invalid_username ______________
+tests/integration/logic/backend/sys/test_auth_flow.py:48: in test_login_invalid_username
+    assert response.status_code == 401
+E   assert 404 == 401
+E    +  where 404 = <Response [404 Not Found]>.status_code
+_____________ TestAuthenticationFlow.test_unauthenticated_api_call _____________
+tests/integration/logic/backend/sys/test_auth_flow.py:67: in test_unauthenticated_api_call
+    assert response.status_code == 401
+E   assert 404 == 401
+E    +  where 404 = <Response [404 Not Found]>.status_code
+___________________ TestJWTValidation.test_invalid_jwt_token ___________________
+tests/integration/logic/backend/sys/test_auth_flow.py:150: in test_invalid_jwt_token
+    assert response.status_code == 401
+E   assert 404 == 401
+E    +  where 404 = <Response [404 Not Found]>.status_code
+___________________ TestJWTValidation.test_missing_jwt_token ___________________
+tests/integration/logic/backend/sys/test_auth_flow.py:159: in test_missing_jwt_token
+    assert response.status_code == 401
+E   assert 404 == 401
+E    +  where 404 = <Response [404 Not Found]>.status_code
+=============================== warnings summary ===============================
+project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+project/backend/app/sys/main.py:49
+  /Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/main.py:49: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:4495
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:4495: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+tests/integration/logic/backend/sys/test_api_dal_integration.py: 7 warnings
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py: 9 warnings
+tests/integration/logic/backend/sys/test_auth_flow.py: 11 warnings
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+    warnings.warn(message, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /Users/zooaqua/Desktop/repo/websys/tests/integration/outputs/test-report-integration-backend.xml -
+=========================== short test summary info ============================
+FAILED tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_session_write_through_dal
+FAILED tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_success
+FAILED tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_invalid_credentials
+FAILED tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_invalid_username
+FAILED tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_unauthenticated_api_call
+FAILED tests/integration/logic/backend/sys/test_auth_flow.py::TestJWTValidation::test_invalid_jwt_token
+FAILED tests/integration/logic/backend/sys/test_auth_flow.py::TestJWTValidation::test_missing_jwt_token
+ERROR tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_user_read_through_dal
+ERROR tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_config_read_through_dal
+ERROR tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_apps_list_through_dal
+ERROR tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_dal_abstraction_no_direct_file_access
+ERROR tests/integration/logic/backend/sys/test_api_dal_integration.py::TestDataConsistency::test_session_cleanup_on_logout
+ERROR tests/integration/logic/backend/sys/test_api_dal_integration.py::TestDataConsistency::test_user_data_not_modified_by_read_api
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_auto_registration_from_manifest
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_metadata_from_manifest
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_enable_disable
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_disabled_app_api_not_accessible
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_data_isolation
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_cannot_access_system_data_directly
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_uses_system_common_api
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestCrossAppIsolation::test_app_a_cannot_access_app_b_data
+ERROR tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestCrossAppIsolation::test_app_disable_does_not_affect_other_apps
+ERROR tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_authenticated_api_call
+ERROR tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_logout
+ERROR tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_session_persistence
+ERROR tests/integration/logic/backend/sys/test_auth_flow.py::TestRoleBasedAccess::test_admin_access_to_admin_api
+ERROR tests/integration/logic/backend/sys/test_auth_flow.py::TestRoleBasedAccess::test_user_cannot_access_admin_api
+================== 7 failed, 30 warnings, 20 errors in 0.58s ===================

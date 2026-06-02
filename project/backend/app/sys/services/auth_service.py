@@ -1,5 +1,5 @@
 """認証サービス"""
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Tuple
 from fastapi import HTTPException, status
 from ..models.user import User
@@ -54,15 +54,15 @@ class AuthService:
     def create_session(self, user: User, token: str) -> Session:
         """セッション作成"""
         session_id = str(uuid.uuid4())
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         expires_at = now + timedelta(hours=24)
         
         session_data = {
             "sessionId": session_id,
             "userId": user.id,
             "token": token,
-            "createdAt": now.isoformat() + "Z",
-            "expiresAt": expires_at.isoformat() + "Z",
+            "createdAt": now.isoformat().replace("+00:00", "Z"),
+            "expiresAt": expires_at.isoformat().replace("+00:00", "Z"),
             "metadata": {}
         }
         
@@ -136,5 +136,5 @@ class AuthService:
         new_hash = hash_password(new_password)
         return self.user_dal.update(user_id, {
             "passwordHash": new_hash,
-            "updatedAt": datetime.utcnow().isoformat() + "Z"
+            "updatedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         })

@@ -1,0 +1,24 @@
+{
+  "test_user_001": {
+    "id": "test_user_001",
+    "username": "test_admin",
+    "passwordHash": "$2b$12$6SAdlpWmsdLhtzTLdxACf.WGjMjTEK.5WIfevsZkfBHbAVYsDMDHu",
+    "displayName": "テスト管理者",
+    "email": "test_admin@example.com",
+    "role": "admin",
+    "isActive": true,
+    "createdAt": "2026-01-01T00:00:00Z",
+    "updatedAt": "2026-01-01T00:00:00Z"
+  },
+  "test_user_002": {
+    "id": "test_user_002",
+    "username": "test_user",
+    "passwordHash": "$2b$12$6SAdlpWmsdLhtzTLdxACf.WGjMjTEK.5WIfevsZkfBHbAVYsDMDHu",
+    "displayName": "テストユーザー",
+    "email": "test_user@example.com",
+    "role": "user",
+    "isActive": true,
+    "createdAt": "2026-01-01T00:00:00Z",
+    "updatedAt": "2026-01-01T00:00:00Z"
+  }
+}

@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="22" skipped="0" tests="148" time="7.461" timestamp="2026-06-01T11:08:44.015153" hostname="zooAquas-iMac.local"><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_creation_valid_user" time="0.009" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_creation_valid_admin" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_username_min" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_username_max" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_displayname_min" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_boundary_displayname_max" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_username_too_short" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_username_too_long" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_role" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_email" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_displayname_empty" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_invalid_displayname_too_long" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_to_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_from_dict" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_serialization_roundtrip" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_validate_password_success" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserModel" name="test_user_validate_password_failure" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserCreateModel" name="test_usercreate_valid" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserCreateModel" name="test_usercreate_invalid_password_too_short" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserUpdateModel" name="test_userupdate_partial" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_model.TestUserResponseModel" name="test_userresponse_no_password" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_creation_valid" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_future" time="0.002"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_model.TestSessionModel object at 0x106404d90&gt;
+
+    def test_session_is_valid_future(self):
+        """
+        TC-SESSION-002: is_valid() - 有効期限内（未来）
+        条件: expiresAt &gt; 現在時刻
+        期待: is_valid() が True を返す
+        """
+        data = load_fixture('session_boundary_future')
+        session = Session(**data)
+    
+        # 未来の有効期限を持つため有効
+&gt;       assert session.is_valid() is True
+
+tests/unit/logic/backend/sys/test_cases/test_session_model.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Session(sessionId='sess-future-1234-1234-1234-123456789abc', userId='user-004', token='eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp... 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2027, 12, 31, 23, 59, 59, tzinfo=TzInfo(UTC)), metadata={})
+
+    def is_valid(self) -&gt; bool:
+        """セッションが有効か"""
+&gt;       return datetime.utcnow() &lt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/session.py:18: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_expired" time="0.001"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_model.TestSessionModel object at 0x1063baf80&gt;
+
+    def test_session_is_valid_expired(self):
+        """
+        TC-SESSION-003: is_valid() - 有効期限切れ（過去）
+        条件: expiresAt &lt; 現在時刻
+        期待: is_valid() が False を返す
+        """
+        data = load_fixture('expired_session')
+        session = Session(**data)
+    
+        # 過去の有効期限を持つため無効
+&gt;       assert session.is_valid() is False
+
+tests/unit/logic/backend/sys/test_cases/test_session_model.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Session(sessionId='sess-expired-1234-1234-1234-123456789abc', userId='user-002', token='eyJhbGciOiJIUzI1NiIsInR5cCI6Ik...(2026, 5, 1, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2026, 5, 2, 0, 0, tzinfo=TzInfo(UTC)), metadata={})
+
+    def is_valid(self) -&gt; bool:
+        """セッションが有効か"""
+&gt;       return datetime.utcnow() &lt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/session.py:18: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_boundary_exact_now" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_is_valid_boundary_one_second_before_expiry" time="0.006" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_to_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_from_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_no_metadata" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_missing_sessionId" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_missing_userId" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_invalid_createdAt_type" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_model.TestSessionModel" name="test_session_invalid_expiresAt_type" time="0.001"><failure message="Failed: DID NOT RAISE &lt;class 'pydantic_core._pydantic_core.ValidationError'&gt;">self = &lt;test_session_model.TestSessionModel object at 0x106405060&gt;
+
+    def test_session_invalid_expiresAt_type(self):
+        """
+        TC-SESSION-012: 異常系 - expiresAt型不正
+        条件: expiresAtが不正な型（数値）
+        期待: ValidationError が発生
+        """
+        data = load_fixture('valid_session')
+        data['expiresAt'] = 12345
+    
+&gt;       with pytest.raises(ValidationError) as exc_info:
+E       Failed: DID NOT RAISE &lt;class 'pydantic_core._pydantic_core.ValidationError'&gt;
+
+tests/unit/logic/backend/sys/test_cases/test_session_model.py:204: Failed</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_creation_valid" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_creation_disabled" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_creation_with_dependencies" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_validate_manifest_valid" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_validate_manifest_invalid_missing_field" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_to_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_from_dict" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_serialization_roundtrip" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_invalid_missing_id" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppModel" name="test_app_invalid_missing_name" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_model.TestAppResponseModel" name="test_appresponse_creation_valid" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_info" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_warning" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_error" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_creation_success" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_boundary_title_min" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_boundary_title_max" time="0.002"><failure message="AssertionError: assert 198 == 200&#10; +  where 198 = len('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')&#10; +    where 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' = Notification(id='notif-007', userId='user-001', type='info', title='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', message='Maximum length title (200 chars)', metadata={}, read=False, createdAt=datetime.datetime(2026, 5, 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=None).title">self = &lt;test_notification_model.TestNotificationModel object at 0x106b45c00&gt;
+
+    def test_notification_boundary_title_max(self):
+        """
+        TC-NOTIF-006: 境界値 - title最大長（200文字）
+        条件: title=200文字
+        期待: Notificationインスタンスが生成される
+        """
+        data = load_fixture('boundary_title_max')
+        notif = Notification(**data)
+    
+&gt;       assert len(notif.title) == 200
+E       AssertionError: assert 198 == 200
+E        +  where 198 = len('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+E        +    where 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' = Notification(id='notif-007', userId='user-001', type='info', title='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', message='Maximum length title (200 chars)', metadata={}, read=False, createdAt=datetime.datetime(2026, 5, 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=None).title
+
+tests/unit/logic/backend/sys/test_cases/test_notification_model.py:102: AssertionError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_boundary_message_min" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_type" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_title_empty" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_title_too_long" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_message_empty" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_invalid_message_too_long" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_is_expired_true" time="0.002"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_notification_model.TestNotificationModel object at 0x106b463b0&gt;
+mock_datetime = &lt;MagicMock name='datetime' id='4410534752'&gt;
+
+    @patch('project.backend.app.sys.models.notification.datetime')
+    def test_notification_is_expired_true(self, mock_datetime):
+        """
+        TC-NOTIF-013: is_expired() - 期限切れ
+        条件: 現在時刻 &gt; expiresAt
+        期待: True
+        """
+        mock_datetime.utcnow.return_value = datetime(2026, 5, 29, 12, 0, 0)
+    
+        data = load_fixture('expired_notification')
+        notif = Notification(**data)
+    
+&gt;       assert notif.is_expired() is True
+
+tests/unit/logic/backend/sys/test_cases/test_notification_model.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Notification(id='notif-005', userId='user-001', type='info', title='Expired message', message='This notification has e...time.datetime(2026, 5, 1, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2026, 5, 2, 0, 0, tzinfo=TzInfo(UTC)))
+
+    def is_expired(self) -&gt; bool:
+        """期限切れか判定"""
+        if not self.expiresAt:
+            return False
+&gt;       return datetime.utcnow() &gt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/notification.py:28: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_is_expired_false_not_expired" time="0.002"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_notification_model.TestNotificationModel object at 0x106b464a0&gt;
+mock_datetime = &lt;MagicMock name='datetime' id='4408622000'&gt;
+
+    @patch('project.backend.app.sys.models.notification.datetime')
+    def test_notification_is_expired_false_not_expired(self, mock_datetime):
+        """
+        TC-NOTIF-014: is_expired() - 有効期限内
+        条件: 現在時刻 &lt; expiresAt
+        期待: False
+        """
+        mock_datetime.utcnow.return_value = datetime(2026, 5, 29, 12, 0, 0)
+    
+        data = load_fixture('valid_warning_notification')
+        notif = Notification(**data)
+    
+&gt;       assert notif.is_expired() is False
+
+tests/unit/logic/backend/sys/test_cases/test_notification_model.py:216: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Notification(id='notif-002', userId='user-001', type='warning', title='Warning: Maintenance', message='System maintena...me.datetime(2026, 5, 29, 0, 0, tzinfo=TzInfo(UTC)), expiresAt=datetime.datetime(2026, 5, 30, 0, 0, tzinfo=TzInfo(UTC)))
+
+    def is_expired(self) -&gt; bool:
+        """期限切れか判定"""
+        if not self.expiresAt:
+            return False
+&gt;       return datetime.utcnow() &gt; self.expiresAt
+E       TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/models/notification.py:28: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_is_expired_false_no_expiry" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_to_dict" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_from_dict" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationModel" name="test_notification_serialization_roundtrip" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_model.TestNotificationCreateModel" name="test_notification_create_valid" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_insert_new_record" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_insert_with_predefined_id" time="0.006" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_one_existing_record" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_one_non_existing_record" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_multiple_records" time="0.008" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_with_pagination" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_find_boundary_offset_exceeds_data" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_update_existing_record" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_update_non_existing_record" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_delete_existing_record" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_delete_non_existing_record" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_count_matching_records" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_count_no_match" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_exists_record_present" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_exists_record_absent" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_load_data_file_not_exists" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_load_data_empty_file" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_load_data_io_error" time="0.007" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_match_criteria_all_match" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_match_criteria_partial_match" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_json_dal.TestJsonDAL" name="test_generate_id_uniqueness" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_username_existing" time="0.007" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_username_non_existing" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_username_case_sensitive" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_email_existing" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_email_non_existing" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_update_last_login_existing_user" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_update_last_login_non_existing_user" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_multiple_users_find_by_username" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_find_by_email_case_sensitive" time="0.006" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_collection_name_set" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_crud_operations_integration" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_user_dal.TestUserDAL" name="test_boundary_empty_database" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_find_by_token_existing" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_find_by_token_non_existing" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_insert_creates_session_file" time="0.003"><failure message="AssertionError: assert False&#10; +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp08aiwlat/sessions/a6d2f750-48a0-4069-ab99-90d7b7978a80.json')&gt;()&#10; +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp08aiwlat/sessions/a6d2f750-48a0-4069-ab99-90d7b7978a80.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp08aiwlat/sessions/a6d2f750-48a0-4069-ab99-90d7b7978a80.json').exists">self = &lt;test_session_dal.TestSessionDAL object at 0x106b6be20&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106e40790&gt;
+
+    def test_insert_creates_session_file(self, dal):
+        """
+        TC-SESSION-DAL-003: insert() - セッションファイル作成
+        条件: セッションを挿入
+        期待: 個別ファイル（sessionId.json）が作成される
+        """
+        session_data = {
+            "sessionId": "sess-file-001",
+            "userId": "user-001",
+            "token": "token-file",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2026-05-30T00:00:00Z"
+        }
+        session_id = dal.insert(session_data)
+    
+        session_file = dal.sessions_dir / f"{session_id}.json"
+    
+&gt;       assert session_file.exists()
+E       AssertionError: assert False
+E        +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp08aiwlat/sessions/a6d2f750-48a0-4069-ab99-90d7b7978a80.json')&gt;()
+E        +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp08aiwlat/sessions/a6d2f750-48a0-4069-ab99-90d7b7978a80.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmp08aiwlat/sessions/a6d2f750-48a0-4069-ab99-90d7b7978a80.json').exists
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:82: AssertionError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_delete_removes_session_file" time="0.003"><failure message="AssertionError: assert False&#10; +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmpxlwfimue/sessions/8f8724be-9533-496f-97cf-2ea155bedc42.json')&gt;()&#10; +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmpxlwfimue/sessions/8f8724be-9533-496f-97cf-2ea155bedc42.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmpxlwfimue/sessions/8f8724be-9533-496f-97cf-2ea155bedc42.json').exists">self = &lt;test_session_dal.TestSessionDAL object at 0x106b90160&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106cb60e0&gt;
+
+    def test_delete_removes_session_file(self, dal):
+        """
+        TC-SESSION-DAL-004: delete() - セッションファイル削除
+        条件: セッションを削除
+        期待: 個別ファイルも削除される
+        """
+        session_data = {
+            "sessionId": "sess-delete-001",
+            "userId": "user-001",
+            "token": "token-delete",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2026-05-30T00:00:00Z"
+        }
+        session_id = dal.insert(session_data)
+    
+        session_file = dal.sessions_dir / f"{session_id}.json"
+&gt;       assert session_file.exists()
+E       AssertionError: assert False
+E        +  where False = &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmpxlwfimue/sessions/8f8724be-9533-496f-97cf-2ea155bedc42.json')&gt;()
+E        +    where &lt;bound method Path.exists of PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmpxlwfimue/sessions/8f8724be-9533-496f-97cf-2ea155bedc42.json')&gt; = PosixPath('/var/folders/x6/g7dnvc792p39016t688tsnj00000gp/T/tmpxlwfimue/sessions/8f8724be-9533-496f-97cf-2ea155bedc42.json').exists
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:101: AssertionError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_removes_old_sessions" time="0.005"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x106b901c0&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106e5a8c0&gt;
+
+    def test_cleanup_expired_removes_old_sessions(self, dal):
+        """
+        TC-SESSION-DAL-005: cleanup_expired() - 期限切れセッション削除
+        条件: 期限切れと有効なセッションが混在
+        期待: 期限切れのみ削除され、削除数が返される
+        """
+        # 期限切れセッション（2件）
+        dal.insert({
+            "sessionId": "sess-exp-001",
+            "userId": "user-001",
+            "token": "token-exp-1",
+            "createdAt": "2026-05-01T00:00:00Z",
+            "expiresAt": "2026-05-02T00:00:00Z"
+        })
+        dal.insert({
+            "sessionId": "sess-exp-002",
+            "userId": "user-002",
+            "token": "token-exp-2",
+            "createdAt": "2026-05-01T00:00:00Z",
+            "expiresAt": "2026-05-03T00:00:00Z"
+        })
+    
+        # 有効なセッション
+        dal.insert({
+            "sessionId": "sess-valid-001",
+            "userId": "user-003",
+            "token": "token-valid",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2027-05-29T00:00:00Z"
+        })
+    
+&gt;       deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106e5a8c0&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_no_expired_sessions" time="0.008"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x106b90370&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106ddaa70&gt;
+
+    def test_cleanup_expired_no_expired_sessions(self, dal):
+        """
+        TC-SESSION-DAL-006: cleanup_expired() - 期限切れなし
+        条件: 全セッションが有効
+        期待: 削除数 0 が返される
+        """
+        dal.insert({
+            "sessionId": "sess-valid-001",
+            "userId": "user-001",
+            "token": "token-valid-1",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2027-05-29T00:00:00Z"
+        })
+        dal.insert({
+            "sessionId": "sess-valid-002",
+            "userId": "user-002",
+            "token": "token-valid-2",
+            "createdAt": "2026-05-29T00:00:00Z",
+            "expiresAt": "2027-05-29T00:00:00Z"
+        })
+    
+&gt;       deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106ddaa70&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_boundary_exact_now" time="0.006"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x106b90520&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106e35fc0&gt;
+
+    def test_cleanup_expired_boundary_exact_now(self, dal):
+        """
+        TC-SESSION-DAL-007: cleanup_expired() - 境界値（expiresAt == 現在時刻）
+        条件: expiresAtがちょうど現在時刻
+        期待: 削除される（&lt; 比較のため）
+        """
+        with patch('project.backend.app.sys.dal.session_dal.datetime') as mock_datetime:
+            fixed_now = datetime(2026, 5, 29, 12, 0, 0)
+            mock_datetime.utcnow.return_value = fixed_now
+            mock_datetime.fromisoformat = datetime.fromisoformat
+    
+            dal.insert({
+                "sessionId": "sess-boundary",
+                "userId": "user-001",
+                "token": "token-boundary",
+                "createdAt": "2026-05-29T00:00:00Z",
+                "expiresAt": "2026-05-29T12:00:00Z"  # ちょうど現在時刻
+            })
+    
+&gt;           deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:195: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106e35fc0&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_cleanup_expired_removes_session_files" time="0.003"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_session_dal.TestSessionDAL object at 0x106b906d0&gt;
+dal = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106e83fd0&gt;
+
+    def test_cleanup_expired_removes_session_files(self, dal):
+        """
+        TC-SESSION-DAL-008: cleanup_expired() - セッションファイルも削除
+        条件: 期限切れセッションを削除
+        期待: 個別ファイルも削除される
+        """
+        session_id = "sess-cleanup-file"
+        dal.insert({
+            "sessionId": session_id,
+            "userId": "user-001",
+            "token": "token-cleanup",
+            "createdAt": "2026-05-01T00:00:00Z",
+            "expiresAt": "2026-05-02T00:00:00Z"
+        })
+    
+        session_file = dal.sessions_dir / f"{session_id}.json"
+        assert session_file.exists()
+    
+&gt;       deleted_count = dal.cleanup_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_session_dal.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;project.backend.app.sys.dal.session_dal.SessionDAL object at 0x106e83fd0&gt;
+
+    def cleanup_expired(self) -&gt; int:
+        """期限切れセッションを削除"""
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for session_id, session in list(all_data.items()):
+            expires_at = session.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/session_dal.py:32: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_sessions_dir_created_on_init" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_collection_name_set" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_find_by_token_multiple_sessions" time="0.007" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_session_dal.TestSessionDAL" name="test_boundary_empty_database_cleanup" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestHashPassword" name="test_hash_password_normal" time="0.015"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestHashPassword object at 0x106c21990&gt;
+
+    def test_hash_password_normal(self):
+        """
+        TC-SECURITY-001: hash_password() - 正常系
+        条件: 通常のパスワード
+        期待: ハッシュ化された文字列を返す
+        """
+        password = "SecurePassword123!"
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106e870d0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestHashPassword" name="test_hash_password_empty" time="0.010"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestHashPassword object at 0x106c21ab0&gt;
+
+    def test_hash_password_empty(self):
+        """
+        TC-SECURITY-002: hash_password() - 空文字列
+        条件: 空文字列
+        期待: ハッシュ化された文字列を返す（bcryptは空文字列もハッシュ化可能）
+        """
+        password = ""
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106f939d0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestHashPassword" name="test_hash_password_long" time="0.010"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestHashPassword object at 0x106c217b0&gt;
+
+    def test_hash_password_long(self):
+        """
+        TC-SECURITY-003: hash_password() - 長い文字列
+        条件: 100文字のパスワード
+        期待: ハッシュ化された文字列を返す
+        """
+        password = "A" * 100
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x1060bbac0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestHashPassword" name="test_hash_password_uniqueness" time="0.012"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestHashPassword object at 0x106c216f0&gt;
+
+    def test_hash_password_uniqueness(self):
+        """
+        TC-SECURITY-004: hash_password() - ユニーク性
+        条件: 同じパスワードを2回ハッシュ化
+        期待: 異なるハッシュ値を返す（saltが異なる）
+        """
+        password = "SamePassword"
+&gt;       hash1 = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106f6b670&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyPassword" name="test_verify_password_match" time="0.012"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestVerifyPassword object at 0x106c21cf0&gt;
+
+    def test_verify_password_match(self):
+        """
+        TC-SECURITY-005: verify_password() - 一致
+        条件: 正しいパスワードとハッシュ
+        期待: True
+        """
+        password = "CorrectPassword"
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106f7f9d0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyPassword" name="test_verify_password_mismatch" time="0.011"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestVerifyPassword object at 0x106c21e10&gt;
+
+    def test_verify_password_mismatch(self):
+        """
+        TC-SECURITY-006: verify_password() - 不一致
+        条件: 誤ったパスワードとハッシュ
+        期待: False
+        """
+        password = "CorrectPassword"
+        wrong_password = "WrongPassword"
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106ddada0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyPassword" name="test_verify_password_empty_plain" time="0.012"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestVerifyPassword object at 0x106c21f30&gt;
+
+    def test_verify_password_empty_plain(self):
+        """
+        TC-SECURITY-007: verify_password() - 空のプレーンパスワード
+        条件: 空文字列と通常のハッシュ
+        期待: False
+        """
+        password = "SomePassword"
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:102: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106e364a0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyPassword" name="test_verify_password_empty_both" time="0.013"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestVerifyPassword object at 0x106c21630&gt;
+
+    def test_verify_password_empty_both(self):
+        """
+        TC-SECURITY-008: verify_password() - 両方空
+        条件: 空文字列のパスワードとそのハッシュ
+        期待: True
+        """
+        password = ""
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106e823b0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyPassword" name="test_verify_password_case_sensitive" time="0.012"><failure message="ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])">self = &lt;test_security.TestVerifyPassword object at 0x106c21900&gt;
+
+    def test_verify_password_case_sensitive(self):
+        """
+        TC-SECURITY-009: verify_password() - 大文字小文字区別
+        条件: 大文字小文字が異なるパスワード
+        期待: False
+        """
+        password = "Password"
+&gt;       hashed = hash_password(password)
+
+tests/unit/logic/backend/sys/test_cases/test_security.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+project/backend/app/sys/core/security.py:14: in hash_password
+    return pwd_context.hash(password)
+project/backend/venv/lib/python3.10/site-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+project/backend/venv/lib/python3.10/site-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;passlib.handlers.bcrypt._BcryptBackend object at 0x106cb67d0&gt;
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+&gt;       hash = _bcrypt.hashpw(secret, config)
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+project/backend/venv/lib/python3.10/site-packages/passlib/handlers/bcrypt.py:655: ValueError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestCreateAccessToken" name="test_create_access_token_default_expiry" time="0.023" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestCreateAccessToken" name="test_create_access_token_custom_expiry" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestCreateAccessToken" name="test_create_access_token_minimal_data" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestCreateAccessToken" name="test_create_access_token_large_data" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestCreateAccessToken" name="test_create_access_token_zero_expiry" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyToken" name="test_verify_token_valid" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyToken" name="test_verify_token_invalid_format" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyToken" name="test_verify_token_malformed" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyToken" name="test_verify_token_expired" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyToken" name="test_verify_token_empty" time="0.001" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_security.TestVerifyToken" name="test_verify_token_roundtrip" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_insert_success" time="0.036" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_find_one_success" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_find_one_not_found" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_update_success" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_delete_success" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_find_all" time="0.007" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_find_by_enabled" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_find_empty" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_count" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_app_dal.TestAppDAL" name="test_exists" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_insert_success" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_find_by_user_all" time="0.002" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_find_by_user_unread_only" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_mark_read_success" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_delete_success" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_delete_expired" time="0.004"><failure message="TypeError: can't compare offset-naive and offset-aware datetimes">self = &lt;test_notification_dal.TestNotificationDAL object at 0x106c623b0&gt;
+notif_dal = &lt;app.sys.dal.notification_dal.NotificationDAL object at 0x1070f1960&gt;
+valid_notif_data = {'createdAt': '2026-06-01T02:08:49.964725Z', 'expiresAt': '2026-06-02T02:08:49.965496Z', 'id': 'notif-001', 'message': 'This is a test', ...}
+
+    def test_delete_expired(self, notif_dal, valid_notif_data):
+        """期限切れ通知削除"""
+        # 期限切れ通知
+        expired_notif = valid_notif_data.copy()
+        expired_notif["id"] = "expired-notif"
+        expired_notif["expiresAt"] = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
+        notif_dal.insert(expired_notif)
+    
+        # 有効な通知
+        valid_notif_data["expiresAt"] = (datetime.utcnow() + timedelta(days=1)).isoformat() + "Z"
+        notif_dal.insert(valid_notif_data)
+    
+&gt;       deleted_count = notif_dal.delete_expired()
+
+tests/unit/logic/backend/sys/test_cases/test_notification_dal.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;app.sys.dal.notification_dal.NotificationDAL object at 0x1070f1960&gt;
+
+    def delete_expired(self) -&gt; int:
+        """期限切れ通知を削除"""
+        from datetime import datetime
+    
+        all_data = self._load_data()
+        deleted_count = 0
+    
+        for notif_id, notif in list(all_data.items()):
+            expires_at = notif.get("expiresAt")
+            if expires_at:
+&gt;               if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) &lt; datetime.utcnow():
+E               TypeError: can't compare offset-naive and offset-aware datetimes
+
+project/backend/app/sys/dal/notification_dal.py:33: TypeError</failure></testcase><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_find_by_user_empty" time="0.004" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_find_by_user_multiple_users" time="0.005" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_count" time="0.003" /><testcase classname="tests.unit.logic.backend.sys.test_cases.test_notification_dal.TestNotificationDAL" name="test_exists" time="0.007" /></testsuite></testsuites>

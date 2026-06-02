@@ -1,0 +1,23 @@
+{
+  "valid_credentials": {
+    "username": "testuser",
+    "password": "SecurePass123!"
+  },
+  "admin_credentials": {
+    "username": "admin",
+    "password": "AdminPass456!"
+  },
+  "invalid_password": {
+    "username": "testuser",
+    "password": "wrongpassword"
+  },
+  "non_existent_user": {
+    "username": "nonexistent",
+    "password": "AnyPass123!"
+  },
+  "valid_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdHVzZXIiLCJleHAiOjk5OTk5OTk5OTl9.fakesignature",
+  "expired_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdHVzZXIiLCJleHAiOjF9.fakesignature",
+  "invalid_token": "invalid.token.format",
+  "refresh_token_valid": "refresh_token_abc123",
+  "refresh_token_expired": "refresh_token_expired_xyz"
+}

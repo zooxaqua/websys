@@ -1,0 +1,70 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.13, pytest-7.4.3, pluggy-1.6.0 -- /Users/zooaqua/Desktop/repo/websys/project/backend/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/zooaqua/Desktop/repo/websys
+plugins: cov-4.1.0, asyncio-0.21.1, anyio-4.13.0
+asyncio: mode=strict
+collecting ... collected 27 items
+
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_user_read_through_dal PASSED [  3%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_session_write_through_dal PASSED [  7%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_config_read_through_dal PASSED [ 11%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_apps_list_through_dal PASSED [ 14%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_dal_abstraction_no_direct_file_access PASSED [ 18%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestDataConsistency::test_session_cleanup_on_logout PASSED [ 22%]
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestDataConsistency::test_user_data_not_modified_by_read_api PASSED [ 25%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_auto_registration_from_manifest PASSED [ 29%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_metadata_from_manifest PASSED [ 33%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_app_enable_disable PASSED [ 37%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppPluginMechanism::test_disabled_app_api_not_accessible PASSED [ 40%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_data_isolation SKIPPED [ 44%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_cannot_access_system_data_directly PASSED [ 48%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestAppIsolation::test_app_uses_system_common_api PASSED [ 51%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestCrossAppIsolation::test_app_a_cannot_access_app_b_data SKIPPED [ 55%]
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py::TestCrossAppIsolation::test_app_disable_does_not_affect_other_apps PASSED [ 59%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_success PASSED [ 62%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_invalid_credentials PASSED [ 66%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_login_invalid_username PASSED [ 70%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_authenticated_api_call PASSED [ 74%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_unauthenticated_api_call PASSED [ 77%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_logout PASSED [ 81%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestAuthenticationFlow::test_session_persistence PASSED [ 85%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestRoleBasedAccess::test_admin_access_to_admin_api PASSED [ 88%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestRoleBasedAccess::test_user_cannot_access_admin_api PASSED [ 92%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestJWTValidation::test_invalid_jwt_token PASSED [ 96%]
+tests/integration/logic/backend/sys/test_auth_flow.py::TestJWTValidation::test_missing_jwt_token PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/integration/logic/backend/sys/test_api_dal_integration.py: 8 warnings
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py: 9 warnings
+tests/integration/logic/backend/sys/test_auth_flow.py: 11 warnings
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_user_read_through_dal
+  /Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/main.py:49: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+tests/integration/logic/backend/sys/test_api_dal_integration.py::TestAPIDALIntegration::test_user_read_through_dal
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:4495: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+tests/integration/logic/backend/sys/test_api_dal_integration.py: 7 warnings
+tests/integration/logic/backend/sys/test_app_plugin_mechanism.py: 9 warnings
+tests/integration/logic/backend/sys/test_auth_flow.py: 11 warnings
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+    warnings.warn(message, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /Users/zooaqua/Desktop/repo/websys/tests/system/outputs/regression-integration-test.xml -
+================== 25 passed, 2 skipped, 57 warnings in 8.53s ==================

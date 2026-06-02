@@ -1,5 +1,5 @@
 """ユーザーDAL"""
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from .json_dal import JsonDAL
 
@@ -20,6 +20,6 @@ class UserDAL(JsonDAL):
     def update_last_login(self, user_id: str) -> bool:
         """最終ログイン日時を更新"""
         return self.update(user_id, {
-            "lastLogin": datetime.utcnow().isoformat() + "Z",
-            "updatedAt": datetime.utcnow().isoformat() + "Z"
+            "lastLogin": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "updatedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         })

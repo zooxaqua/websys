@@ -1,0 +1,42 @@
+{
+  "auth_api": {
+    "login_request": {
+      "username": "testuser",
+      "password": "SecurePass123!"
+    },
+    "login_invalid": {
+      "username": "testuser",
+      "password": "wrongpassword"
+    },
+    "refresh_request": {
+      "refresh_token": "valid_refresh_token_abc123"
+    }
+  },
+  "users_api": {
+    "create_user": {
+      "username": "apiuser",
+      "password": "ApiPass123!",
+      "email": "apiuser@example.com",
+      "display_name": "API User",
+      "role": "user"
+    },
+    "update_user": {
+      "email": "newemail@example.com",
+      "display_name": "New Display Name"
+    }
+  },
+  "apps_api": {
+    "register_app": {
+      "app_id": "test-app",
+      "name": "Test App",
+      "description": "Test application",
+      "icon": "test-icon.png",
+      "url": "/apps/test-app"
+    }
+  },
+  "notifications_api": {
+    "mark_read_request": {
+      "notification_ids": ["notif-001", "notif-002"]
+    }
+  }
+}

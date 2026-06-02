@@ -5,6 +5,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
+    setupFiles: ['./vitest.setup.ts'],
     include: [
       '**/*.{test,spec}.?(c|m)[jt]s?(x)',
       '../../tests/unit/logic/frontend/sys/**/*.test.ts'
@@ -34,6 +35,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@': resolve(__dirname, './src'),
       '@sys': resolve(__dirname, './src/sys'),
     },
   },

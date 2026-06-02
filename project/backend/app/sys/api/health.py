@@ -6,11 +6,11 @@
 
 from fastapi import APIRouter
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 import sys
 
-router = APIRouter(prefix="/health", tags=["health"])
+router = APIRouter(tags=["health"])
 
 
 class HealthResponse(BaseModel):
@@ -43,7 +43,7 @@ async def health_check() -> HealthResponse:
     
     return HealthResponse(
         status="ok" if data_dir_accessible else "error",
-        timestamp=datetime.utcnow().isoformat() + "Z",
+        timestamp=datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         version="1.0.0",
         python_version=f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
         data_dir_accessible=data_dir_accessible

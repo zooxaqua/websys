@@ -9,7 +9,7 @@ MCDC準拠: 全条件分岐を網羅
 """
 import pytest
 import tempfile
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import patch
 
 # テスト対象
@@ -121,8 +121,8 @@ class TestUserDAL:
         dal.insert(user_data)
         
         with patch('project.backend.app.sys.dal.user_dal.datetime') as mock_datetime:
-            fixed_now = datetime(2026, 5, 29, 12, 0, 0)
-            mock_datetime.utcnow.return_value = fixed_now
+            fixed_now = datetime(2026, 5, 29, 12, 0, 0, tzinfo=timezone.utc)
+            mock_datetime.now.return_value = fixed_now
             
             result = dal.update_last_login(user_id)
         
@@ -200,8 +200,8 @@ class TestUserDAL:
         
         # Update
         with patch('project.backend.app.sys.dal.user_dal.datetime') as mock_datetime:
-            fixed_now = datetime(2026, 5, 29, 15, 0, 0)
-            mock_datetime.utcnow.return_value = fixed_now
+            fixed_now = datetime(2026, 5, 29, 15, 0, 0, tzinfo=timezone.utc)
+            mock_datetime.now.return_value = fixed_now
             result = dal.update_last_login(user_id)
         
         assert result is True

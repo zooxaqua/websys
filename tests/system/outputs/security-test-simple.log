@@ -1,0 +1,54 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.13, pytest-7.4.3, pluggy-1.6.0 -- /Users/zooaqua/Desktop/repo/websys/project/backend/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/zooaqua/Desktop/repo/websys
+plugins: cov-4.1.0, asyncio-0.21.1, anyio-4.13.0
+asyncio: mode=strict
+collecting ... collected 5 items
+
+tests/system/logic/security/test_owasp_simple.py::TestOWASPA02Cryptography::test_password_is_hashed_in_storage ERROR [ 20%]
+tests/system/logic/security/test_owasp_simple.py::TestOWASPA03Injection::test_xss_prevention_in_error_message ERROR [ 40%]
+tests/system/logic/security/test_owasp_simple.py::TestOWASPA07Authentication::test_jwt_expiration ERROR [ 60%]
+tests/system/logic/security/test_owasp_simple.py::TestOWASPA07Authentication::test_jwt_tampering_detection ERROR [ 80%]
+tests/system/logic/security/test_owasp_simple.py::TestOWASPComprehensive::test_all_owasp_checks_passed PASSED [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at setup of TestOWASPA02Cryptography.test_password_is_hashed_in_storage _
+file /Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py, line 26
+      def test_password_is_hashed_in_storage(self, client: TestClient):
+E       fixture 'client' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, event_loop, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py:26
+_ ERROR at setup of TestOWASPA03Injection.test_xss_prevention_in_error_message _
+file /Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py, line 50
+      def test_xss_prevention_in_error_message(self, client: TestClient):
+E       fixture 'client' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, event_loop, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py:50
+_______ ERROR at setup of TestOWASPA07Authentication.test_jwt_expiration _______
+file /Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py, line 70
+      def test_jwt_expiration(self, client: TestClient):
+E       fixture 'client' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, event_loop, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py:70
+__ ERROR at setup of TestOWASPA07Authentication.test_jwt_tampering_detection ___
+file /Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py, line 81
+      def test_jwt_tampering_detection(self, authenticated_client: tuple[TestClient, dict]):
+E       fixture 'authenticated_client' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, event_loop, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/zooaqua/Desktop/repo/websys/tests/system/logic/security/test_owasp_simple.py:81
+- generated xml file: /Users/zooaqua/Desktop/repo/websys/tests/system/outputs/security-test-simple.xml -
+=========================== short test summary info ============================
+ERROR tests/system/logic/security/test_owasp_simple.py::TestOWASPA02Cryptography::test_password_is_hashed_in_storage
+ERROR tests/system/logic/security/test_owasp_simple.py::TestOWASPA03Injection::test_xss_prevention_in_error_message
+ERROR tests/system/logic/security/test_owasp_simple.py::TestOWASPA07Authentication::test_jwt_expiration
+ERROR tests/system/logic/security/test_owasp_simple.py::TestOWASPA07Authentication::test_jwt_tampering_detection
+========================= 1 passed, 4 errors in 0.73s ==========================

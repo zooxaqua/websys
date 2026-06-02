@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-router = APIRouter(prefix="/config", tags=["config"])
+router = APIRouter(tags=["config"])
 
 # 設定ファイルパス
 CONFIG_FILE = Path(__file__).parent.parent.parent.parent / "data" / "config.json"

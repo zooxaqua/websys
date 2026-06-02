@@ -1,0 +1,191 @@
+============================= test session starts ==============================
+collecting ... collected 94 items
+
+tests/unit/logic/backend/sys/test_api_auth.py::TestLogin::test_login_success PASSED [  1%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestLogin::test_login_invalid_credentials PASSED [  2%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestLogin::test_login_empty_username FAILED [  3%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestLogin::test_login_empty_password FAILED [  4%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestLogout::test_logout_success PASSED [  5%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestLogout::test_logout_unauthenticated FAILED [  6%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestGetMe::test_get_me_success PASSED [  7%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestGetMe::test_get_me_admin_user PASSED [  8%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestChangePassword::test_change_password_success PASSED [  9%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestChangePassword::test_change_password_wrong_current PASSED [ 10%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestChangePassword::test_change_password_too_short PASSED [ 11%]
+tests/unit/logic/backend/sys/test_api_auth.py::TestChangePassword::test_change_password_exactly_8_chars PASSED [ 12%]
+tests/unit/logic/backend/sys/test_api_users.py::TestListUsers::test_list_users_all PASSED [ 13%]
+tests/unit/logic/backend/sys/test_api_users.py::TestListUsers::test_list_users_filter_by_role PASSED [ 14%]
+tests/unit/logic/backend/sys/test_api_users.py::TestListUsers::test_list_users_pagination PASSED [ 15%]
+tests/unit/logic/backend/sys/test_api_users.py::TestListUsers::test_list_users_boundary_limit_min PASSED [ 17%]
+tests/unit/logic/backend/sys/test_api_users.py::TestListUsers::test_list_users_boundary_limit_max PASSED [ 18%]
+tests/unit/logic/backend/sys/test_api_users.py::TestGetUser::test_get_user_success PASSED [ 19%]
+tests/unit/logic/backend/sys/test_api_users.py::TestGetUser::test_get_user_not_found PASSED [ 20%]
+tests/unit/logic/backend/sys/test_api_users.py::TestCreateUser::test_create_user_success PASSED [ 21%]
+tests/unit/logic/backend/sys/test_api_users.py::TestCreateUser::test_create_user_duplicate_username PASSED [ 22%]
+tests/unit/logic/backend/sys/test_api_users.py::TestUpdateUser::test_update_user_success PASSED [ 23%]
+tests/unit/logic/backend/sys/test_api_users.py::TestUpdateUser::test_update_user_not_found PASSED [ 24%]
+tests/unit/logic/backend/sys/test_api_users.py::TestDeleteUser::test_delete_user_success PASSED [ 25%]
+tests/unit/logic/backend/sys/test_api_users.py::TestDeleteUser::test_delete_user_self PASSED [ 26%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestListApps::test_list_apps_all PASSED [ 27%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestListApps::test_list_apps_enabled_only PASSED [ 28%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestListApps::test_list_apps_disabled_only PASSED [ 29%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestListApps::test_list_apps_empty PASSED [ 30%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestGetApp::test_get_app_success PASSED [ 31%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestGetApp::test_get_app_not_found PASSED [ 32%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestScanApps::test_scan_apps_success PASSED [ 34%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestScanApps::test_scan_apps_no_apps_found PASSED [ 35%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestScanApps::test_scan_apps_multiple PASSED [ 36%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestEnableApp::test_enable_app_success PASSED [ 37%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestEnableApp::test_enable_app_not_found PASSED [ 38%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestEnableApp::test_enable_app_already_enabled PASSED [ 39%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestDisableApp::test_disable_app_success PASSED [ 40%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestDisableApp::test_disable_app_already_disabled PASSED [ 41%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestReloadApp::test_reload_app_success PASSED [ 42%]
+tests/unit/logic/backend/sys/test_api_apps.py::TestReloadApp::test_reload_app_not_found PASSED [ 43%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestListNotifications::test_list_notifications_all PASSED [ 44%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestListNotifications::test_list_notifications_unread_only PASSED [ 45%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestListNotifications::test_list_notifications_empty PASSED [ 46%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestListNotifications::test_list_notifications_multiple PASSED [ 47%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestCreateNotification::test_create_notification_success PASSED [ 48%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestCreateNotification::test_create_notification_with_expiry PASSED [ 50%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestCreateNotification::test_create_notification_all_types PASSED [ 51%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestMarkNotificationAsRead::test_mark_as_read_success PASSED [ 52%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestMarkNotificationAsRead::test_mark_as_read_not_found PASSED [ 53%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestMarkNotificationAsRead::test_mark_as_read_forbidden PASSED [ 54%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestDeleteNotification::test_delete_notification_success PASSED [ 55%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestDeleteNotification::test_delete_notification_not_found PASSED [ 56%]
+tests/unit/logic/backend/sys/test_api_notifications.py::TestDeleteNotification::test_delete_notification_forbidden PASSED [ 57%]
+tests/unit/logic/backend/sys/test_api_config.py::TestLoadConfig::test_load_config_file_exists PASSED [ 58%]
+tests/unit/logic/backend/sys/test_api_config.py::TestLoadConfig::test_load_config_file_not_exists PASSED [ 59%]
+tests/unit/logic/backend/sys/test_api_config.py::TestLoadConfig::test_load_config_invalid_json PASSED [ 60%]
+tests/unit/logic/backend/sys/test_api_config.py::TestGetConfig::test_get_config_success FAILED [ 61%]
+tests/unit/logic/backend/sys/test_api_config.py::TestUpdateConfig::test_update_config_success FAILED [ 62%]
+tests/unit/logic/backend/sys/test_api_config.py::TestUpdateConfig::test_update_config_partial PASSED [ 63%]
+tests/unit/logic/backend/sys/test_api_config.py::TestUpdateConfig::test_update_config_invalid_values PASSED [ 64%]
+tests/unit/logic/backend/sys/test_api_config.py::TestConfigBoundaryValues::test_session_timeout_min PASSED [ 65%]
+tests/unit/logic/backend/sys/test_api_config.py::TestConfigBoundaryValues::test_session_timeout_zero PASSED [ 67%]
+tests/unit/logic/backend/sys/test_api_config.py::TestConfigBoundaryValues::test_password_min_length_boundary PASSED [ 68%]
+tests/unit/logic/backend/sys/test_api_config.py::TestConfigBoundaryValues::test_max_login_attempts_boundary PASSED [ 69%]
+tests/unit/logic/backend/sys/test_api_config.py::TestConfigBoundaryValues::test_boolean_flags PASSED [ 70%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthCheck::test_health_check_ok PASSED [ 71%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthCheck::test_health_check_data_dir_not_accessible PASSED [ 72%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthCheck::test_health_check_data_dir_not_directory PASSED [ 73%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthCheck::test_health_check_timestamp_format PASSED [ 74%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthCheck::test_health_check_python_version PASSED [ 75%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthCheck::test_health_check_version PASSED [ 76%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthResponse::test_health_response_model PASSED [ 77%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthResponse::test_health_response_status_values PASSED [ 78%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthResponse::test_health_response_serialization PASSED [ 79%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthEndpoint::test_health_endpoint_status_code FAILED [ 80%]
+tests/unit/logic/backend/sys/test_api_health.py::TestHealthEndpoint::test_health_endpoint_response_format FAILED [ 81%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestCreateToken::test_create_token_success PASSED [ 82%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestCreateToken::test_create_token_contains_user_data PASSED [ 84%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestCreateToken::test_create_token_expiration PASSED [ 85%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestCreateToken::test_create_token_admin_user PASSED [ 86%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestVerifyToken::test_verify_token_success PASSED [ 87%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestVerifyToken::test_verify_token_invalid PASSED [ 88%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestVerifyToken::test_verify_token_expired PASSED [ 89%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestVerifyToken::test_verify_token_wrong_secret PASSED [ 90%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestDecodeToken::test_decode_token_success PASSED [ 91%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestDecodeToken::test_decode_token_invalid PASSED [ 92%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestRefreshToken::test_refresh_token_success FAILED [ 93%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestRefreshToken::test_refresh_token_invalid PASSED [ 94%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestRefreshToken::test_refresh_token_preserves_user_data PASSED [ 95%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestJWTServiceConfiguration::test_custom_expiration PASSED [ 96%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestJWTServiceConfiguration::test_different_algorithm PASSED [ 97%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestJWTServiceConfiguration::test_minimum_expiration PASSED [ 98%]
+tests/unit/logic/backend/sys/test_jwt_service.py::TestJWTServiceConfiguration::test_maximum_expiration PASSED [100%]
+
+=================================== FAILURES ===================================
+_____________________ TestLogin.test_login_empty_username ______________________
+tests/unit/logic/backend/sys/test_api_auth.py:77: in test_login_empty_username
+    with pytest.raises(ValidationError):
+E   Failed: DID NOT RAISE <class 'pydantic_core._pydantic_core.ValidationError'>
+_____________________ TestLogin.test_login_empty_password ______________________
+tests/unit/logic/backend/sys/test_api_auth.py:86: in test_login_empty_password
+    with pytest.raises(ValidationError):
+E   Failed: DID NOT RAISE <class 'pydantic_core._pydantic_core.ValidationError'>
+____________________ TestLogout.test_logout_unauthenticated ____________________
+tests/unit/logic/backend/sys/test_api_auth.py:111: in test_logout_unauthenticated
+    with pytest.raises(Exception):  # get_current_user dependency で例外発生
+E   Failed: DID NOT RAISE <class 'Exception'>
+____________________ TestGetConfig.test_get_config_success _____________________
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:23: in <module>
+    import httpx
+E   ModuleNotFoundError: No module named 'httpx'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/backend/sys/test_api_config.py:98: in test_get_config_success
+    from fastapi.testclient import TestClient
+project/backend/venv/lib/python3.10/site-packages/fastapi/testclient.py:1: in <module>
+    from starlette.testclient import TestClient as TestClient  # noqa
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:25: in <module>
+    raise RuntimeError(
+E   RuntimeError: The starlette.testclient module requires the httpx package to be installed.
+E   You can install this with:
+E       $ pip install httpx
+_________________ TestUpdateConfig.test_update_config_success __________________
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:23: in <module>
+    import httpx
+E   ModuleNotFoundError: No module named 'httpx'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/backend/sys/test_api_config.py:126: in test_update_config_success
+    from fastapi.testclient import TestClient
+project/backend/venv/lib/python3.10/site-packages/fastapi/testclient.py:1: in <module>
+    from starlette.testclient import TestClient as TestClient  # noqa
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:25: in <module>
+    raise RuntimeError(
+E   RuntimeError: The starlette.testclient module requires the httpx package to be installed.
+E   You can install this with:
+E       $ pip install httpx
+_____________ TestHealthEndpoint.test_health_endpoint_status_code ______________
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:23: in <module>
+    import httpx
+E   ModuleNotFoundError: No module named 'httpx'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/backend/sys/test_api_health.py:182: in test_health_endpoint_status_code
+    from fastapi.testclient import TestClient
+project/backend/venv/lib/python3.10/site-packages/fastapi/testclient.py:1: in <module>
+    from starlette.testclient import TestClient as TestClient  # noqa
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:25: in <module>
+    raise RuntimeError(
+E   RuntimeError: The starlette.testclient module requires the httpx package to be installed.
+E   You can install this with:
+E       $ pip install httpx
+___________ TestHealthEndpoint.test_health_endpoint_response_format ____________
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:23: in <module>
+    import httpx
+E   ModuleNotFoundError: No module named 'httpx'
+
+During handling of the above exception, another exception occurred:
+tests/unit/logic/backend/sys/test_api_health.py:201: in test_health_endpoint_response_format
+    from fastapi.testclient import TestClient
+project/backend/venv/lib/python3.10/site-packages/fastapi/testclient.py:1: in <module>
+    from starlette.testclient import TestClient as TestClient  # noqa
+project/backend/venv/lib/python3.10/site-packages/starlette/testclient.py:25: in <module>
+    raise RuntimeError(
+E   RuntimeError: The starlette.testclient module requires the httpx package to be installed.
+E   You can install this with:
+E       $ pip install httpx
+_________________ TestRefreshToken.test_refresh_token_success __________________
+tests/unit/logic/backend/sys/test_jwt_service.py:181: in test_refresh_token_success
+    assert new_token != old_token
+E   AssertionError: assert 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTAwMSIsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJyb2xlIjoidXNlciIsImV4cCI6MTc4MDM2NjM3NCwiaWF0IjoxNzgwMjc5OTc0fQ.7LaUz-vImdgcM3OTUMK5ExM5Hwrc602yUq67j6vEm14' != 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTAwMSIsInVzZXJuYW1lIjoidGVzdHVzZXIiLCJyb2xlIjoidXNlciIsImV4cCI6MTc4MDM2NjM3NCwiaWF0IjoxNzgwMjc5OTc0fQ.7LaUz-vImdgcM3OTUMK5ExM5Hwrc602yUq67j6vEm14'
+=============================== warnings summary ===============================
+project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/unit/logic/backend/sys/test_api_auth.py::TestLogin::test_login_empty_username
+FAILED tests/unit/logic/backend/sys/test_api_auth.py::TestLogin::test_login_empty_password
+FAILED tests/unit/logic/backend/sys/test_api_auth.py::TestLogout::test_logout_unauthenticated
+FAILED tests/unit/logic/backend/sys/test_api_config.py::TestGetConfig::test_get_config_success
+FAILED tests/unit/logic/backend/sys/test_api_config.py::TestUpdateConfig::test_update_config_success
+FAILED tests/unit/logic/backend/sys/test_api_health.py::TestHealthEndpoint::test_health_endpoint_status_code
+FAILED tests/unit/logic/backend/sys/test_api_health.py::TestHealthEndpoint::test_health_endpoint_response_format
+FAILED tests/unit/logic/backend/sys/test_jwt_service.py::TestRefreshToken::test_refresh_token_success
+=================== 8 failed, 86 passed, 1 warning in 2.68s ====================

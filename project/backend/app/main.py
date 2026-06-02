@@ -7,7 +7,7 @@ FastAPIメインアプリケーション
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.sys.core.middleware import error_handler_middleware
+from app.sys.api.middleware import error_handler_middleware
 from app.sys.api import auth, users, apps, notifications, config, health
 from pathlib import Path
 import json

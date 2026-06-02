@@ -1,5 +1,5 @@
 """セッションモデル"""
-from datetime import datetime
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 
 
@@ -15,7 +15,7 @@ class Session(BaseModel):
     
     def is_valid(self) -> bool:
         """セッションが有効か"""
-        return datetime.utcnow() < self.expiresAt
+        return datetime.now(timezone.utc) < self.expiresAt
     
     def to_dict(self) -> dict:
         """辞書形式に変換"""

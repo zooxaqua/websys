@@ -6,7 +6,7 @@ from ..models.user import User
 from ..services.notification_service import NotificationService
 from ..core.dependencies import get_notification_service, get_current_user
 
-router = APIRouter()
+router = APIRouter(tags=["notifications"])
 
 
 @router.get("", response_model=list[NotificationResponse])

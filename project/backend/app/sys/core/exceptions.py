@@ -53,6 +53,34 @@ class BaseAPIException(Exception):
         }
 
 
+class WebSystemException(BaseAPIException):
+    """
+    Webシステム全体で使用する汎用例外クラス
+    
+    BaseAPIExceptionを継承し、デフォルトで500エラーを返します。
+    カスタムエラーメッセージとエラーコードをサポートします。
+    """
+    def __init__(
+        self, 
+        status_code: int = 500,
+        message: str = "Internal Server Error",
+        error_code: str = "WS_ERROR"
+    ):
+        """
+        WebSystemExceptionの初期化
+        
+        Args:
+            status_code: HTTPステータスコード（デフォルト: 500）
+            message: エラーメッセージ（デフォルト: "Internal Server Error"）
+            error_code: エラーコード（デフォルト: "WS_ERROR"）
+        """
+        super().__init__(
+            code=error_code,
+            message=message,
+            status_code=status_code
+        )
+
+
 # 認証エラー（ERR-SYS-AUTH-XXX）
 class AuthenticationException(BaseAPIException):
     """認証エラー"""

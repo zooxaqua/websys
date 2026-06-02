@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="12" time="1.213" timestamp="2026-06-02T09:14:02.995527" hostname="zooAquas-iMac.local"><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA01AccessControl" name="test_unauthenticated_cannot_access_protected_resource" time="0.013" /><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA01AccessControl" name="test_normal_user_cannot_access_admin_api" time="0.006"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code">self = &lt;test_owasp_check.TestOWASPA01AccessControl object at 0x10a548df0&gt;
+
+    def test_normal_user_cannot_access_admin_api(self):
+        """
+        AC-SYS-007: 一般ユーザーは管理者APIにアクセスできない
+        期待結果: 403 Forbidden
+        """
+        client = TestClient(app)
+    
+        # 一般ユーザーでログイン
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_user",
+            "password": "password"
+        })
+&gt;       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/security/test_owasp_check.py:82: AssertionError</failure></testcase><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA01AccessControl" name="test_disabled_app_api_returns_403" time="0.006"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code">self = &lt;test_owasp_check.TestOWASPA01AccessControl object at 0x10a548f40&gt;
+
+    def test_disabled_app_api_returns_403(self):
+        """
+        FR-SYS-027: 無効化されたアプリのAPIにアクセスすると403
+        期待結果: 403 Forbidden
+        """
+        client = TestClient(app)
+    
+        # 管理者でログイン
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+&gt;       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/security/test_owasp_check.py:100: AssertionError</failure></testcase><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA02Cryptography" name="test_password_is_hashed_in_storage" time="0.001" /><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA02Cryptography" name="test_jwt_in_httponly_cookie" time="0.008"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code">self = &lt;test_owasp_check.TestOWASPA02Cryptography object at 0x10ad33760&gt;
+
+    def test_jwt_in_httponly_cookie(self):
+        """
+        AC-SYS-003: JWTがhttpOnly Cookieに設定される
+        期待結果: Set-Cookie ヘッダーにhttpOnly属性が含まれる
+        """
+        client = TestClient(app)
+    
+        response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+&gt;       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/security/test_owasp_check.py:140: AssertionError</failure></testcase><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA03Injection" name="test_xss_prevention_in_error_message" time="0.008" /><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA03Injection" name="test_path_traversal_prevention" time="0.007"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code">self = &lt;test_owasp_check.TestOWASPA03Injection object at 0x10ad56e60&gt;
+
+    def test_path_traversal_prevention(self):
+        """
+        NFR-SYS-006: パストラバーサル攻撃防止
+        期待結果: ../../などのパスが拒否される
+        """
+        client = TestClient(app)
+    
+        # 管理者でログイン
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+&gt;       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/security/test_owasp_check.py:181: AssertionError</failure></testcase><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA07Authentication" name="test_jwt_expiration" time="0.006" /><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA07Authentication" name="test_jwt_tampering_detection" time="0.008"><failure message="assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code">self = &lt;test_owasp_check.TestOWASPA07Authentication object at 0x10ad543d0&gt;
+
+    def test_jwt_tampering_detection(self):
+        """
+        AC-SYS-003: JWT改ざん検出
+        期待結果: 改ざんされたJWTは401を返す
+        """
+        client = TestClient(app)
+    
+        # 正常なJWT取得
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+&gt;       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/security/test_owasp_check.py:217: AssertionError</failure></testcase><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA07Authentication" name="test_login_failure_logging" time="0.006" /><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA04SecureDesign" name="test_dal_abstraction_enforced" time="0.001" /><testcase classname="tests.system.logic.security.test_owasp_check.TestOWASPA08SoftwareIntegrity" name="test_manifest_validation" time="0.006" /></testsuite></testsuites>

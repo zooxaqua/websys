@@ -1,0 +1,123 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.13, pytest-7.4.3, pluggy-1.6.0 -- /Users/zooaqua/Desktop/repo/websys/project/backend/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/zooaqua/Desktop/repo/websys
+plugins: cov-4.1.0, asyncio-0.21.1, anyio-4.13.0
+asyncio: mode=strict
+collecting ... collected 342 items / 8 errors
+
+==================================== ERRORS ====================================
+__ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_api_apps.py ___
+import file mismatch:
+imported module 'test_api_apps' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_apps.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_apps.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+__ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_api_auth.py ___
+import file mismatch:
+imported module 'test_api_auth' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_auth.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_auth.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_api_config.py __
+import file mismatch:
+imported module 'test_api_config' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_config.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_config.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_api_health.py __
+import file mismatch:
+imported module 'test_api_health' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_health.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_health.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_api_notifications.py _
+import file mismatch:
+imported module 'test_api_notifications' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_notifications.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_notifications.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+__ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_api_users.py __
+import file mismatch:
+imported module 'test_api_users' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_users.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_users.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_jwt_service.py _
+import file mismatch:
+imported module 'test_jwt_service' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_jwt_service.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_jwt_service.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_ ERROR collecting tests/unit/logic/backend/sys/test_cases/test_notification_dal.py _
+import file mismatch:
+imported module 'test_notification_dal' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_notification_dal.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_notification_dal.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+=============================== warnings summary ===============================
+project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271
+project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /Users/zooaqua/Desktop/repo/websys/tests/system/outputs/regression-unit-test.xml -
+
+--------- coverage: platform darwin, python 3.10.13-final-0 ----------
+Name                                                       Stmts   Miss Branch BrPart  Cover
+--------------------------------------------------------------------------------------------
+project/backend/app/sys/__init__.py                            0      0      0      0   100%
+project/backend/app/sys/api/__init__.py                        0      0      0      0   100%
+project/backend/app/sys/api/apps.py                           45     20      4      0    51%
+project/backend/app/sys/api/auth.py                           32      8      0      0    75%
+project/backend/app/sys/api/config.py                         39     18      2      0    51%
+project/backend/app/sys/api/health.py                         20      4      0      0    80%
+project/backend/app/sys/api/middleware.py                     11     11      0      0     0%
+project/backend/app/sys/api/notifications.py                  26      9      0      0    65%
+project/backend/app/sys/api/users.py                          32     10      0      0    69%
+project/backend/app/sys/core/config.py                        15      0      0      0   100%
+project/backend/app/sys/core/dependencies.py                  30     14      4      0    47%
+project/backend/app/sys/core/exceptions.py                    46     20      0      0    57%
+project/backend/app/sys/core/security.py                      26     16      4      0    33%
+project/backend/app/sys/dal/__init__.py                        7      0      0      0   100%
+project/backend/app/sys/dal/app_dal.py                         8      2      0      0    75%
+project/backend/app/sys/dal/base.py                           25      7      0      0    72%
+project/backend/app/sys/dal/base_dal.py                       25     25      0      0     0%
+project/backend/app/sys/dal/json_dal.py                       87     64     22      0    21%
+project/backend/app/sys/dal/notification_dal.py               22     15      8      0    23%
+project/backend/app/sys/dal/session_dal.py                    45     30     12      0    26%
+project/backend/app/sys/dal/user_dal.py                       11      3      0      0    73%
+project/backend/app/sys/main.py                               43     43     10      0     0%
+project/backend/app/sys/models/app.py                         37      4      0      0    89%
+project/backend/app/sys/models/notification.py                38      5      2      0    82%
+project/backend/app/sys/models/session.py                     16      3      0      0    81%
+project/backend/app/sys/models/user.py                        44      4      0      0    91%
+project/backend/app/sys/services/__init__.py                   5      0      0      0   100%
+project/backend/app/sys/services/app_service.py               72     56     28      0    16%
+project/backend/app/sys/services/auth_service.py              59     43     18      0    21%
+project/backend/app/sys/services/jwt_service.py               27     18      2      0    31%
+project/backend/app/sys/services/notification_service.py      41     27     10      0    27%
+project/backend/app/sys/services/user_service.py              67     52     26      0    16%
+--------------------------------------------------------------------------------------------
+TOTAL                                                       1001    531    152      0    41%
+
+=========================== short test summary info ============================
+ERROR tests/unit/logic/backend/sys/test_cases/test_api_apps.py
+ERROR tests/unit/logic/backend/sys/test_cases/test_api_auth.py
+ERROR tests/unit/logic/backend/sys/test_cases/test_api_config.py
+ERROR tests/unit/logic/backend/sys/test_cases/test_api_health.py
+ERROR tests/unit/logic/backend/sys/test_cases/test_api_notifications.py
+ERROR tests/unit/logic/backend/sys/test_cases/test_api_users.py
+ERROR tests/unit/logic/backend/sys/test_cases/test_jwt_service.py
+ERROR tests/unit/logic/backend/sys/test_cases/test_notification_dal.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 8 errors during collection !!!!!!!!!!!!!!!!!!!!
+======================== 2 warnings, 8 errors in 2.73s =========================

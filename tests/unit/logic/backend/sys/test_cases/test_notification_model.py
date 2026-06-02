@@ -11,7 +11,7 @@ MCDC準拠: 全条件分岐を網羅
 import pytest
 import json
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pydantic import ValidationError
 from unittest.mock import patch
 
@@ -194,7 +194,7 @@ class TestNotificationModel:
         条件: 現在時刻 > expiresAt
         期待: True
         """
-        mock_datetime.utcnow.return_value = datetime(2026, 5, 29, 12, 0, 0)
+        mock_datetime.now.return_value = datetime(2026, 5, 29, 12, 0, 0, tzinfo=timezone.utc)
         
         data = load_fixture('expired_notification')
         notif = Notification(**data)
@@ -208,7 +208,7 @@ class TestNotificationModel:
         条件: 現在時刻 < expiresAt
         期待: False
         """
-        mock_datetime.utcnow.return_value = datetime(2026, 5, 29, 12, 0, 0)
+        mock_datetime.now.return_value = datetime(2026, 5, 29, 12, 0, 0, tzinfo=timezone.utc)
         
         data = load_fixture('valid_warning_notification')
         notif = Notification(**data)
@@ -222,7 +222,7 @@ class TestNotificationModel:
         条件: expiresAt=None
         期待: False
         """
-        mock_datetime.utcnow.return_value = datetime(2026, 5, 29, 12, 0, 0)
+        mock_datetime.now.return_value = datetime(2026, 5, 29, 12, 0, 0, tzinfo=timezone.utc)
         
         data = load_fixture('valid_info_notification')
         notif = Notification(**data)

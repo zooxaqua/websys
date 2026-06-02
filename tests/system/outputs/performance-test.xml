@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="3" failures="1" skipped="0" tests="5" time="1.328" timestamp="2026-06-02T09:16:35.758740" hostname="zooAquas-iMac.local"><testcase classname="tests.system.logic.performance.test_api_performance.TestAPIPerformance" name="test_api_response_time_under_100ms" time="0.264"><error message="failed on setup with &quot;assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code&quot;">client = &lt;starlette.testclient.TestClient object at 0x108fe3250&gt;
+
+    @pytest.fixture(scope="function")
+    def authenticated_client(client: TestClient) -&gt; tuple[TestClient, dict]:
+        """
+        認証済みTestClient
+        ログイン済みの状態でテストを実行できる
+    
+        Returns:
+            tuple[TestClient, dict]: (クライアント, ユーザー情報)
+        """
+        # ログイン
+        response = client.post(
+            "/api/sys/auth/login",
+            json={"username": "test_admin", "password": "password"}
+        )
+&gt;       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/conftest.py:118: AssertionError</error></testcase><testcase classname="tests.system.logic.performance.test_api_performance.TestAPIPerformance" name="test_simple_data_retrieval_performance" time="0.012"><error message="failed on setup with &quot;assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code&quot;">client = &lt;starlette.testclient.TestClient object at 0x1090283a0&gt;
+
+    @pytest.fixture(scope="function")
+    def authenticated_client(client: TestClient) -&gt; tuple[TestClient, dict]:
+        """
+        認証済みTestClient
+        ログイン済みの状態でテストを実行できる
+    
+        Returns:
+            tuple[TestClient, dict]: (クライアント, ユーザー情報)
+        """
+        # ログイン
+        response = client.post(
+            "/api/sys/auth/login",
+            json={"username": "test_admin", "password": "password"}
+        )
+&gt;       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/conftest.py:118: AssertionError</error></testcase><testcase classname="tests.system.logic.performance.test_api_performance.TestConcurrentConnections" name="test_10_concurrent_requests" time="0.063"><failure message="AssertionError: 一部のリクエストが失敗しました&#10;assert False&#10; +  where False = all(&lt;generator object TestConcurrentConnections.test_10_concurrent_requests.&lt;locals&gt;.&lt;genexpr&gt; at 0x1091db8b0&gt;)">self = &lt;test_api_performance.TestConcurrentConnections object at 0x108cb38b0&gt;
+client = &lt;starlette.testclient.TestClient object at 0x10898f190&gt;
+
+    def test_10_concurrent_requests(self, client: TestClient):
+        """
+        NFR-SYS-011: 最低10ユーザーの同時接続サポート
+        期待結果: 10個の同時リクエストが全て成功
+        """
+        # 10個のリクエストを順次実行（実際の同時実行はTestClientの制約により困難）
+        # ここでは、10個のリクエストが全て成功することを確認
+        results = []
+        for i in range(10):
+            # 各リクエストでログイン試行
+            response = client.post("/api/sys/auth/login", json={
+                "username": "test_admin",
+                "password": "password"
+            })
+            results.append(response.status_code)
+    
+        # 全てのリクエストが成功（200）することを確認
+&gt;       assert all(status == 200 for status in results), "一部のリクエストが失敗しました"
+E       AssertionError: 一部のリクエストが失敗しました
+E       assert False
+E        +  where False = all(&lt;generator object TestConcurrentConnections.test_10_concurrent_requests.&lt;locals&gt;.&lt;genexpr&gt; at 0x1091db8b0&gt;)
+
+tests/system/logic/performance/test_api_performance.py:97: AssertionError</failure></testcase><testcase classname="tests.system.logic.performance.test_api_performance.TestConcurrentConnections" name="test_authenticated_concurrent_api_calls" time="0.013"><error message="failed on setup with &quot;assert 401 == 200&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code&quot;">client = &lt;starlette.testclient.TestClient object at 0x108cf04c0&gt;
+
+    @pytest.fixture(scope="function")
+    def authenticated_client(client: TestClient) -&gt; tuple[TestClient, dict]:
+        """
+        認証済みTestClient
+        ログイン済みの状態でテストを実行できる
+    
+        Returns:
+            tuple[TestClient, dict]: (クライアント, ユーザー情報)
+        """
+        # ログイン
+        response = client.post(
+            "/api/sys/auth/login",
+            json={"username": "test_admin", "password": "password"}
+        )
+&gt;       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+tests/system/logic/conftest.py:118: AssertionError</error></testcase><testcase classname="tests.system.logic.performance.test_api_performance.TestPerformanceSummary" name="test_performance_summary" time="0.001" /></testsuite></testsuites>

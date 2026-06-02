@@ -1,0 +1,23 @@
+{
+  "todo-app": {
+    "id": "todo-app",
+    "name": "TODOアプリ",
+    "version": "1.0.0",
+    "description": "タスク管理アプリケーション",
+    "enabled": true,
+    "icon": "📝",
+    "entryPoint": "/index.html",
+    "apiPrefix": "/api/todo",
+    "author": "Test Developer",
+    "requiredPermissions": ["user", "admin"],
+    "dependencies": [],
+    "manifest": {
+      "name": "todo-app",
+      "version": "1.0.0",
+      "displayName": "TODOアプリ",
+      "entryPoint": "/index.html",
+      "apiPrefix": "/api/todo"
+    },
+    "lastUpdated": "2026-01-01T00:00:00Z"
+  }
+}

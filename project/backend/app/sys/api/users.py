@@ -6,7 +6,7 @@ from ..models.user import User, UserCreate, UserUpdate, UserResponse
 from ..services.user_service import UserService
 from ..core.dependencies import get_user_service, get_current_user, get_current_admin_user
 
-router = APIRouter()
+router = APIRouter(tags=["users"])
 
 
 class UserListResponse(BaseModel):

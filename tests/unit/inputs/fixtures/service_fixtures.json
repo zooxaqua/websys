@@ -1,0 +1,35 @@
+{
+  "user_service": {
+    "create_user_request": {
+      "username": "newuser",
+      "password": "NewPass123!",
+      "email": "newuser@example.com",
+      "display_name": "New User",
+      "role": "user"
+    },
+    "update_user_request": {
+      "email": "updated@example.com",
+      "display_name": "Updated Name"
+    },
+    "invalid_email": {
+      "email": "invalid-email"
+    }
+  },
+  "app_service": {
+    "register_app": {
+      "app_id": "new-app",
+      "name": "New Application",
+      "description": "A new application",
+      "icon": "app-icon.png",
+      "url": "/apps/new-app"
+    }
+  },
+  "notification_service": {
+    "create_notification": {
+      "user_id": "testuser",
+      "title": "Test Notification",
+      "message": "This is a test notification",
+      "type": "info"
+    }
+  }
+}

@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from typing import Optional
 from fastapi import HTTPException, status
-from datetime import datetime
+from datetime import datetime, timezone
 from ..models.app import App
 from ..dal.app_dal import AppDAL
 
@@ -57,7 +57,7 @@ class AppService:
                     "requiredPermissions": manifest.get("requiredPermissions", []),
                     "dependencies": manifest.get("dependencies", []),
                     "manifest": manifest,
-                    "lastUpdated": datetime.utcnow().isoformat() + "Z"
+                    "lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
                 }
                 
                 if existing_app:
@@ -110,7 +110,7 @@ class AppService:
         
         return self.dal.update(app_id, {
             "enabled": True,
-            "lastUpdated": datetime.utcnow().isoformat() + "Z"
+            "lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         })
     
     def disable_app(self, app_id: str) -> bool:
@@ -130,7 +130,7 @@ class AppService:
         
         return self.dal.update(app_id, {
             "enabled": False,
-            "lastUpdated": datetime.utcnow().isoformat() + "Z"
+            "lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         })
     
     def validate_app_manifest(self, manifest: dict) -> tuple[bool, str]:

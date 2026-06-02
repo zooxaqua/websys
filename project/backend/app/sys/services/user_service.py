@@ -1,5 +1,5 @@
 """ユーザーサービス"""
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Tuple
 from fastapi import HTTPException, status
 import uuid
@@ -65,7 +65,7 @@ class UserService:
         password_hash = hash_password(user_create.password)
         
         # ユーザーデータ作成
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         user_data = {
             "id": str(uuid.uuid4()),
             "username": user_create.username,
@@ -74,8 +74,8 @@ class UserService:
             "role": user_create.role,
             "email": user_create.email,
             "metadata": user_create.metadata,
-            "createdAt": now.isoformat() + "Z",
-            "updatedAt": now.isoformat() + "Z",
+            "createdAt": now.isoformat().replace("+00:00", "Z"),
+            "updatedAt": now.isoformat().replace("+00:00", "Z"),
             "lastLogin": None
         }
         
@@ -104,7 +104,7 @@ class UserService:
                     detail={"code": "ERR-SYS-USER-003", "message": "メールアドレスが既に存在します"}
                 )
         
-        update_data["updatedAt"] = datetime.utcnow().isoformat() + "Z"
+        update_data["updatedAt"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         
         self.dal.update(user_id, update_data)
         

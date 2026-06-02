@@ -463,7 +463,7 @@ uvicorn app.sys.main:app --port 8001
 ```
 websys/
 ├── README.md                          ← プロジェクト概要
-├── How2Use_admin.md                   ← このファイル（管理者向けガイド）
+├── HOW2USE_ADMIN.md                   ← このファイル（管理者向けガイド）
 ├── agents.md                          ← エージェント構成定義
 │
 ├── .github/                           ← GitHub設定・CI/CD・チェックプログラム

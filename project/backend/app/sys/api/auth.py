@@ -6,7 +6,7 @@ from ..services.auth_service import AuthService
 from ..core.dependencies import get_auth_service, get_current_user
 from ..models.user import User
 
-router = APIRouter()
+router = APIRouter(tags=["auth"])
 
 
 class LoginRequest(BaseModel):

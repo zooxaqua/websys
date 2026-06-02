@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="8" failures="0" skipped="0" tests="8" time="2.753" timestamp="2026-06-02T09:09:51.933654" hostname="zooAquas-iMac.local"><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_apps" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_api_apps' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_apps.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_apps.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_auth" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_api_auth' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_auth.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_auth.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_config" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_api_config' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_config.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_config.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_health" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_api_health' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_health.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_health.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_notifications" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_api_notifications' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_notifications.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_notifications.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_users" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_api_users' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_api_users.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_users.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_jwt_service" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_jwt_service' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_jwt_service.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_jwt_service.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_notification_dal" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'test_notification_dal' has this __file__ attribute:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_notification_dal.py
+which is not the same as the test file we want to collect:
+  /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_notification_dal.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase></testsuite></testsuites>

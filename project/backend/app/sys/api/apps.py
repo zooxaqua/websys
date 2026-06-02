@@ -1,12 +1,19 @@
 """アプリ管理API"""
 from fastapi import APIRouter, Depends
 from typing import Optional
+from pydantic import BaseModel
 from ..models.app import AppResponse
 from ..models.user import User
 from ..services.app_service import AppService
 from ..core.dependencies import get_app_service, get_current_user, get_current_admin_user
 
-router = APIRouter()
+router = APIRouter(tags=["apps"])
+
+
+class AppUpdateRequest(BaseModel):
+    """アプリ更新リクエスト"""
+    enabled: Optional[bool] = None
+    isEnabled: Optional[bool] = None  # テストで使用される可能性があるため両方対応
 
 
 @router.get("", response_model=list[AppResponse])
@@ -27,6 +34,29 @@ def get_app(
     app_service: AppService = Depends(get_app_service)
 ):
     """アプリ詳細を取得"""
+    app = app_service.get_app(app_id)
+    return AppResponse(**app.model_dump())
+
+
+@router.patch("/{app_id}", response_model=AppResponse)
+def update_app(
+    app_id: str,
+    update_request: AppUpdateRequest,
+    current_user: User = Depends(get_current_admin_user),
+    app_service: AppService = Depends(get_app_service)
+):
+    """アプリを更新（有効化・無効化）（管理者のみ）"""
+    # enabled または isEnabled のいずれかを受け取る
+    enabled = update_request.enabled if update_request.enabled is not None else update_request.isEnabled
+    
+    if enabled is None:
+        return AppResponse(**app_service.get_app(app_id).model_dump())
+    
+    if enabled:
+        app_service.enable_app(app_id)
+    else:
+        app_service.disable_app(app_id)
+    
     app = app_service.get_app(app_id)
     return AppResponse(**app.model_dump())
 

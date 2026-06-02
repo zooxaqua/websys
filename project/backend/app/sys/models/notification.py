@@ -1,5 +1,5 @@
 """通知モデル"""
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from pydantic import BaseModel, Field
 
@@ -25,7 +25,7 @@ class Notification(BaseModel):
         """期限切れか判定"""
         if not self.expiresAt:
             return False
-        return datetime.utcnow() > self.expiresAt
+        return datetime.now(timezone.utc) > self.expiresAt
     
     @classmethod
     def from_dict(cls, data: dict) -> "Notification":

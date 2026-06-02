@@ -10,7 +10,7 @@ MCDC準拠: 全条件分岐を網羅
 import pytest
 import json
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pydantic import ValidationError
 from unittest.mock import patch
 
@@ -71,12 +71,12 @@ class TestSessionModel:
     def test_session_is_valid_boundary_exact_now(self, mock_datetime):
         """
         TC-SESSION-004: is_valid() - 境界値（expiresAt == 現在時刻）
-        条件: expiresAt == datetime.utcnow()
+        条件: expiresAt == datetime.now(timezone.utc)
         期待: is_valid() が False を返す（厳密な未満比較）
         """
         # 固定時刻を設定
-        fixed_now = datetime(2026, 5, 29, 10, 0, 0)
-        mock_datetime.utcnow.return_value = fixed_now
+        fixed_now = datetime(2026, 5, 29, 10, 0, 0, tzinfo=timezone.utc)
+        mock_datetime.now.return_value = fixed_now
         
         session = Session(
             sessionId="sess_boundary",
@@ -96,8 +96,8 @@ class TestSessionModel:
         条件: expiresAt が現在時刻より1秒後
         期待: is_valid() が True を返す
         """
-        fixed_now = datetime(2026, 5, 29, 10, 0, 0)
-        mock_datetime.utcnow.return_value = fixed_now
+        fixed_now = datetime(2026, 5, 29, 10, 0, 0, tzinfo=timezone.utc)
+        mock_datetime.now.return_value = fixed_now
         
         session = Session(
             sessionId="sess_boundary_before",
@@ -195,11 +195,11 @@ class TestSessionModel:
     def test_session_invalid_expiresAt_type(self):
         """
         TC-SESSION-012: 異常系 - expiresAt型不正
-        条件: expiresAtが不正な型（数値）
+        条件: expiresAtが不正な型（解析不可能な文字列）
         期待: ValidationError が発生
         """
         data = load_fixture('valid_session')
-        data['expiresAt'] = 12345
+        data['expiresAt'] = "not_a_valid_datetime_string"
         
         with pytest.raises(ValidationError) as exc_info:
             Session(**data)

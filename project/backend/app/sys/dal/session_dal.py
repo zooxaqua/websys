@@ -29,9 +29,9 @@ class SessionDAL(JsonDAL):
         for session_id, session in list(all_data.items()):
             expires_at = session.get("expiresAt")
             if expires_at:
-                if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) < datetime.utcnow():
+                from datetime import timezone
+                if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) < datetime.now(timezone.utc):
                     self.delete(session_id)
-                    self._delete_session_file(session_id)
                     deleted_count += 1
         
         return deleted_count
@@ -52,6 +52,9 @@ class SessionDAL(JsonDAL):
     
     def insert(self, data: dict) -> str:
         """セッションを挿入（ファイルにも保存）"""
+        # sessionIdをidとして扱う
+        if "sessionId" in data and "id" not in data:
+            data["id"] = data["sessionId"]
         session_id = super().insert(data)
         self._save_session_file(data)
         return session_id

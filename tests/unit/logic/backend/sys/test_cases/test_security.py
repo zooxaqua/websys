@@ -43,15 +43,25 @@ class TestHashPassword:
     
     def test_hash_password_long(self):
         """
-        TC-SECURITY-003: hash_password() - 長い文字列
-        条件: 100文字のパスワード
+        TC-SECURITY-003: hash_password() - 長い文字列（72バイト以下）
+        条件: 70文字のパスワード
         期待: ハッシュ化された文字列を返す
         """
-        password = "A" * 100
+        password = "A" * 70
         hashed = hash_password(password)
         
         assert hashed is not None
         assert len(hashed) > 0
+    
+    def test_hash_password_72byte_limit(self):
+        """
+        TC-SECURITY-003-B: hash_password() - 72バイト制限超過
+        条件: 73バイトのパスワード
+        期待: ValueErrorが発生する
+        """
+        long_password = "a" * 73
+        with pytest.raises(ValueError, match="Password cannot be longer than 72 bytes"):
+            hash_password(long_password)
     
     def test_hash_password_uniqueness(self):
         """

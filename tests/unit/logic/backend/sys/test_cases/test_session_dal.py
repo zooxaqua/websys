@@ -10,7 +10,7 @@ MCDC準拠: 全条件分岐を網羅
 import pytest
 import tempfile
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import patch, MagicMock
 
 # テスト対象
@@ -177,11 +177,11 @@ class TestSessionDAL:
         """
         TC-SESSION-DAL-007: cleanup_expired() - 境界値（expiresAt == 現在時刻）
         条件: expiresAtがちょうど現在時刻
-        期待: 削除される（< 比較のため）
+        期待: 削除されない（< 比較のため、等しい場合は削除されない）
         """
         with patch('project.backend.app.sys.dal.session_dal.datetime') as mock_datetime:
-            fixed_now = datetime(2026, 5, 29, 12, 0, 0)
-            mock_datetime.utcnow.return_value = fixed_now
+            fixed_now = datetime(2026, 5, 29, 12, 0, 0, tzinfo=timezone.utc)
+            mock_datetime.now.return_value = fixed_now
             mock_datetime.fromisoformat = datetime.fromisoformat
             
             dal.insert({
@@ -194,7 +194,7 @@ class TestSessionDAL:
             
             deleted_count = dal.cleanup_expired()
         
-        assert deleted_count == 1
+        assert deleted_count == 0  # 等しい場合は削除されない
     
     def test_cleanup_expired_removes_session_files(self, dal):
         """

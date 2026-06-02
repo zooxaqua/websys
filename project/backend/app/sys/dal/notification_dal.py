@@ -22,7 +22,7 @@ class NotificationDAL(JsonDAL):
     
     def delete_expired(self) -> int:
         """期限切れ通知を削除"""
-        from datetime import datetime
+        from datetime import datetime, timezone
         
         all_data = self._load_data()
         deleted_count = 0
@@ -30,7 +30,7 @@ class NotificationDAL(JsonDAL):
         for notif_id, notif in list(all_data.items()):
             expires_at = notif.get("expiresAt")
             if expires_at:
-                if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) < datetime.utcnow():
+                if datetime.fromisoformat(expires_at.replace("Z", "+00:00")) < datetime.now(timezone.utc):
                     self.delete(notif_id)
                     deleted_count += 1
         

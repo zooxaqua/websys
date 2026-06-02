@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api import todos
+from .api import todos, data
 
 app = FastAPI(
     title="TODOアプリ",
@@ -21,6 +21,7 @@ app.add_middleware(
 
 # API ルーター
 app.include_router(todos.router, prefix="/api/todo-app/todos", tags=["TODO"])
+app.include_router(data.router, prefix="/api/todo-app/data", tags=["Data"])
 
 @app.get("/api/todo-app/health")
 def health_check():

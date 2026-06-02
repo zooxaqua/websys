@@ -48,4 +48,5 @@ class AppResponse(BaseModel):
     apiPrefix: str
     enabled: bool
     author: str
+    requiredPermissions: list[str] = Field(default_factory=list)
     lastUpdated: datetime

@@ -1,0 +1,155 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.13, pytest-7.4.3, pluggy-1.6.0 -- /Users/zooaqua/Desktop/repo/websys/project/backend/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/zooaqua/Desktop/repo/websys
+plugins: cov-4.1.0, asyncio-0.21.1, anyio-4.13.0
+asyncio: mode=strict
+collecting ... collected 5 items
+
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_api_response_time_under_100ms ERROR
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_simple_data_retrieval_performance ERROR
+tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_10_concurrent_requests FAILED
+tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_authenticated_concurrent_api_calls ERROR
+tests/system/logic/performance/test_api_performance.py::TestPerformanceSummary::test_performance_summary PASSED
+
+==================================== ERRORS ====================================
+___ ERROR at setup of TestAPIPerformance.test_api_response_time_under_100ms ____
+
+client = <starlette.testclient.TestClient object at 0x108fe3250>
+
+    @pytest.fixture(scope="function")
+    def authenticated_client(client: TestClient) -> tuple[TestClient, dict]:
+        """
+        認証済みTestClient
+        ログイン済みの状態でテストを実行できる
+    
+        Returns:
+            tuple[TestClient, dict]: (クライアント, ユーザー情報)
+        """
+        # ログイン
+        response = client.post(
+            "/api/sys/auth/login",
+            json={"username": "test_admin", "password": "password"}
+        )
+>       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/conftest.py:118: AssertionError
+_ ERROR at setup of TestAPIPerformance.test_simple_data_retrieval_performance __
+
+client = <starlette.testclient.TestClient object at 0x1090283a0>
+
+    @pytest.fixture(scope="function")
+    def authenticated_client(client: TestClient) -> tuple[TestClient, dict]:
+        """
+        認証済みTestClient
+        ログイン済みの状態でテストを実行できる
+    
+        Returns:
+            tuple[TestClient, dict]: (クライアント, ユーザー情報)
+        """
+        # ログイン
+        response = client.post(
+            "/api/sys/auth/login",
+            json={"username": "test_admin", "password": "password"}
+        )
+>       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/conftest.py:118: AssertionError
+_ ERROR at setup of TestConcurrentConnections.test_authenticated_concurrent_api_calls _
+
+client = <starlette.testclient.TestClient object at 0x108cf04c0>
+
+    @pytest.fixture(scope="function")
+    def authenticated_client(client: TestClient) -> tuple[TestClient, dict]:
+        """
+        認証済みTestClient
+        ログイン済みの状態でテストを実行できる
+    
+        Returns:
+            tuple[TestClient, dict]: (クライアント, ユーザー情報)
+        """
+        # ログイン
+        response = client.post(
+            "/api/sys/auth/login",
+            json={"username": "test_admin", "password": "password"}
+        )
+>       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/conftest.py:118: AssertionError
+=================================== FAILURES ===================================
+____________ TestConcurrentConnections.test_10_concurrent_requests _____________
+
+self = <test_api_performance.TestConcurrentConnections object at 0x108cb38b0>
+client = <starlette.testclient.TestClient object at 0x10898f190>
+
+    def test_10_concurrent_requests(self, client: TestClient):
+        """
+        NFR-SYS-011: 最低10ユーザーの同時接続サポート
+        期待結果: 10個の同時リクエストが全て成功
+        """
+        # 10個のリクエストを順次実行（実際の同時実行はTestClientの制約により困難）
+        # ここでは、10個のリクエストが全て成功することを確認
+        results = []
+        for i in range(10):
+            # 各リクエストでログイン試行
+            response = client.post("/api/sys/auth/login", json={
+                "username": "test_admin",
+                "password": "password"
+            })
+            results.append(response.status_code)
+    
+        # 全てのリクエストが成功（200）することを確認
+>       assert all(status == 200 for status in results), "一部のリクエストが失敗しました"
+E       AssertionError: 一部のリクエストが失敗しました
+E       assert False
+E        +  where False = all(<generator object TestConcurrentConnections.test_10_concurrent_requests.<locals>.<genexpr> at 0x1091db8b0>)
+
+tests/system/logic/performance/test_api_performance.py:97: AssertionError
+=============================== warnings summary ===============================
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_api_response_time_under_100ms
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_api_response_time_under_100ms
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_simple_data_retrieval_performance
+tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_10_concurrent_requests
+tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_authenticated_concurrent_api_calls
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_api_response_time_under_100ms
+  /Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/main.py:49: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_api_response_time_under_100ms
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:4495: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_api_response_time_under_100ms
+tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_simple_data_retrieval_performance
+tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_10_concurrent_requests
+tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_authenticated_concurrent_api_calls
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+    warnings.warn(message, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /Users/zooaqua/Desktop/repo/websys/tests/system/outputs/performance-test.xml -
+=========================== short test summary info ============================
+FAILED tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_10_concurrent_requests
+ERROR tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_api_response_time_under_100ms
+ERROR tests/system/logic/performance/test_api_performance.py::TestAPIPerformance::test_simple_data_retrieval_performance
+ERROR tests/system/logic/performance/test_api_performance.py::TestConcurrentConnections::test_authenticated_concurrent_api_calls
+============== 1 failed, 1 passed, 11 warnings, 3 errors in 1.32s ==============

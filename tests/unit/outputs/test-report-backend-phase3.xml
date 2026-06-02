@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="10" failures="0" skipped="0" tests="10" time="4.991" timestamp="2026-06-01T11:39:48.630887" hostname="zooAquas-iMac.local"><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_apps" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_apps.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/unit/logic/backend/sys/test_cases/test_api_apps.py:18: in &lt;module&gt;
+    from project.backend.app.main import app
+project/backend/app/main.py:10: in &lt;module&gt;
+    from app.sys.core.middleware import error_handler_middleware
+E   ImportError: cannot import name 'error_handler_middleware' from 'app.sys.core.middleware' (/Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/core/middleware.py)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_auth" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_auth.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/unit/logic/backend/sys/test_cases/test_api_auth.py:17: in &lt;module&gt;
+    from project.backend.app.main import app
+project/backend/app/main.py:10: in &lt;module&gt;
+    from app.sys.core.middleware import error_handler_middleware
+E   ImportError: cannot import name 'error_handler_middleware' from 'app.sys.core.middleware' (/Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/core/middleware.py)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_config" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_config.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/unit/logic/backend/sys/test_cases/test_api_config.py:18: in &lt;module&gt;
+    from project.backend.app.main import app
+project/backend/app/main.py:10: in &lt;module&gt;
+    from app.sys.core.middleware import error_handler_middleware
+E   ImportError: cannot import name 'error_handler_middleware' from 'app.sys.core.middleware' (/Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/core/middleware.py)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_health" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_health.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/unit/logic/backend/sys/test_cases/test_api_health.py:16: in &lt;module&gt;
+    from project.backend.app.main import app
+project/backend/app/main.py:10: in &lt;module&gt;
+    from app.sys.core.middleware import error_handler_middleware
+E   ImportError: cannot import name 'error_handler_middleware' from 'app.sys.core.middleware' (/Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/core/middleware.py)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_notifications" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_notifications.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/unit/logic/backend/sys/test_cases/test_api_notifications.py:18: in &lt;module&gt;
+    from project.backend.app.main import app
+project/backend/app/main.py:10: in &lt;module&gt;
+    from app.sys.core.middleware import error_handler_middleware
+E   ImportError: cannot import name 'error_handler_middleware' from 'app.sys.core.middleware' (/Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/core/middleware.py)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_api_users" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_api_users.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/unit/logic/backend/sys/test_cases/test_api_users.py:17: in &lt;module&gt;
+    from project.backend.app.main import app
+project/backend/app/main.py:10: in &lt;module&gt;
+    from app.sys.core.middleware import error_handler_middleware
+E   ImportError: cannot import name 'error_handler_middleware' from 'app.sys.core.middleware' (/Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/core/middleware.py)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_apps_api" time="0.000"><error message="collection failure">project/backend/venv/lib/python3.10/site-packages/_pytest/runner.py:341: in from_call
+    result: Optional[TResult] = func()
+project/backend/venv/lib/python3.10/site-packages/_pytest/runner.py:372: in &lt;lambda&gt;
+    call = CallInfo.from_call(lambda: list(collector.collect()), "collect")
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:531: in collect
+    self._inject_setup_module_fixture()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:545: in _inject_setup_module_fixture
+    self.obj, ("setUpModule", "setup_module")
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:310: in obj
+    self._obj = obj = self._getobj()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:528: in _getobj
+    return self._importtestmodule()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:617: in _importtestmodule
+    mod = import_path(self.path, mode=importmode, root=self.config.rootpath)
+project/backend/venv/lib/python3.10/site-packages/_pytest/pathlib.py:567: in import_path
+    importlib.import_module(module_name)
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1050: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1027: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1006: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:688: in _load_unlocked
+    ???
+project/backend/venv/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:186: in exec_module
+    exec(co, module.__dict__)
+tests/unit/logic/backend/sys/test_cases/test_apps_api.py:24: in &lt;module&gt;
+    app.include_router(router)
+project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:1447: in include_router
+    self.router.include_router(
+project/backend/venv/lib/python3.10/site-packages/fastapi/routing.py:1229: in include_router
+    raise FastAPIError(
+E   fastapi.exceptions.FastAPIError: Prefix and path cannot be both empty (path operation: list_apps)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_exceptions" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/backend/sys/test_cases/test_exceptions.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/unit/logic/backend/sys/test_cases/test_exceptions.py:15: in &lt;module&gt;
+    from app.sys.core.exceptions import (
+E   ImportError: cannot import name 'WebSystemException' from 'app.sys.core.exceptions' (/Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/core/exceptions.py)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_notifications_api" time="0.000"><error message="collection failure">project/backend/venv/lib/python3.10/site-packages/_pytest/runner.py:341: in from_call
+    result: Optional[TResult] = func()
+project/backend/venv/lib/python3.10/site-packages/_pytest/runner.py:372: in &lt;lambda&gt;
+    call = CallInfo.from_call(lambda: list(collector.collect()), "collect")
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:531: in collect
+    self._inject_setup_module_fixture()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:545: in _inject_setup_module_fixture
+    self.obj, ("setUpModule", "setup_module")
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:310: in obj
+    self._obj = obj = self._getobj()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:528: in _getobj
+    return self._importtestmodule()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:617: in _importtestmodule
+    mod = import_path(self.path, mode=importmode, root=self.config.rootpath)
+project/backend/venv/lib/python3.10/site-packages/_pytest/pathlib.py:567: in import_path
+    importlib.import_module(module_name)
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1050: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1027: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1006: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:688: in _load_unlocked
+    ???
+project/backend/venv/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:186: in exec_module
+    exec(co, module.__dict__)
+tests/unit/logic/backend/sys/test_cases/test_notifications_api.py:24: in &lt;module&gt;
+    app.include_router(router)
+project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:1447: in include_router
+    self.router.include_router(
+project/backend/venv/lib/python3.10/site-packages/fastapi/routing.py:1229: in include_router
+    raise FastAPIError(
+E   fastapi.exceptions.FastAPIError: Prefix and path cannot be both empty (path operation: list_notifications)</error></testcase><testcase classname="" name="tests.unit.logic.backend.sys.test_cases.test_users_api" time="0.000"><error message="collection failure">project/backend/venv/lib/python3.10/site-packages/_pytest/runner.py:341: in from_call
+    result: Optional[TResult] = func()
+project/backend/venv/lib/python3.10/site-packages/_pytest/runner.py:372: in &lt;lambda&gt;
+    call = CallInfo.from_call(lambda: list(collector.collect()), "collect")
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:531: in collect
+    self._inject_setup_module_fixture()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:545: in _inject_setup_module_fixture
+    self.obj, ("setUpModule", "setup_module")
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:310: in obj
+    self._obj = obj = self._getobj()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:528: in _getobj
+    return self._importtestmodule()
+project/backend/venv/lib/python3.10/site-packages/_pytest/python.py:617: in _importtestmodule
+    mod = import_path(self.path, mode=importmode, root=self.config.rootpath)
+project/backend/venv/lib/python3.10/site-packages/_pytest/pathlib.py:567: in import_path
+    importlib.import_module(module_name)
+../../../.pyenv/versions/3.10.13/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1050: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1027: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1006: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:688: in _load_unlocked
+    ???
+project/backend/venv/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:186: in exec_module
+    exec(co, module.__dict__)
+tests/unit/logic/backend/sys/test_cases/test_users_api.py:23: in &lt;module&gt;
+    app.include_router(router)
+project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:1447: in include_router
+    self.router.include_router(
+project/backend/venv/lib/python3.10/site-packages/fastapi/routing.py:1229: in include_router
+    raise FastAPIError(
+E   fastapi.exceptions.FastAPIError: Prefix and path cannot be both empty (path operation: list_users)</error></testcase></testsuite></testsuites>

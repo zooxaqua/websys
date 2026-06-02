@@ -1,0 +1,170 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.13, pytest-7.4.3, pluggy-1.6.0 -- /Users/zooaqua/Desktop/repo/websys/project/backend/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/zooaqua/Desktop/repo/websys
+plugins: cov-4.1.0, asyncio-0.21.1, anyio-4.13.0
+asyncio: mode=strict
+collecting ... collected 12 items
+
+tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_unauthenticated_cannot_access_protected_resource PASSED [  8%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_normal_user_cannot_access_admin_api FAILED [ 16%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_disabled_app_api_returns_403 FAILED [ 25%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA02Cryptography::test_password_is_hashed_in_storage PASSED [ 33%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA02Cryptography::test_jwt_in_httponly_cookie FAILED [ 41%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA03Injection::test_xss_prevention_in_error_message PASSED [ 50%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA03Injection::test_path_traversal_prevention FAILED [ 58%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA07Authentication::test_jwt_expiration PASSED [ 66%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA07Authentication::test_jwt_tampering_detection FAILED [ 75%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA07Authentication::test_login_failure_logging PASSED [ 83%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA04SecureDesign::test_dal_abstraction_enforced PASSED [ 91%]
+tests/system/logic/security/test_owasp_check.py::TestOWASPA08SoftwareIntegrity::test_manifest_validation PASSED [100%]
+
+=================================== FAILURES ===================================
+______ TestOWASPA01AccessControl.test_normal_user_cannot_access_admin_api ______
+
+self = <test_owasp_check.TestOWASPA01AccessControl object at 0x10a548df0>
+
+    def test_normal_user_cannot_access_admin_api(self):
+        """
+        AC-SYS-007: 一般ユーザーは管理者APIにアクセスできない
+        期待結果: 403 Forbidden
+        """
+        client = TestClient(app)
+    
+        # 一般ユーザーでログイン
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_user",
+            "password": "password"
+        })
+>       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/security/test_owasp_check.py:82: AssertionError
+_________ TestOWASPA01AccessControl.test_disabled_app_api_returns_403 __________
+
+self = <test_owasp_check.TestOWASPA01AccessControl object at 0x10a548f40>
+
+    def test_disabled_app_api_returns_403(self):
+        """
+        FR-SYS-027: 無効化されたアプリのAPIにアクセスすると403
+        期待結果: 403 Forbidden
+        """
+        client = TestClient(app)
+    
+        # 管理者でログイン
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+>       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/security/test_owasp_check.py:100: AssertionError
+_____________ TestOWASPA02Cryptography.test_jwt_in_httponly_cookie _____________
+
+self = <test_owasp_check.TestOWASPA02Cryptography object at 0x10ad33760>
+
+    def test_jwt_in_httponly_cookie(self):
+        """
+        AC-SYS-003: JWTがhttpOnly Cookieに設定される
+        期待結果: Set-Cookie ヘッダーにhttpOnly属性が含まれる
+        """
+        client = TestClient(app)
+    
+        response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+>       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/security/test_owasp_check.py:140: AssertionError
+_____________ TestOWASPA03Injection.test_path_traversal_prevention _____________
+
+self = <test_owasp_check.TestOWASPA03Injection object at 0x10ad56e60>
+
+    def test_path_traversal_prevention(self):
+        """
+        NFR-SYS-006: パストラバーサル攻撃防止
+        期待結果: ../../などのパスが拒否される
+        """
+        client = TestClient(app)
+    
+        # 管理者でログイン
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+>       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/security/test_owasp_check.py:181: AssertionError
+___________ TestOWASPA07Authentication.test_jwt_tampering_detection ____________
+
+self = <test_owasp_check.TestOWASPA07Authentication object at 0x10ad543d0>
+
+    def test_jwt_tampering_detection(self):
+        """
+        AC-SYS-003: JWT改ざん検出
+        期待結果: 改ざんされたJWTは401を返す
+        """
+        client = TestClient(app)
+    
+        # 正常なJWT取得
+        login_response = client.post("/api/sys/auth/login", json={
+            "username": "test_admin",
+            "password": "password"
+        })
+>       assert login_response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests/system/logic/security/test_owasp_check.py:217: AssertionError
+=============================== warnings summary ===============================
+project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/pydantic/_internal/_config.py:271: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.5/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+project/backend/app/sys/main.py:49
+  /Users/zooaqua/Desktop/repo/websys/project/backend/app/sys/main.py:49: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:4495
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/fastapi/applications.py:4495: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_unauthenticated_cannot_access_protected_resource
+tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_normal_user_cannot_access_admin_api
+tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_disabled_app_api_returns_403
+tests/system/logic/security/test_owasp_check.py::TestOWASPA02Cryptography::test_jwt_in_httponly_cookie
+tests/system/logic/security/test_owasp_check.py::TestOWASPA03Injection::test_xss_prevention_in_error_message
+tests/system/logic/security/test_owasp_check.py::TestOWASPA03Injection::test_path_traversal_prevention
+tests/system/logic/security/test_owasp_check.py::TestOWASPA07Authentication::test_jwt_expiration
+tests/system/logic/security/test_owasp_check.py::TestOWASPA07Authentication::test_jwt_tampering_detection
+tests/system/logic/security/test_owasp_check.py::TestOWASPA07Authentication::test_login_failure_logging
+  /Users/zooaqua/Desktop/repo/websys/project/backend/venv/lib/python3.10/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+    warnings.warn(message, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /Users/zooaqua/Desktop/repo/websys/tests/system/outputs/security-test.xml -
+=========================== short test summary info ============================
+FAILED tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_normal_user_cannot_access_admin_api
+FAILED tests/system/logic/security/test_owasp_check.py::TestOWASPA01AccessControl::test_disabled_app_api_returns_403
+FAILED tests/system/logic/security/test_owasp_check.py::TestOWASPA02Cryptography::test_jwt_in_httponly_cookie
+FAILED tests/system/logic/security/test_owasp_check.py::TestOWASPA03Injection::test_path_traversal_prevention
+FAILED tests/system/logic/security/test_owasp_check.py::TestOWASPA07Authentication::test_jwt_tampering_detection
+=================== 5 failed, 7 passed, 12 warnings in 1.20s ===================

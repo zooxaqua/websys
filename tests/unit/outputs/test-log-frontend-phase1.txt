@@ -1,0 +1,155 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.7 [39m[90m/Users/zooaqua/Desktop/repo/websys/project/frontend[39m
+
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mrequest()[2m > [22mTC-HTTP-001: 正常系（response.ok = true）[32m 9[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mrequest()[2m > [22mTC-HTTP-002: 異常系（response.ok = false, error.error.message）[32m 2[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mrequest()[2m > [22mTC-HTTP-003: 異常系（response.ok = false, error.message）[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mrequest()[2m > [22mTC-HTTP-004: 異常系（response.ok = false, JSONパース失敗）[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mrequest()[2m > [22mTC-HTTP-011: credentials = "include" が設定される[32m 2[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mrequest()[2m > [22mTC-HTTP-012: Content-Type = "application/json" が設定される[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mrequest()[2m > [22mTC-HTTP-013: 異常系（error.error, error.message 両方なし）[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mget()[2m > [22mTC-HTTP-005: 正常系（GETメソッド呼び出し）[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mpost()[2m > [22mTC-HTTP-006: 正常系（POSTメソッド、データあり）[32m 3[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mput()[2m > [22mTC-HTTP-007: 正常系（PUTメソッド、データあり）[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mdelete()[2m > [22mTC-HTTP-008: 正常系（DELETEメソッド）[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mpatch()[2m > [22mTC-HTTP-009: 正常系（PATCHメソッド、data = あり）[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-http-util.test.ts[2m > [22mHttpClient[2m > [22mpatch()[2m > [22mTC-HTTP-010: 正常系（PATCHメソッド、data = なし）[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould login successfully[32m 4[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould handle login failure[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould handle generic error[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould handle empty username[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould handle empty password[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould clear error on successful login[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould use error message when error is Error instance[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould use default message when error is not Error instance[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould have correct initial state[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-login-page.test.ts[2m > [22mLogin Page[2m > [22mshould handle long credentials[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould list users successfully[32m 7[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould filter users by role[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould paginate users[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould get user by ID[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould throw error when user not found[32m 3[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould create user successfully[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould throw error when creating duplicate user[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould delete user successfully[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould throw error when deleting user fails[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-users-api.test.ts[2m > [22mUsers API[2m > [22mshould handle empty user list[32m 0[2mms[22m[39m
+[90mstderr[2m | ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22m[2mFetch Utility[2m > [22m[2mshould throw error on 404
+[22m[39mAPI Error [NOT_FOUND]: Not found [90mundefined[39m
+
+[90mstderr[2m | ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22m[2mFetch Utility[2m > [22m[2mshould handle network error
+[22m[39mNetwork error: TypeError: Network error
+    at /Users/zooaqua/Desktop/repo/websys/tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts:78:45
+    at [90mfile:///Users/zooaqua/Desktop/repo/websys/project/frontend/[39mnode_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:302:11
+    at [90mfile:///Users/zooaqua/Desktop/repo/websys/project/frontend/[39mnode_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:1903:26
+    at [90mfile:///Users/zooaqua/Desktop/repo/websys/project/frontend/[39mnode_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/zooaqua/Desktop/repo/websys/project/frontend/[39mnode_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2323:10[90m)[39m
+    at [90mfile:///Users/zooaqua/Desktop/repo/websys/project/frontend/[39mnode_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/zooaqua/Desktop/repo/websys/project/frontend/[39mnode_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2272:10[90m)[39m
+    at [90mfile:///Users/zooaqua/Desktop/repo/websys/project/frontend/[39mnode_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2955:64
+
+[90mstderr[2m | ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22m[2mFetch Utility[2m > [22m[2mshould throw error on 500
+[22m[39mAPI Error [INTERNAL_ERROR]: Server error [90mundefined[39m
+
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould fetch successfully[32m 7[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould post data successfully[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould handle 204 No Content[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould throw error on 404[32m 3[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould handle network error[32m 9[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould include custom headers[32m 1[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould skip error handling when specified[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould handle empty response[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould include credentials[32m 0[2mms[22m[39m
+ [32m✓[39m ../../tests/unit/logic/frontend/sys/test_cases/test-fetch-util.test.ts[2m > [22mFetch Utility[2m > [22mshould throw error on 500[32m 1[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 4 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m ../../tests/unit/logic/frontend/sys/storage.test.ts[2m [ ../../tests/unit/logic/frontend/sys/storage.test.ts ][22m
+[31m[1mError[22m: Failed to resolve import "@/sys/utils/storage" from "../../tests/unit/logic/frontend/sys/storage.test.ts". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/frontend/sys/storage.test.ts[39m:6:73
+[33m  3  |  */
+  4  |  import { describe, it, expect, beforeEach, vi } from "vitest";
+  5  |  import { setItem, getItem, removeItem, clear, hasItem, getAllKeys } from "@/sys/utils/storage";
+     |                                                                            ^
+  6  |  describe("storage", () => {
+  7  |  	beforeEach(() => {[39m
+[90m [2m❯[22m TransformPluginContext._formatLog node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30488:39[22m[39m
+[90m [2m❯[22m TransformPluginContext.error node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30485:14[22m[39m
+[90m [2m❯[22m normalizeUrl node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27728:18[22m[39m
+[90m [2m❯[22m node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27791:30[22m[39m
+[90m [2m❯[22m TransformPluginContext.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27759:4[22m[39m
+[90m [2m❯[22m EnvironmentPluginContainer.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30273:14[22m[39m
+[90m [2m❯[22m loadAndTransform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m24532:26[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m ../../tests/unit/logic/frontend/sys/test-runner.test.ts[2m [ ../../tests/unit/logic/frontend/sys/test-runner.test.ts ][22m
+[31m[1mError[22m: Failed to resolve import "../../../../../project/frontend/src/sys/api/auth" from "../../tests/unit/logic/frontend/sys/test_cases/test-auth-api.test.ts". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/frontend/sys/test_cases/test-auth-api.test.ts[39m:9:64
+[33m  7  |  */
+  8  |  import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+  9  |  import { login, logout, getMe, changePassword } from "../../../../../project/frontend/src/sys/api/auth";
+     |                                                        ^
+  10 |  import * as httpModule from "../../../../../project/frontend/src/sys/utils/http";
+  11 |  import fixtures from "../../../inputs/fixtures/frontend-fixtures.json";[39m
+[90m [2m❯[22m TransformPluginContext._formatLog node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30488:39[22m[39m
+[90m [2m❯[22m TransformPluginContext.error node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30485:14[22m[39m
+[90m [2m❯[22m normalizeUrl node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27728:18[22m[39m
+[90m [2m❯[22m node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27791:30[22m[39m
+[90m [2m❯[22m TransformPluginContext.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27759:4[22m[39m
+[90m [2m❯[22m EnvironmentPluginContainer.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30273:14[22m[39m
+[90m [2m❯[22m loadAndTransform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m24532:26[22m[39m
+[90m [2m❯[22m fetchModule node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m23123:15[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m ../../tests/unit/logic/frontend/sys/validation.test.ts[2m [ ../../tests/unit/logic/frontend/sys/validation.test.ts ][22m
+[31m[1mError[22m: Failed to resolve import "@/sys/utils/validation" from "../../tests/unit/logic/frontend/sys/validation.test.ts". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/frontend/sys/validation.test.ts[39m:11:7
+[33m  3  |  */
+  4  |  import { describe, it, expect } from "vitest";
+  5  |  import { validateUsername, validatePassword, validateEmail, validateDisplayName } from "@/sys/utils/validation";
+     |                                                                                          ^
+  6  |  describe("validation", () => {
+  7  |  	describe("validateUsername", () => {[39m
+[90m [2m❯[22m TransformPluginContext._formatLog node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30488:39[22m[39m
+[90m [2m❯[22m TransformPluginContext.error node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30485:14[22m[39m
+[90m [2m❯[22m normalizeUrl node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27728:18[22m[39m
+[90m [2m❯[22m node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27791:30[22m[39m
+[90m [2m❯[22m TransformPluginContext.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27759:4[22m[39m
+[90m [2m❯[22m EnvironmentPluginContainer.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30273:14[22m[39m
+[90m [2m❯[22m loadAndTransform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m24532:26[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m ../../tests/unit/logic/frontend/sys/test_cases/test-auth-api.test.ts[2m [ ../../tests/unit/logic/frontend/sys/test_cases/test-auth-api.test.ts ][22m
+[31m[1mError[22m: Failed to resolve import "../../../../../project/frontend/src/sys/api/auth" from "../../tests/unit/logic/frontend/sys/test_cases/test-auth-api.test.ts". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/zooaqua/Desktop/repo/websys/tests/unit/logic/frontend/sys/test_cases/test-auth-api.test.ts[39m:9:64
+[33m  7  |  */
+  8  |  import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+  9  |  import { login, logout, getMe, changePassword } from "../../../../../project/frontend/src/sys/api/auth";
+     |                                                        ^
+  10 |  import * as httpModule from "../../../../../project/frontend/src/sys/utils/http";
+  11 |  import fixtures from "../../../inputs/fixtures/frontend-fixtures.json";[39m
+[90m [2m❯[22m TransformPluginContext._formatLog node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30488:39[22m[39m
+[90m [2m❯[22m TransformPluginContext.error node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30485:14[22m[39m
+[90m [2m❯[22m normalizeUrl node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27728:18[22m[39m
+[90m [2m❯[22m node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27791:30[22m[39m
+[90m [2m❯[22m TransformPluginContext.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m27759:4[22m[39m
+[90m [2m❯[22m EnvironmentPluginContainer.transform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m30273:14[22m[39m
+[90m [2m❯[22m loadAndTransform node_modules/vitest/node_modules/vite/dist/node/chunks/node.js:[2m24532:26[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m4 failed[39m[22m[2m | [22m[1m[32m4 passed[39m[22m[90m (8)[39m
+[2m      Tests [22m [1m[32m43 passed[39m[22m[90m (43)[39m
+[2m   Start at [22m 11:14:55
+[2m   Duration [22m 3.20s[2m (transform 416ms, setup 0ms, import 507ms, tests 79ms, environment 4.11s)[22m
+

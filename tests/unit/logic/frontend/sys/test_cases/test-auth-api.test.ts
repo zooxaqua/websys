@@ -6,8 +6,8 @@
  * 対象: project/frontend/src/sys/api/auth.ts
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { login, logout, getMe, changePassword, type User } from '../../../../../project/frontend/src/sys/api/auth';
-import * as httpModule from '../../../../../project/frontend/src/sys/utils/http';
+import { login, logout, getMe, changePassword, type User } from '@sys/api/auth';
+import * as httpModule from '@sys/utils/http';
 import fixtures from '../../../inputs/fixtures/frontend-fixtures.json';
 import expected from '../../../inputs/expected/frontend-expected.json';
 

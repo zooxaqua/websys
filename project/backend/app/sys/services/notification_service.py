@@ -1,5 +1,5 @@
 """通知サービス"""
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, AsyncGenerator
 from fastapi import HTTPException, status
 import uuid
@@ -20,7 +20,7 @@ class NotificationService:
         notif_create: NotificationCreate
     ) -> Notification:
         """通知を作成"""
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         
         notif_data = {
             "id": str(uuid.uuid4()),
@@ -30,8 +30,8 @@ class NotificationService:
             "message": notif_create.message,
             "metadata": notif_create.metadata,
             "read": False,
-            "createdAt": now.isoformat() + "Z",
-            "expiresAt": notif_create.expiresAt.isoformat() + "Z" if notif_create.expiresAt else None
+            "createdAt": now.isoformat().replace("+00:00", "Z"),
+            "expiresAt": notif_create.expiresAt.isoformat().replace("+00:00", "Z") if notif_create.expiresAt else None
         }
         
         self.dal.insert(notif_data)

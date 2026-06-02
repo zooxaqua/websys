@@ -74,7 +74,7 @@ def get_current_admin_user(current_user: User = Depends(get_current_user)) -> Us
     if current_user.role != "admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail={"code": "ERR-SYS-AUTH-006", "message": "管理者権限が必要です"}
+            detail={"code": "ERR-SYS-AUTH-003", "message": "管理者権限が必要です"}
         )
     
     return current_user

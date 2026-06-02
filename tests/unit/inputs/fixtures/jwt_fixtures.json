@@ -1,0 +1,21 @@
+{
+  "token_payload": {
+    "user_id": "testuser",
+    "role": "user",
+    "exp": 9999999999
+  },
+  "admin_payload": {
+    "user_id": "admin",
+    "role": "admin",
+    "exp": 9999999999
+  },
+  "expired_payload": {
+    "user_id": "testuser",
+    "role": "user",
+    "exp": 1
+  },
+  "missing_fields": {
+    "user_id": "testuser"
+  },
+  "secret_key": "test_secret_key_for_jwt_signing_do_not_use_in_production"
+}

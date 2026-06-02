@@ -4,7 +4,7 @@ JWT認証サービス
 このモジュールはJWT（JSON Web Token）の生成・検証を担当します。
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
 from typing import Any
 
@@ -47,8 +47,8 @@ class JWTService:
             "sub": user_data.get("id"),
             "username": user_data.get("username"),
             "role": user_data.get("role"),
-            "exp": datetime.utcnow() + timedelta(hours=self.expiration_hours),
-            "iat": datetime.utcnow()
+            "exp": datetime.now(timezone.utc) + timedelta(hours=self.expiration_hours),
+            "iat": datetime.now(timezone.utc)
         }
         
         # トークン生成
